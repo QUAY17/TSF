@@ -395,7 +395,7 @@ body[data-hero="type"] .hero-cta { display: flex; gap: var(--s-3); justify-conte
 }
 .mission-img-caption {
   margin-top: var(--s-3);
-  text-align: right;
+  text-align: left;
 }
 .mission-body p { margin: 0 0 1em; }
 
