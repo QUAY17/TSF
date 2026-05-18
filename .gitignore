@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Local-only working material — not published to the site
+TSF.zip
+branding/TSF Logos/
+donation_recipients/
+images/
+screenshots/
+uploads/
+website/
