@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612">
+  <defs>
+    
+  </defs>
+  <rect class="cls-3" x="-1.85" y=".6" width="395.69" height="612"></rect>
+  <rect x="394.7" y=".14" width="395.69" height="612"></rect>
+  <g>
+    <circle class="cls-2" cx="593.44" cy="307.03" r="109.23" transform="translate(-43.29 509.55) rotate(-45)"></circle>
+    <path class="cls-5" d="M541.8,254.94h48.68v3.87h-16.17l26.43,71.84h.3l24.45-71.84h-16.48v-3.87h36.07v3.87h-15.57l-34.17,100.32h-2.05l-37.81-100.32h-13.67v-3.87Z"></path>
+  </g>
+  <g>
+    <circle class="cls-1" cx="200.12" cy="307.03" r="109.23" transform="translate(-158.49 231.44) rotate(-45)"></circle>
+    <path class="cls-4" d="M148.49,254.94h48.68v3.87h-16.17l26.43,71.84h.3l24.45-71.84h-16.48v-3.87h36.07v3.87h-15.57l-34.17,100.32h-2.05l-37.81-100.32h-13.67v-3.87Z"></path>
+  </g>
+</svg>
