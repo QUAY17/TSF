@@ -342,7 +342,6 @@ body[data-hero="split"] .hero-inner {
   max-width: 680px;
 }
 body[data-hero="split"] .hero .display { font-size: clamp(40px, 5.4vw, 80px); }
-body[data-hero="split"] .hero-caption { padding: var(--s-3) var(--gutter); }
 
 /* — typographic: no photo, manifesto type — */
 body[data-hero="type"] .hero {
