@@ -1058,6 +1058,8 @@ body[data-hero="type"] .hero-cta { display: flex; gap: var(--s-3); justify-conte
   font-size: 12px;
   color: rgba(255,250,242,.55);
 }
+.foot-base a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,250,242,.35); }
+.foot-base a:hover { text-decoration-color: var(--crimson); }
 
 /* ============================================================
    LAYOUT VARIANTS
