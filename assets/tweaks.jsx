@@ -4,7 +4,7 @@ const TSF_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "layout": "a",
   "hero": "split",
   "density": "balanced",
-  "annotate": true
+  "annotate": false
 }/*EDITMODE-END*/;
 
 function TsfTweaks() {
