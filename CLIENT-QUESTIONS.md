@@ -136,9 +136,12 @@ source material. Please confirm each fits the foundation's voice:
 - "Where each gift landed." (Stories hero)
 - "A family in the work, not at a distance from it." (About hero)
 
-## Photos
+## Photos needed
 
-- Higher-resolution photos of **Rowdy the horse** (current ones are
-  319×213 and 171×240 — framed as small archival snapshots).
+- **Catherine Violet Hubbard Sanctuary visit** — we have no CVH-specific photographs.
+  Stories page currently shows a cropped sanctuary image with an inline "Photo needed"
+  note. Please send any photos from family visits to CVH (Newtown, CT).
+- **Higher-resolution photos of Rowdy the horse** (current ones are 319×213 and 171×240
+  — framed as small archival snapshots).
 - Optional: individual portrait photos of each family member, rather than
   the current environmental shots cropped from group photos.

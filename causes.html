@@ -219,7 +219,7 @@
     }
   </style>
 </head>
-<body>
+<body data-layout="a" data-hero="split" data-density="balanced" data-annotate="off">
 
 <header class="nav" data-screen-label="00 Nav" data-sq>
   <div class="sq-mapping">SQ · Header</div>
@@ -284,22 +284,22 @@
         <h3>Catskill Animal Sanctuary</h3>
         <p class="blurb">
           A 150-acre refuge in New York&rsquo;s Hudson Valley, rescuing animals from cruelty,
-          neglect, and abandonment for 25 years. We sponsor horses in their
+          neglect, and abandonment for <span class="ph">[years — client]</span> years. We sponsor horses in their
           care - most recently <em>Rowdy</em>, rescued from an animal hoarding situation
           alongside thirteen other horses.
         </p>
         <div style="display:flex; gap: var(--s-6); margin-top: var(--s-3)">
           <div>
             <div class="caption" style="margin-bottom: 4px">Location</div>
-            <div style="font-family:var(--f-serif); font-size: 18px;">Saugerties, NY</span></div>
+            <div style="font-family:var(--f-serif); font-size: 18px;">Saugerties, NY</div>
           </div>
           <div>
             <div class="caption" style="margin-bottom: 4px">Sponsored since</div>
-            <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;">2026</div>
+            <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;"><span class="ph">[YEAR — client]</span></div>
           </div>
           <div>
             <div class="caption" style="margin-bottom: 4px">Animals rescued</div>
-            <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;">5,000</div>
+            <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;"><span class="ph">[count — client]</span></div>
           </div>
         </div>
         <a class="btn btn-ghost" href="https://casanctuary.org" target="_blank" rel="noopener" style="margin-top: var(--s-3)">Visit casanctuary.org</a>
@@ -328,7 +328,7 @@
       <div class="stats">
         <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[YEAR — client]</span></span></div>
         <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# — client]</span></span></div>
-        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount">2024</span></div>
+        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[YEAR — client]</span></span></div>
       </div>
       <a class="btn btn-ghost more" href="stories.html#paws-of-war">Read story</a>
     </article>
@@ -347,7 +347,7 @@
       <div class="stats">
         <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[YEAR — client]</span></span></div>
         <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# — client]</span></span></div>
-        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount">2024</span></div>
+        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[YEAR — client]</span></span></div>
       </div>
       <a class="btn btn-ghost more" href="stories.html#daws">Read story</a>
     </article>
@@ -526,8 +526,9 @@
       </div>
     </div>
     <div class="foot-base">
-      <span>&copy; 2026 The Spinner Foundation. A 501(c)(3) nonprofit organization.</span>
-      <span>Made with care, in Connecticut.</span>
+      <span>&copy; 2026 The Spinner Foundation.<span class="ph">A 501(c)(3) nonprofit organization.
+      </span></span>
+      <span>Quay Concepts</span>
     </div>
   </div>
 </footer>

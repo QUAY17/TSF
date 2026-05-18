@@ -154,7 +154,7 @@
     }
   </style>
 </head>
-<body>
+<body data-layout="a" data-hero="split" data-density="balanced" data-annotate="off">
 
 <header class="nav" data-screen-label="00 Nav" data-sq>
   <div class="sq-mapping">SQ · Header</div>
@@ -186,7 +186,7 @@
     </h1>
     <p class="lede">
       The animals, the partners, the moments. Stories build year by year here -
-      as the work happens, and as we have time to tell it.
+      as the work happens, and as we have time to tell it honestly.
     </p>
 
     <nav class="story-toc" aria-label="Stories index">
@@ -254,11 +254,10 @@
             has rescued over 5,000 animals in twenty-five years, and we couldn't be prouder
             to support what they do.
           </p>
-          <newline><newline><span class="ph">[photo]</span></newline></newline>
         </div>
         <div class="meta">
           <div><strong>Recipient</strong>Catskill Animal Sanctuary</div>
-          <div><strong>Sponsored</strong>2026</div>
+          <div><strong>Sponsored</strong><span class="v"><span class="ph">[YEAR — client]</span></span></div>
           <div><strong>Visit</strong>casanctuary.org</div>
         </div>
       </div>
@@ -272,7 +271,7 @@
         <div class="org"><span class="story-index-num">02.</span>Paws of War <span class="dot">·</span> Nesconset, NY</div>
         <h2>To&nbsp;<em>Paws of War.</em></h2>
         <p class="lede">
-          A gift, hand-delivered in September 2024 to the people pairing rescued
+          A single gift, hand-delivered in September 2024 to the people pairing rescued
           animals with American veterans and first responders.
         </p>
         <div class="body">
@@ -297,7 +296,7 @@
 
     <article class="story" id="hubbard" data-sq>
       <div class="sq-mapping">SQ · Image + Text Row</div>
-      <div class="story-img" style="background-image: url('assets/photos/family-13.jpg'); background-position: center;"></div>
+      <div class="story-img" style="background-image: url('assets/photos/cvh-placeholder.jpg'); background-position: center 60%;"></div>
       <div class="story-body">
         <div class="org"><span class="story-index-num">03.</span>Catherine Violet Hubbard Sanctuary <span class="dot">·</span> Newtown, CT</div>
         <h2>Newtown's quiet&nbsp;<em>sanctuary</em>.</h2>
@@ -311,7 +310,11 @@
             Sanctuary in our home state. It is a place built deliberately for healing,
             and we are honored to support their ongoing work.
           </p>
-          <newline><newline><span class="ph">[photo]</span></newline></newline>
+          <p style="margin-top: var(--s-3); padding: var(--s-3) var(--s-4); background: oklch(0.96 0.04 28); border-left: 2px solid var(--crimson);">
+            <span class="ph">Photo needed: CVH sanctuary visit</span> &nbsp; The image
+            here is a temporary stand-in until we have a photograph from the family's
+            visit to the Catherine Violet Hubbard Sanctuary itself.
+          </p>
         </div>
         <div class="meta">
           <div><strong>Gift</strong><span class="v">$2,500</span></div>
@@ -402,7 +405,6 @@
             with winter activity ideas and safety handouts. We came back with a story we
             still tell.
           </p>
-          <newline><newline><span class="ph">[photo]</span></newline></newline>
         </div>
         <div class="meta">
           <div><strong>Engagement</strong>Event partner</div>
@@ -425,6 +427,12 @@
           while we put together the photographs, the dates, and the right way to honor
           what was built.
         </p>
+        <div class="body">
+          <p>
+            If you'd like to help us tell this story properly - if you have records,
+            photographs, or first-hand memory of the dedication - please write.
+          </p>
+        </div>
         <div class="meta">
           <div><strong>Status</strong>In preparation</div>
           <div><strong>Pillar</strong>Medical</div>
@@ -500,8 +508,9 @@
       </div>
     </div>
     <div class="foot-base">
-      <span>&copy; 2026 The Spinner Foundation. A 501(c)(3) nonprofit organization.</span>
-      <span>Made with care, in Connecticut.</span>
+      <span>&copy; 2026 The Spinner Foundation.<span class="ph">A 501(c)(3) nonprofit organization.
+      </span></span>
+      <span>Quay Concepts</span>
     </div>
   </div>
 </footer>
