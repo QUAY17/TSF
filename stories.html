@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stories · The Spinner Foundation</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    .stories-hero { padding: 144px 0 56px; border-bottom: 1px solid var(--rule); }
+    .stories-hero h1 { max-width: 16ch; }
+    .stories-hero .lede { max-width: 56ch; margin-top: var(--s-5); }
+
+    /* Scrollable index of long-form story blocks */
+    .stories-list { padding-bottom: var(--section-y); }
+    .story {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: var(--s-8);
+      align-items: center;
+      padding: var(--s-9) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .story:nth-child(even) {
+      grid-template-columns: 1fr 1.1fr;
+    }
+    .story:nth-child(even) .story-img { order: 2; }
+    .story:nth-child(even) .story-body { order: 1; }
+
+    .story-img {
+      aspect-ratio: 4 / 5;
+      background-size: cover;
+      background-position: center;
+      border: 1px solid var(--rule);
+    }
+
+    .story-body { padding: 0 var(--s-3); }
+    .story-body .org {
+      font-family: var(--f-sans);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .story-body .org .dot { color: var(--crimson); opacity: .7; }
+    .story-body h2 {
+      margin-top: var(--s-3);
+      font-family: var(--f-serif);
+      font-size: clamp(36px, 4vw, 52px);
+      line-height: 1.05;
+      font-weight: 400;
+      letter-spacing: -0.012em;
+      max-width: 16ch;
+    }
+    .story-body h2 em { font-style: italic; color: var(--crimson); }
+    .story-body .lede {
+      margin-top: var(--s-5);
+      font-family: var(--f-serif);
+      font-size: clamp(20px, 1.7vw, 24px);
+      line-height: 1.42;
+      color: var(--ink-2);
+      max-width: 38ch;
+    }
+    .story-body .body { margin-top: var(--s-5); max-width: 52ch; }
+    .story-body .body p { margin: 0 0 1em; }
+    .story-body .meta {
+      margin-top: var(--s-5);
+      display: flex;
+      gap: var(--s-5);
+      font-family: var(--f-sans);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--ink-3);
+      border-top: 1px solid var(--rule);
+      padding-top: var(--s-3);
+    }
+    .story-body .meta strong {
+      display: block;
+      margin-bottom: 2px;
+      font-family: var(--f-sans);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 500;
+    }
+    .story-body .meta .v {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    .story-index-num {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--crimson);
+      margin-right: 12px;
+    }
+
+    /* Bookmark-style anchor list at top */
+    .story-toc {
+      margin-top: var(--s-7);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .story-toc a {
+      background: var(--paper);
+      padding: var(--s-4) var(--s-4);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background .2s, color .2s;
+    }
+    .story-toc a:hover { background: var(--paper-2); color: var(--crimson); }
+    .story-toc .toc-num {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--crimson);
+      letter-spacing: 0;
+    }
+    .story-toc .toc-name {
+      font-family: var(--f-serif);
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 500;
+    }
+    .story-toc .toc-org {
+      font-family: var(--f-sans);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    @media (max-width: 980px) {
+      .story, .story:nth-child(even) { grid-template-columns: 1fr; gap: var(--s-5); }
+      .story:nth-child(even) .story-img { order: 0; }
+      .story:nth-child(even) .story-body { order: 0; }
+      .story-toc { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav" data-screen-label="00 Nav" data-sq>
+  <div class="sq-mapping">SQ · Header</div>
+  <div class="nav-inner">
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="causes.html">Causes</a>
+      <a href="about.html">About</a>
+      <a href="stories.html" class="active">Stories</a>
+    </nav>
+    <a href="index.html" aria-label="The Spinner Foundation" class="wordmark"></a>
+    <div class="nav-right">
+      <a class="btn btn-primary" href="index.html#donate">Donate</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     PAGE HERO
+============================================================ -->
+<section class="stories-hero" data-screen-label="01 Stories Hero" data-sq>
+  <div class="sq-mapping">SQ · Banner Section</div>
+  <div class="wrap">
+    <span class="eyebrow">Stories</span>
+    <h1 class="h1" style="margin-top: 24px">
+      Where each gift&nbsp;<em style="font-style:italic;color:var(--crimson)">landed</em>.
+    </h1>
+    <p class="lede">
+      The animals, the partners, the moments. Stories build year by year here -
+      as the work happens, and as we have time to tell it.
+    </p>
+
+    <nav class="story-toc" aria-label="Stories index">
+      <a href="#rowdy">
+        <div class="toc-num">01</div>
+        <div class="toc-name">Meet Rowdy</div>
+        <div class="toc-org">Catskill Animal Sanctuary</div>
+      </a>
+      <a href="#paws-of-war">
+        <div class="toc-num">02</div>
+        <div class="toc-name">To Paws of War</div>
+        <div class="toc-org">Paws of War &middot; Veterans &amp; Rescue</div>
+      </a>
+      <a href="#hubbard">
+        <div class="toc-num">03</div>
+        <div class="toc-name">Newtown's Sanctuary</div>
+        <div class="toc-org">Catherine Violet Hubbard</div>
+      </a>
+      <a href="#best-friends">
+        <div class="toc-num">04</div>
+        <div class="toc-name">A Night at the Glass House</div>
+        <div class="toc-org">Best Friends Animal Society</div>
+      </a>
+      <a href="#daws">
+        <div class="toc-num">05</div>
+        <div class="toc-name">A Local Shelter, Year After Year</div>
+        <div class="toc-org">DAWS &middot; Bethel, CT</div>
+      </a>
+      <a href="#families-network">
+        <div class="toc-num">06</div>
+        <div class="toc-name">Gingerbread Joy</div>
+        <div class="toc-org">Families Network of Western CT</div>
+      </a>
+    </nav>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STORIES INDEX  — long-form rows
+============================================================ -->
+<section class="stories-list" data-screen-label="02 Stories" data-sq>
+  <div class="sq-mapping">SQ · Summary Block (List view) or Image+Text rows</div>
+  <div class="wrap">
+
+    <article class="story" id="rowdy" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Row</div>
+      <div class="story-img" style="background-image: url('assets/photos/rowdy-2.jpg'); background-position: center 35%; background-size: cover;"></div>
+      <div class="story-body">
+        <div class="org"><span class="story-index-num">01.</span>Catskill Animal Sanctuary <span class="dot">·</span> Saugerties, NY</div>
+        <h2>Meet <em>Rowdy.</em></h2>
+        <p class="lede">
+          A gentle soul, rescued from an animal hoarding situation in Saratoga, New York,
+          alongside thirteen other horses.
+        </p>
+        <div class="body">
+          <p>
+            When Rowdy arrived at Catskill Animal Sanctuary, he was several hundred pounds
+            underweight, suffering from rain rot, and had severely neglected hooves.
+            Due to his past, Rowdy carries some lingering trust issues - but he is patient
+            and kind, and getting better every day.
+          </p>
+          <p>
+            We sponsor Rowdy. The sanctuary itself is a 150-acre Hudson Valley refuge that
+            has rescued over 5,000 animals in twenty-five years, and we couldn't be prouder
+            to support what they do.
+          </p>
+          <newline><newline><span class="ph">[photo]</span></newline></newline>
+        </div>
+        <div class="meta">
+          <div><strong>Recipient</strong>Catskill Animal Sanctuary</div>
+          <div><strong>Sponsored</strong>2026</div>
+          <div><strong>Visit</strong>casanctuary.org</div>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="story" id="paws-of-war" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Row (reversed)</div>
+      <div class="story-img" style="background-image: url('assets/photos/family-quote.jpg'); background-position: center;"></div>
+      <div class="story-body">
+        <div class="org"><span class="story-index-num">02.</span>Paws of War <span class="dot">·</span> Nesconset, NY</div>
+        <h2>To&nbsp;<em>Paws of War.</em></h2>
+        <p class="lede">
+          A gift, hand-delivered in September 2024 to the people pairing rescued
+          animals with American veterans and first responders.
+        </p>
+        <div class="body">
+          <p>
+            Paws of War rescues animals from neglect, abandonment, and active conflict
+            zones, and trains them to support service members returning home. It is some
+            of the most concentrated good we know of - healing on both ends of the leash.
+          </p>
+          <p>
+            We delivered the check in person, at the Nesconset facility, alongside
+            the team that does the work day-in and day-out.
+          </p>
+        </div>
+        <div class="meta">
+          <div><strong>Gift</strong><span class="v">$10,000</span></div>
+          <div><strong>Date</strong>September 2024</div>
+          <div><strong>Visit</strong>pawsofwar.org</div>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="story" id="hubbard" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Row</div>
+      <div class="story-img" style="background-image: url('assets/photos/family-13.jpg'); background-position: center;"></div>
+      <div class="story-body">
+        <div class="org"><span class="story-index-num">03.</span>Catherine Violet Hubbard Sanctuary <span class="dot">·</span> Newtown, CT</div>
+        <h2>Newtown's quiet&nbsp;<em>sanctuary</em>.</h2>
+        <p class="lede">
+          A 34-acre animal sanctuary in Newtown, Connecticut - carrying forward the
+          memory of Catherine Violet Hubbard through compassion, education, and care.
+        </p>
+        <div class="body">
+          <p>
+            We were drawn to the worthwhile programming at the Catherine Violet Hubbard
+            Sanctuary in our home state. It is a place built deliberately for healing,
+            and we are honored to support their ongoing work.
+          </p>
+          <newline><newline><span class="ph">[photo]</span></newline></newline>
+        </div>
+        <div class="meta">
+          <div><strong>Gift</strong><span class="v">$2,500</span></div>
+          <div><strong>Date</strong>August 2024</div>
+          <div><strong>Visit</strong>cvhfoundation.org</div>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="story" id="best-friends" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Row (reversed)</div>
+      <div class="story-img" style="background-image: url('assets/photos/event-19.jpg'); background-position: center;"></div>
+      <div class="story-body">
+        <div class="org"><span class="story-index-num">04.</span>Best Friends Animal Society <span class="dot">·</span> National</div>
+        <h2>A night at the&nbsp;<em>Glass House</em>.</h2>
+        <p class="lede">
+          The national leader in ending the killing of dogs and cats in America's
+          shelters - and the closest thing the movement has to a center of gravity.
+        </p>
+        <div class="body">
+          <p>
+            In 2024, members of the family attended Best Friends' annual benefit gala at
+            the Glass House. The mission of Best Friends - ending shelter killing by 2025 -
+            is one of the only audacious, time-bound goals in animal welfare. We're glad
+            to be part of the room that's funding it.
+          </p>
+          <p>
+            Later that year, the family made the pilgrimage to the Best Friends sanctuary
+            in Kanab, Utah. The land itself is part of the story - we keep going back.
+          </p>
+        </div>
+        <div class="meta">
+          <div><strong>Engagement</strong>Gala benefactor</div>
+          <div><strong>Sanctuary visit</strong>Kanab, UT</div>
+          <div><strong>Visit</strong>bestfriends.org</div>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="story" id="daws" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Row</div>
+      <div class="story-img" style="background-image: url('assets/photos/event-15.jpg'); background-position: center;"></div>
+      <div class="story-body">
+        <div class="org"><span class="story-index-num">05.</span>DAWS Animal Welfare Society <span class="dot">·</span> Bethel, CT</div>
+        <h2>A local shelter,&nbsp;<em>year after year</em>.</h2>
+        <p class="lede">
+          A no-kill shelter serving Western Connecticut with adoption, foster, and
+          community education programs - our longest-running partner.
+        </p>
+        <div class="body">
+          <p>
+            DAWS has been a constant for the foundation since the beginning. We read
+            their newsletter cover-to-cover, attend the benefits when we can, and quietly
+            keep the relationship warm. They are the model of what a small, well-run
+            shelter looks like.
+          </p>
+        </div>
+        <div class="meta">
+          <div><strong>Relationship</strong>Annual partner</div>
+          <div><strong>Newsletter</strong>Active recipient</div>
+          <div><strong>Visit</strong>daws.org</div>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="story" id="families-network" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Row (reversed)</div>
+      <div class="story-img" style="background-image: url('assets/photos/event-11.jpg'); background-position: center;"></div>
+      <div class="story-body">
+        <div class="org"><span class="story-index-num">06.</span>Families Network of Western CT <span class="dot">·</span> Danbury, CT</div>
+        <h2>Gingerbread&nbsp;<em>joy.</em></h2>
+        <p class="lede">
+          Programs and resources that foster healthy, loving, supportive family
+          environments. They invite us in for the work and for the joy.
+        </p>
+        <div class="body">
+          <p>
+            Their mission is to ensure that families receive the support they need to give
+            their children a safe and healthy start. The programs reduce social isolation
+            and mitigate childhood risk - quiet, structural work.
+          </p>
+          <p>
+            We were granted the joyous privilege of judging their Gingerbread Decorating
+            Contest, themed "Winter Family Fun: Avoiding Cabin Fever." The kits went out
+            with winter activity ideas and safety handouts. We came back with a story we
+            still tell.
+          </p>
+          <newline><newline><span class="ph">[photo]</span></newline></newline>
+        </div>
+        <div class="meta">
+          <div><strong>Engagement</strong>Event partner</div>
+          <div><strong>Recent</strong>Gingerbread Contest, Dec '24</div>
+          <div><strong>Visit</strong>familiesnetwork.org</div>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- Placeholder for upcoming Medical / Hospital wing story -->
+    <article class="story" id="medical" data-sq style="opacity: .7">
+      <div class="sq-mapping">SQ · Image + Text Row (Coming Soon)</div>
+      <div class="story-img" style="background: repeating-linear-gradient(45deg, var(--paper) 0 18px, var(--paper-2) 18px 36px);"></div>
+      <div class="story-body">
+        <div class="org"><span class="story-index-num">07.</span>Hospital Wing <span class="dot">·</span> Connecticut <span class="dot">·</span> <span style="color: var(--crimson)">Coming soon</span></div>
+        <h2>A wing in our&nbsp;<em>home state</em>.</h2>
+        <p class="lede">
+          A named hospital wing in Connecticut. We're holding space for the story here
+          while we put together the photographs, the dates, and the right way to honor
+          what was built.
+        </p>
+        <div class="meta">
+          <div><strong>Status</strong>In preparation</div>
+          <div><strong>Pillar</strong>Medical</div>
+          <div><strong>Contact</strong>thespinnerfoundation@gmail.com</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     DONATE BAND (shared)
+============================================================ -->
+<section class="donate" id="donate" data-screen-label="03 Donate" data-sq>
+  <div class="sq-mapping">SQ · Section · CTA Block</div>
+  <div class="wrap">
+    <div class="donate-inner">
+      <div>
+        <span class="eyebrow"><span class="num">07</span> Get Involved</span>
+        <h2 class="h2">A foundation that&nbsp;<em>gives</em>,<br/>not gathers.</h2>
+        <p class="lede" style="margin-top: 24px">
+          If you'd like to contribute, your gift goes directly to one of our partner
+          organizations. We don't take a cut. We don't keep an endowment.
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start">
+        <a class="btn btn-primary" href="#" style="padding: 18px 28px">Make a Donation</a>
+        <a class="btn btn-ghost" href="mailto:thespinnerfoundation@gmail.com">Or write to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="foot" data-screen-label="09 Footer" data-sq>
+  <div class="sq-mapping">SQ · Footer</div>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <a href="index.html" class="wordmark wordmark-dark" aria-label="The Spinner Foundation"></a>
+        <p class="body" style="color: rgba(255,250,242,.7); font-size: 14px; margin-top: 24px; max-width: 36ch">
+          A family-run charitable foundation supporting animal sanctuaries, children's services,
+          and medical causes since <span class="ph">[YEAR — client]</span>.
+        </p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="causes.html">Causes &amp; Recipients</a></li>
+          <li><a href="about.html">About the Family</a></li>
+          <li><a href="stories.html">Stories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="#donate">Make a Donation</a></li>
+          <li><a href="mailto:thespinnerfoundation@gmail.com">Nominate a Cause</a></li>
+          <li><a href="mailto:thespinnerfoundation@gmail.com">Volunteer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:thespinnerfoundation@gmail.com">thespinnerfoundation@gmail.com</a></li>
+          <li><a href="https://thespinnerfoundation.org">thespinnerfoundation.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 The Spinner Foundation. A 501(c)(3) nonprofit organization.</span>
+      <span>Made with care, in Connecticut.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks.jsx"></script>
+
+</body>
+</html>

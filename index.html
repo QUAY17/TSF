@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Spinner Foundation</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV — maps to Squarespace Header
+============================================================ -->
+<header class="nav" data-screen-label="00 Nav" data-sq>
+  <div class="sq-mapping">SQ · Header</div>
+  <div class="nav-inner">
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="causes.html">Causes</a>
+      <a href="about.html">About</a>
+      <a href="stories.html">Stories</a>
+    </nav>
+    <a href="index.html" aria-label="The Spinner Foundation" class="wordmark"></a>
+    <div class="nav-right">
+      <a class="btn btn-primary" href="#donate">Donate</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     HERO — switches between bleed / split / type via [data-hero]
+     Maps to Squarespace Banner Section
+============================================================ -->
+<section class="hero" data-screen-label="01 Hero" data-sq>
+  <div class="sq-mapping">SQ · Banner Section (one image, headline overlay)</div>
+
+  <div class="hero-img" style="background-image:url('assets/photos/cas-2.jpg'); background-position: center 38%;"></div>
+
+  <div class="hero-inner">
+    <span class="eyebrow">A Family Foundation · Est. <span class="ph">[YEAR — client]</span></span>
+    <h1 class="display">Where every being has the opportunity to&nbsp;<em>thrive.</em></h1>
+    <p class="lede">
+      The Spinner Foundation supports animal sanctuaries, children's services, and medical
+      causes - in partnership with the people doing the work on the ground.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="causes.html">See where we give</a>
+      <a class="btn btn-ghost" href="stories.html#rowdy">Read Rowdy's story</a>
+    </div>
+  </div>
+
+  <p class="hero-caption caption">Inside the stables - Catskill Animal Sanctuary, Saugerties NY.</p>
+</section>
+
+
+<!-- ============================================================
+     MISSION  (slim — lede + signature, body lives on About)
+     Maps to Squarespace : Image + Text Block (two-column)
+============================================================ -->
+<section class="section mission" id="about" data-screen-label="02 Mission" data-sq>
+  <div class="sq-mapping">SQ · Image + Text Block</div>
+  <div class="wrap">
+    <div class="mission-grid">
+      <figure style="margin: 0">
+        <div class="mission-img" style="background-image: url('assets/photos/family-7226.jpg'); background-position: 60% center;"></div>
+        <figcaption class="caption mission-img-caption">
+          Nicole and Jim, with sanctuary kids.
+        </figcaption>
+      </figure>
+      <div>
+        <span class="eyebrow"><span class="num">01</span> Our Mission</span>
+        <p class="lede-big" style="margin-top: 32px">
+          We give to organizations that serve the vulnerable with care, dignity,
+          and <span class="pencil-mark">follow-through</span>.
+        </p>
+        <div class="mission-body body" style="margin-top: var(--s-6)">
+          <p>
+            We support animal sanctuaries, children's services, and medical causes -
+            three pillars that have guided our giving since the family began this work
+            in earnest.
+          </p>
+          <p>
+            We don't take a cut. We don't keep an endowment. Every gift gets placed
+            by hand, in conversation with the people on the ground.
+          </p>
+          <p style="margin-top: var(--s-5)">
+            <a class="btn btn-ghost" href="about.html">Read more about the family</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     THREE PILLARS — at-a-glance index, full detail on About
+     Maps to Squarespace : List Section (3 cards)
+============================================================ -->
+<section data-screen-label="03 Pillars Index" data-sq>
+  <div class="sq-mapping">SQ · List Section (3 cards, equal width)</div>
+  <div class="wrap" style="padding-top: var(--s-8); padding-bottom: var(--s-5);">
+    <header style="display: flex; align-items: end; justify-content: space-between; gap: var(--s-5); flex-wrap: wrap;">
+      <div>
+        <span class="eyebrow"><span class="num">02</span> Three Pillars</span>
+        <h2 class="h2" style="margin-top: 16px; max-width: 22ch">
+          Where we go to&nbsp;<em style="font-style:italic;color:var(--crimson)">work</em>.
+        </h2>
+      </div>
+      <a class="btn btn-primary" href="about.html#mission">Read the full mission</a>
+    </header>
+  </div>
+
+  <div class="pillars-index">
+    <a class="pillar-card" href="causes.html#animals" data-sq>
+      <div class="sq-mapping">SQ · Card</div>
+      <div class="meta"><span class="roman">i.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+      <h3>Animals</h3>
+      <p>
+        Sanctuaries, shelters, and rescue programs - from horses recovering from
+        neglect to working dogs paired with veterans.
+      </p>
+      <div class="pcta"><span>Browse animal causes</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="pillar-card" href="causes.html#families" data-sq>
+      <div class="sq-mapping">SQ · Card</div>
+      <div class="meta"><span class="roman">ii.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+      <h3>Children &amp; Families</h3>
+      <p>
+        Family-services nonprofits that protect a child's right to a safe and
+        healthy start - reducing isolation, preventing harm.
+      </p>
+      <div class="pcta"><span>Browse family causes</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="pillar-card coming" href="causes.html" data-sq>
+      <div class="sq-mapping">SQ · Card (Coming Soon)</div>
+      <div class="meta"><span class="roman">iii.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+      <h3>Medical</h3>
+      <p>
+        Research, treatment, and the institutions that deliver it - including a
+        named hospital wing in our home state of Connecticut.
+      </p>
+      <div class="pcta"><span>Hospital wing · CT · Coming soon</span></div>
+    </a>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FEATURED STORY — Rowdy
+     Maps to Squarespace : Image + Text Section
+============================================================ -->
+<section class="section" id="story" style="padding-top:0" data-screen-label="04 Featured Story" data-sq>
+  <div class="sq-mapping">SQ · Image + Text Section (large image left, body right)</div>
+  <div class="wrap">
+    <div class="feature">
+      <div class="feature-photo-col">
+        <figure class="photo-frame">
+          <img src="assets/photos/rowdy-2.jpg" alt="Rowdy the horse, portrait" />
+          <figcaption class="label">
+            Rowdy, a few weeks after arriving.
+            <span class="meta">Catskill Animal Sanctuary</span>
+          </figcaption>
+        </figure>
+        <figure class="photo-frame">
+          <img src="assets/photos/rowdy-1.jpg" alt="Rowdy in the pasture" />
+          <figcaption class="label">
+            Out in the pasture.
+            <span class="meta">Catskill Animal Sanctuary</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="feature-body">
+        <span class="eyebrow"><span class="num">03</span> A Story We're Proud Of</span>
+        <h2 class="h2">Meet&nbsp;<em style="font-style:italic;color:var(--crimson)">Rowdy.</em></h2>
+
+        <p class="lede">
+          A gentle soul, rescued from an animal hoarding situation in Saratoga, New York,
+          alongside thirteen other horses.
+        </p>
+
+        <div class="body">
+          <p>
+            When Rowdy arrived at Catskill Animal Sanctuary, he was several hundred pounds
+            underweight, suffering from rain rot, and had severely neglected hooves. Today, he is
+            one of the horses we sponsor - part of a 150-acre Hudson Valley refuge that has
+            rescued over 5,000 animals in twenty-five years.
+          </p>
+        </div>
+
+        <blockquote class="pullquote">
+          &ldquo;Life is life - whether in a cat, or dog, or man. The idea of difference is
+          a human conception for man's own advantage.&rdquo;
+          <cite>Sri Aurobindo</cite>
+        </blockquote>
+
+        <dl class="feature-stats">
+          <div>
+            <dt>Sanctuary</dt>
+            <dd>Catskill Animal Sanctuary</dd>
+          </div>
+          <div>
+            <dt>Year sponsored</dt>
+            <dd><em><span class="ph">[YEAR — client]</span></em></dd>
+          </div>
+        </dl>
+
+        <a class="btn btn-ghost feature-cta" href="stories.html#rowdy">Read Rowdy's full story</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FROM THE FAMILY  — verbatim quote from the foundation's mission
+     Maps to Squarespace : Quote Block
+============================================================ -->
+<section class="family-quote" data-screen-label="05 From The Family" data-sq>
+  <div class="sq-mapping">SQ · Quote Block</div>
+  <div class="wrap">
+    <figure class="portrait photo-frame" style="transform: rotate(-2deg); max-width: 520px;">
+      <img src="assets/photos/family-quote.jpg" alt="The Spinner family presenting a $10,000 donation check to Paws of War" style="width: 100%;" />
+      <figcaption class="label">
+        Presenting a $10,000 gift to Paws of War.
+        <span class="meta">The Spinner Family &middot; Nesconset, NY · September 2024</span>
+      </figcaption>
+    </figure>
+    <div>
+      <span class="eyebrow"><span class="num">From</span> The Family</span>
+      <blockquote style="margin-top: 24px">
+        To foster empathy and understanding between humans and animals through
+        programs that promote responsible pet care, wildlife conservation, and
+        the ethical treatment of <span class="pencil-mark">all living creatures</span>.
+      </blockquote>
+      <p class="attribution"><span class="name">The Spinner Family</span>From the foundation's mission</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     KPI STRIP — at-a-glance stats (replaces full Impact section)
+     Maps to Squarespace : List Section (4 cells, compact)
+============================================================ -->
+<section data-screen-label="03a KPIs" data-sq>
+  <div class="sq-mapping">SQ · List Section (compact KPI row)</div>
+  <div class="kpi-strip">
+    <div class="kpi"><span class="n"><span class="ph">[#]</span></span><span class="l">Partner organizations</span></div>
+    <div class="kpi"><span class="n"><em><span class="ph">[#]</span></em></span><span class="l">Donations placed</span></div>
+    <div class="kpi"><span class="n"><em>$<span class="ph">[TOTAL]</span></em></span><span class="l">In gifts placed since [YEAR]</span></div>
+    <div class="kpi"><span class="n">Since<br/>[YEAR]</span><span class="l">The foundation began this work</span></div>
+  </div>
+</section>
+
+
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     Maps to Squarespace : Footer
+============================================================ -->
+<footer class="foot" data-screen-label="07 Footer" data-sq>
+  <div class="sq-mapping">SQ · Footer</div>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <a href="index.html" class="wordmark wordmark-dark" aria-label="The Spinner Foundation"></a>
+        <p class="body" style="color: rgba(255,250,242,.7); font-size: 14px; margin-top: 24px; max-width: 36ch">
+          A family-run charitable foundation supporting animal sanctuaries, children's services,
+          and medical causes since <span class="ph">[YEAR — client]</span>.
+        </p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="causes.html">Causes &amp; Recipients</a></li>
+          <li><a href="about.html">About the Family</a></li>
+          <li><a href="stories.html">Stories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="#donate">Make a Donation</a></li>
+          <li><a href="#donate">Nominate a Cause</a></li>
+          <li><a href="#donate">Volunteer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:thespinnerfoundation@gmail.com">thespinnerfoundation@gmail.com</a></li>
+          <li><a href="https://thespinnerfoundation.org">thespinnerfoundation.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 The Spinner Foundation. A 501(c)(3) nonprofit organization.</span>
+      <span>Made with care, in Connecticut.</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Tweaks panel -->
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks.jsx"></script>
+
+</body>
+</html>
