@@ -342,6 +342,7 @@ body[data-hero="split"] .hero-inner {
   max-width: 680px;
 }
 body[data-hero="split"] .hero .display { font-size: clamp(40px, 5.4vw, 80px); }
+body[data-hero="split"] .hero-caption { padding-left: var(--s-3); }
 
 /* — typographic: no photo, manifesto type — */
 body[data-hero="type"] .hero {
@@ -395,7 +396,7 @@ body[data-hero="type"] .hero-cta { display: flex; gap: var(--s-3); justify-conte
 }
 .mission-img-caption {
   margin-top: var(--s-3);
-  text-align: left;
+  text-align: right;
 }
 .mission-body p { margin: 0 0 1em; }
 
