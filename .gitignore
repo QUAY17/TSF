@@ -1,9 +1,14 @@
 # OS / editor
 .DS_Store
 Thumbs.db
+
+
 .claude
+
 # Local-only working material — not published to the site
 archive
+branding_new_logos
+design\designer_styleguides\assets\photos
 site_content
 TSF.zip
 branding/TSF Logos/
