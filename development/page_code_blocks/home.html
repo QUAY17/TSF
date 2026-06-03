@@ -1,0 +1,564 @@
+<!-- ============================================================
+     THE SPINNER FOUNDATION — HOMEPAGE  (single Squarespace Code Block)
+     ------------------------------------------------------------
+     PASTE-READY. One self-contained block = the entire homepage.
+     Faithful to design/desktop_design/index.html (layout a, hero split).
+
+     SQUARESPACE PLACEMENT
+       1. Page → add a BLANK SECTION. Fill Screen OFF. Top/bottom
+          padding 0. Section width FULL.
+       2. Add ONE Code Block. Paste everything below. Save, then view
+          on PREVIEW (sticky nav + blur don't render in the editor).
+       3. Hide SS's native header/footer (custom ones live here) via
+          Settings → Advanced → Code Injection (Header) — see handoff notes.
+
+     IMAGES — upload these 7 files to Squarespace, then paste their
+     SS-hosted URLs into the IMAGE SOURCES block just below. Until then
+     the local repo paths render for design review.
+       --logo-nav   → assets/wordmark-light.png   (nav wordmark)
+       --logo-foot  → assets/wordmark-dark.png     (footer wordmark)
+       --img-hero   → assets/photos/cas-2.jpg      (hero, split-left)
+       --img-mission→ assets/photos/family-7226.jpg(mission photo)
+       <img> rowdy  → assets/photos/rowdy-2.jpg    (feature, top frame)
+       <img> rowdy  → assets/photos/rowdy-1.jpg    (feature, lower frame)
+       <img> family → assets/photos/family-quote-cropped.jpg (family-quote portrait)
+     Footer social icons use placeholder href="#" — paste the client's live URLs.
+
+     PLACEHOLDERS — the loud crimson .ph pills mark client data still
+     needed (see CLIENT-QUESTIONS.md): [YEAR], partner counts, $ totals.
+     To resolve: drop in the real value AND remove the <span class="ph"> wrapper.
+     ============================================================ -->
+<div class="tsf" data-layout="a" data-hero="split" data-density="balanced">
+
+  <!-- Fonts: load via <link> (most reliable inside a Squarespace Code Block) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap">
+
+  <style>
+  /* ====== IMAGE SOURCES — swap these 5 URLs after Squarespace upload ======
+     Replace each local path with the SS-hosted URL (e.g.
+     url('https://static1.squarespace.com/static/…/cas-2.jpg')).
+     The 3 <img> photos in the featured story / family quote are swapped
+     directly on their src="" attributes in the markup below. */
+  .tsf {
+    --logo-nav   : url('../../design/designer_styleguides/assets/wordmark-light.png');
+    --logo-foot  : url('../../design/designer_styleguides/assets/wordmark-dark.png');
+    --logo-vmark : url('../../branding_new_logos/The-Spinner-Foundation-Logo_6.png'); /* all-ink ruled V (mobile masthead) */
+    --img-hero   : url('../../design/designer_styleguides/assets/photos/cas-2.jpg');
+    --img-mission: url('../../design/designer_styleguides/assets/photos/family-7226.jpg');
+  }
+
+  /* ============================================================
+     THE SPINNER FOUNDATION — core (namespaced under .tsf)
+     Mirror of development/page_code_blocks/_tsf-core.css.
+     Fonts (Cormorant Garamond + Inter) loaded via <link> above.
+     ============================================================ */
+  .tsf {
+    --paper      : oklch(0.975 0.008 75);
+    --paper-2    : oklch(0.955 0.010 75);
+    --ink        : oklch(0.18  0.010 35);
+    --ink-2      : oklch(0.36  0.010 35);
+    --ink-3      : oklch(0.58  0.008 50);
+    --rule       : oklch(0.85 0.020 28);
+    --rule-soft  : oklch(0.92 0.012 28);
+    --crimson    : #8C1A1A;
+    --crimson-d  : #6E1414;
+    --honey      : oklch(0.66 0.13 70);
+    --honey-soft : oklch(0.94 0.06 75);
+    --ink-on-red : oklch(0.98 0.005 75);
+    --f-serif    : "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+    --f-sans     : "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+    --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 144px;
+    --section-y  : var(--s-10);
+    --gutter     : 56px;
+    --max-w      : 1280px;
+    --col-w      : 720px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-sans) !important;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .tsf[data-density="airy"]    { --section-y: 184px; }
+  .tsf[data-density="compact"] { --section-y: 96px; --s-10: 96px; --s-9: 72px; }
+
+  .tsf, .tsf *, .tsf *::before, .tsf *::after { box-sizing: border-box; }
+  .tsf img { display: block; max-width: 100%; height: auto; }
+  .tsf a   { color: inherit; text-decoration: none !important; }
+  .tsf hr  { border: 0; border-top: 1px solid var(--rule); margin: var(--s-6) 0; }
+
+  /* — Type system — */
+  .tsf .eyebrow {
+    font-family: var(--f-sans) !important; font-size: 12px !important; font-weight: 500 !important;
+    letter-spacing: 0.18em !important; text-transform: uppercase !important; line-height: 1.4 !important;
+    color: var(--crimson); display: inline-flex; align-items: center; gap: 10px; margin: 0;
+  }
+  .tsf .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--crimson); opacity: .8; display: inline-block; flex: none; }
+  .tsf .eyebrow.no-rule::before { display: none; }
+  .tsf .eyebrow .num {
+    font-family: var(--f-serif) !important; font-style: italic; font-weight: 500 !important;
+    font-size: 14px !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--crimson);
+  }
+  .tsf h1, .tsf h2, .tsf h3, .tsf h4 {
+    font-family: var(--f-serif) !important; font-weight: 500 !important; letter-spacing: -0.005em !important;
+    text-transform: none !important; color: var(--ink); margin: 0;
+  }
+  .tsf .display {
+    font-family: var(--f-serif) !important; font-weight: 400 !important; font-size: clamp(48px, 7.4vw, 112px) !important;
+    line-height: 1.02 !important; letter-spacing: -0.018em !important; text-transform: none !important;
+  }
+  .tsf .display em { font-style: italic; font-weight: 500; color: var(--crimson); }
+  .tsf .h1 { font-size: clamp(40px, 5.4vw, 72px) !important; line-height: 1.05 !important; font-weight: 400 !important; }
+  .tsf .h2 { font-size: clamp(32px, 3.8vw, 52px) !important; line-height: 1.08 !important; font-weight: 400 !important; }
+  .tsf .h3 { font-size: clamp(22px, 2.0vw, 28px) !important; line-height: 1.2  !important; font-weight: 500 !important; }
+  .tsf .h4 { font-size: 18px !important; line-height: 1.3 !important; font-weight: 500 !important; }
+  .tsf .lede {
+    font-family: var(--f-serif) !important; font-weight: 400 !important; font-size: clamp(20px, 1.8vw, 26px) !important;
+    line-height: 1.42 !important; letter-spacing: 0.002em !important; text-transform: none !important; color: var(--ink-2);
+  }
+  .tsf .body { font-family: var(--f-sans) !important; font-size: 16px !important; line-height: 1.65 !important; text-transform: none !important; color: var(--ink-2); }
+  .tsf .body p { margin: 0 0 1em; }
+  .tsf .body p:last-child { margin-bottom: 0; }
+  .tsf .caption { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.04em !important; text-transform: none !important; line-height: 1.4 !important; color: var(--ink-3); }
+  .tsf .tabular { font-variant-numeric: tabular-nums; }
+
+  /* — Layout primitives — */
+  .tsf .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+  .tsf .wrap-narrow { max-width: 920px; margin: 0 auto; padding: 0 var(--gutter); }
+  .tsf .section { padding-top: var(--section-y); padding-bottom: var(--section-y); }
+  .tsf .section + .section { padding-top: 0; }
+  .tsf .rule { height: 1px; background: var(--rule); width: 100%; }
+
+  /* — Nav — */
+  .tsf .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in oklch, var(--paper) 88%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(120%); backdrop-filter: blur(18px) saturate(120%);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .tsf .nav-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 92px; padding: 0 var(--gutter); max-width: var(--max-w); margin: 0 auto; }
+  .tsf .nav-links { display: flex; gap: var(--s-6); font-family: var(--f-sans) !important; font-size: 13px !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; color: var(--ink-2); }
+  .tsf .nav-links a { padding: 4px 0; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
+  .tsf .nav-links a:hover, .tsf .nav-links a.active { border-bottom-color: var(--crimson); color: var(--ink); }
+  .tsf .nav-right { justify-self: end; display: flex; gap: var(--s-3); align-items: center; }
+  .tsf .wordmark { display: inline-block; width: 154px; height: 60px; background-image: var(--logo-nav); background-repeat: no-repeat; background-position: center; background-size: contain; }
+  .tsf .wordmark-lg { width: 264px; height: 100px; }
+  .tsf .wordmark-dark, .tsf .foot .wordmark { background-image: var(--logo-foot); }
+  .tsf .foot .wordmark { width: 154px; height: 60px; }
+  .tsf .nav-vmark { display: none; background-image: var(--logo-vmark); background-repeat: no-repeat; background-position: center; background-size: contain; }
+  .tsf .nav-rule { display: none; }
+
+  /* — Buttons — */
+  .tsf .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--f-sans) !important; font-size: 13px !important; font-weight: 500 !important;
+    letter-spacing: 0.08em !important; text-transform: uppercase !important; line-height: 1 !important;
+    padding: 14px 22px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+    text-decoration: none !important; background-image: none !important; box-shadow: none !important;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .tsf .btn:hover { background: var(--ink); color: var(--paper); }
+  .tsf .btn-primary { background: var(--crimson); color: var(--paper) !important; border-color: var(--crimson); }
+  .tsf .btn-primary:hover { background: var(--crimson-d); border-color: var(--crimson-d); color: var(--paper) !important; }
+  .tsf .btn-ghost { border-color: transparent; padding-left: 0; padding-right: 0; }
+  .tsf .btn-ghost::after { content: "→"; font-family: var(--f-serif) !important; font-size: 18px !important; letter-spacing: 0; text-transform: none; }
+  .tsf .btn-ghost:hover { background: transparent; color: var(--crimson); }
+
+  /* — Hero (split is the homepage default; bleed/type kept for reuse) — */
+  .tsf .hero { border-bottom: 1px solid var(--rule-soft); }
+  .tsf[data-hero="bleed"] .hero { position: relative; min-height: 88vh; display: grid; place-items: end start; color: var(--paper); overflow: hidden; }
+  .tsf[data-hero="bleed"] .hero-img { position: absolute; inset: 0; background-size: cover; background-position: center 35%; z-index: 0; }
+  .tsf[data-hero="bleed"] .hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,16,14,.35) 0%, rgba(20,16,14,.15) 30%, rgba(20,16,14,.45) 65%, rgba(20,16,14,.78) 100%); }
+  .tsf[data-hero="bleed"] .hero-inner { position: relative; z-index: 1; padding: 0 var(--gutter) 80px; max-width: var(--max-w); width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: var(--s-5); }
+  .tsf[data-hero="bleed"] .hero .display { color: var(--paper); max-width: 18ch; margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.35); }
+  .tsf[data-hero="bleed"] .hero .lede { color: rgba(255,250,242,.92); max-width: 52ch; margin: 0; text-shadow: 0 1px 18px rgba(0,0,0,.45); }
+  .tsf[data-hero="bleed"] .hero .eyebrow { color: rgba(255,250,242,.88); text-shadow: 0 1px 12px rgba(0,0,0,.4); }
+  .tsf[data-hero="bleed"] .hero .eyebrow::before { background: currentColor; }
+  .tsf[data-hero="bleed"] .hero .hero-cta { margin-top: var(--s-3); }
+  .tsf[data-hero="bleed"] .hero-caption { position: absolute; right: var(--gutter); bottom: 24px; color: rgba(255,250,242,.7); z-index: 2; }
+  .tsf[data-hero="split"] .hero { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 78vh; align-items: stretch; }
+  .tsf[data-hero="split"] .hero-img { background-size: cover; background-position: center 35%; min-height: 60vh; }
+  .tsf[data-hero="split"] .hero-inner { padding: var(--s-9) var(--gutter); display: flex; flex-direction: column; justify-content: center; gap: var(--s-5); max-width: 680px; }
+  .tsf[data-hero="split"] .hero .display { font-size: clamp(38px, 4.8vw, 66px) !important; }
+  .tsf[data-hero="split"] .hero-caption { padding-left: var(--s-3); }
+  .tsf[data-hero="type"] .hero { display: block; }
+  .tsf[data-hero="type"] .hero-img { display: none; }
+  .tsf[data-hero="type"] .hero-inner { max-width: var(--max-w); margin: 0 auto; padding: 168px var(--gutter) 120px; text-align: center; }
+  .tsf[data-hero="type"] .hero .display { font-size: clamp(56px, 9vw, 144px) !important; max-width: none; margin: 24px auto 0; }
+  .tsf[data-hero="type"] .hero .lede { max-width: 56ch; margin: 32px auto 0; }
+  .tsf[data-hero="type"] .hero .eyebrow { justify-content: center; }
+  .tsf[data-hero="type"] .hero-caption { display: none; }
+  .tsf[data-hero="type"] .hero-cta { display: flex; gap: var(--s-3); justify-content: center; margin-top: var(--s-7); }
+  .tsf .hero-cta { display: flex; gap: var(--s-3); margin-top: var(--s-6); flex-wrap: wrap; }
+
+  /* — Mission — */
+  .tsf .mission .lede-big { font-family: var(--f-serif) !important; font-size: clamp(28px, 3.4vw, 46px) !important; line-height: 1.22 !important; font-weight: 400 !important; letter-spacing: -0.005em !important; text-transform: none !important; color: var(--ink); max-width: 22ch; }
+  .tsf .mission .lede-big em { font-style: italic; color: var(--crimson); }
+  .tsf .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-9); align-items: start; }
+  .tsf .mission-img { aspect-ratio: 4 / 5; background-size: cover; background-position: center; border: 1px solid var(--rule); box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 22px 30px -28px rgba(20,16,14,.22); }
+  .tsf .mission-img-caption { margin-top: var(--s-3); text-align: right; }
+  .tsf .mission-body p { margin: 0 0 1em; }
+
+  /* — Placeholders — */
+  .tsf .ph { color: var(--crimson); background: oklch(0.96 0.04 28); padding: 0 6px; border-radius: 3px; font-weight: 500; font-style: normal; font-size: 0.85em; letter-spacing: 0.01em; white-space: nowrap; }
+
+  /* — Pillars index — */
+  .tsf .pillars-index { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .tsf .pillar-card { background: var(--paper); padding: var(--s-7) var(--s-6) var(--s-6); display: flex; flex-direction: column; gap: var(--s-4); min-height: 280px; transition: background .25s; }
+  .tsf .pillar-card:hover { background: var(--paper-2); }
+  .tsf .pillar-card .meta { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--f-sans) !important; font-size: 11px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; color: var(--ink-3); }
+  .tsf .pillar-card .meta .partners { color: var(--crimson); font-weight: 500; }
+  .tsf .pillar-card .roman { font-family: var(--f-serif) !important; font-style: italic; font-size: 20px !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--crimson); }
+  .tsf .pillar-card h3 { font-family: var(--f-serif) !important; font-size: clamp(28px, 2.6vw, 38px) !important; font-weight: 400 !important; line-height: 1.1 !important; letter-spacing: -0.005em !important; }
+  .tsf .pillar-card p { color: var(--ink-2); margin: 0; font-family: var(--f-sans) !important; font-size: 15px !important; line-height: 1.55 !important; max-width: 32ch; }
+  .tsf .pillar-card .pcta { margin-top: auto; padding-top: var(--s-4); border-top: 1px solid var(--rule-soft); display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); font-family: var(--f-sans) !important; font-size: 13px !important; font-weight: 500 !important; letter-spacing: 0.04em !important; text-transform: none !important; color: var(--crimson); }
+  .tsf .pillar-card .pcta .arrow { font-family: var(--f-serif) !important; font-size: 20px !important; letter-spacing: 0; line-height: 1; transition: transform .25s ease; }
+  .tsf .pillar-card:hover .pcta .arrow { transform: translateX(4px); }
+  .tsf .pillar-card.coming { background: var(--paper-2); }
+  .tsf .pillar-card.coming:hover { background: oklch(0.94 0.012 75); }
+  .tsf .pillar-card.coming .pcta { color: var(--ink-3); }
+  .tsf .pillar-card.coming .pcta .arrow { display: none; }
+
+  /* — KPI strip — */
+  .tsf .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--paper-2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .tsf .kpi { padding: var(--s-6) var(--s-5); display: flex; flex-direction: column; gap: 8px; border-right: 1px solid var(--rule); }
+  .tsf .kpi:last-child { border-right: 0; }
+  .tsf .kpi .n { font-family: var(--f-serif) !important; font-size: clamp(30px, 3vw, 40px) !important; font-weight: 500 !important; line-height: 1 !important; letter-spacing: -0.015em !important; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .tsf .kpi .n em { font-style: italic; color: var(--crimson); }
+  .tsf .kpi .n small { font-size: 0.42em; color: var(--ink-3); margin-left: 4px; font-weight: 500; letter-spacing: 0.02em; }
+  .tsf .kpi .l { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); }
+
+  /* — Featured story (Rowdy) — */
+  .tsf .feature { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--s-8); align-items: start; }
+  .tsf .feature-img { aspect-ratio: 4 / 5; background-size: cover; background-position: center; }
+  .tsf .feature-photo-col { display: flex; flex-direction: column; gap: var(--s-5); align-items: flex-start; padding-top: var(--s-6); }
+  .tsf .feature-body { padding-right: var(--s-6); }
+  .tsf .feature-body .h2 { margin-top: var(--s-4); max-width: 14ch; }
+  .tsf .feature-body .lede { margin-top: var(--s-5); }
+  .tsf .feature-body .body { margin-top: var(--s-5); max-width: 52ch; }
+  .tsf .feature-body .feature-cta { margin-top: var(--s-6); }
+  .tsf .feature-stats { margin-top: var(--s-7); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); border-top: 1px solid var(--rule); padding-top: var(--s-5); }
+  .tsf .feature-stats dt { font-family: var(--f-sans) !important; font-size: 11px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); margin: 0 0 6px; }
+  .tsf .feature-stats dd { font-family: var(--f-serif) !important; font-size: 28px !important; font-weight: 500 !important; margin: 0; color: var(--ink); }
+  .tsf .feature-stats dd em { font-style: italic; color: var(--crimson); }
+
+  /* — Editorial photo frame — */
+  .tsf .photo-frame { display: inline-flex; flex-direction: column; gap: 14px; padding: 18px 18px 22px; background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 18px 30px -22px rgba(20,16,14,.18); align-self: start; max-width: 360px; transform: rotate(-1.8deg); transform-origin: 50% 70%; transition: transform .35s ease; }
+  .tsf .photo-frame:hover { transform: rotate(-0.5deg) translateY(-2px); }
+  .tsf .photo-frame:nth-of-type(2n) { transform: rotate(2.4deg); }
+  .tsf .photo-frame:nth-of-type(2n):hover { transform: rotate(0.5deg) translateY(-2px); }
+  .tsf .photo-frame img { display: block; width: 320px; height: auto; image-rendering: auto; }
+  .tsf .photo-frame .label { font-family: var(--f-serif) !important; font-style: italic; font-size: 16px !important; color: var(--ink-2); }
+  .tsf .photo-frame .label .meta { display: block; font-family: var(--f-sans) !important; font-style: normal; font-size: 10px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; color: var(--ink-3); margin-top: 6px; }
+  .tsf .feature-photo-col .photo-frame, .tsf .feature-photo-col .photo-frame:nth-of-type(2n) { transform: none; }
+  .tsf .feature-photo-col .photo-frame:hover, .tsf .feature-photo-col .photo-frame:nth-of-type(2n):hover { transform: translateY(-2px); }
+
+  /* — Pencil-mark underline — */
+  .tsf .pencil-mark { position: relative; display: inline; white-space: nowrap; }
+  .tsf .pencil-mark::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.08em; height: 0.12em; background: var(--crimson); border-radius: 1px; pointer-events: none; opacity: .9; }
+
+  /* — Pull quote — */
+  .tsf .pullquote { font-family: var(--f-serif) !important; font-style: italic; font-size: clamp(22px, 2.2vw, 30px) !important; line-height: 1.32 !important; color: var(--ink); padding-left: var(--s-5); border-left: 2px solid var(--crimson); margin: var(--s-6) 0; }
+  .tsf .pullquote cite { display: block; margin-top: var(--s-3); font-style: normal; font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); }
+
+  /* — Section rhythm before special bands — */
+  .tsf .section:has(+ .family-quote), .tsf .section:has(+ .donate), .tsf .section:has(+ .scrapbook), .tsf .scrapbook:has(+ .donate) { padding-bottom: 0; }
+
+  /* — From-the-family quote — */
+  .tsf .family-quote { padding: var(--section-y) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--paper); }
+  .tsf .family-quote .wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--s-9); align-items: center; }
+  .tsf .family-quote .portrait { max-width: 520px; width: 100%; }
+  .tsf .family-quote blockquote { margin: 0; font-family: var(--f-serif) !important; font-size: clamp(26px, 2.8vw, 38px) !important; line-height: 1.32 !important; letter-spacing: -0.005em !important; font-weight: 400 !important; color: var(--ink); }
+  .tsf .family-quote blockquote::before { content: "\201C"; display: block; font-family: var(--f-serif) !important; font-size: 84px !important; line-height: 0.4; color: var(--crimson); margin-bottom: 24px; }
+  .tsf .family-quote .attribution { margin-top: var(--s-6); font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; color: var(--ink-3); }
+  .tsf .family-quote .attribution .name { font-family: var(--f-serif) !important; font-style: italic; font-size: 20px !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--ink); margin-right: var(--s-3); }
+
+  /* — Footer — */
+  .tsf .foot-seal { display: flex; justify-content: center; padding: var(--s-7) 0; }
+  .tsf .foot-seal .seal { width: 20px; height: 27px; opacity: .9; background: var(--logo-seal) center/contain no-repeat; }
+  .tsf .foot-social { display: flex; gap: var(--s-5); margin-top: var(--s-7); }
+  .tsf .foot-social a { display: inline-flex; color: rgba(255,250,242,.58); transition: color .2s, transform .2s; }
+  .tsf .foot-social a:hover { color: var(--paper); transform: translateY(-2px); }
+  .tsf .foot-social svg { width: 20px; height: 20px; fill: currentColor; display: block; }
+  .tsf .foot { background: oklch(0.32 0.008 35); color: var(--paper); padding: var(--s-9) 0 var(--s-6); }
+  .tsf .foot-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--s-7); }
+  .tsf .foot-inner > div:first-child { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .tsf .foot-inner > div:first-child .foot-social { justify-content: center; }
+  .tsf .foot h4 { font-family: var(--f-sans) !important; font-size: 11px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; font-weight: 500 !important; color: rgba(255,250,242,.55); margin: 0 0 var(--s-4); }
+  .tsf .foot ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .tsf .foot a { color: rgba(255,250,242,.85); font-size: 14px !important; }
+  .tsf .foot a:hover { color: var(--paper); border-bottom: 1px solid var(--crimson); }
+  .tsf .foot-base { margin-top: var(--s-9); padding-top: var(--s-4); border-top: 1px solid rgba(255,250,242,.15); display: flex; justify-content: space-between; font-size: 12px !important; color: rgba(255,250,242,.55); }
+  .tsf .foot-base a { text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: rgba(255,250,242,.35); }
+  .tsf .foot-base a:hover { text-decoration-color: var(--crimson); }
+
+  /* — Responsive — */
+  @media (max-width: 1080px) { .tsf .nav-links { gap: var(--s-4); font-size: 12px !important; } }
+  @media (max-width: 980px) { .tsf .family-quote .wrap { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) {
+    .tsf { --gutter: 24px; --section-y: 64px; }
+    /* Mobile masthead — V → wordmark → hairline → [ links · Donate ] (Donate inline, after Impact) */
+    .tsf .nav { position: static; }
+    .tsf .nav-inner { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 16px; height: auto; padding: 18px var(--gutter) 16px; }
+    .tsf .nav-vmark { display: block; order: 1; flex: 0 0 100%; height: 50px; margin-bottom: 12px; }
+    /* margin (not padding): wordmark is a background image that paints into padding; margin gives real breathing room above the hairline */
+    .tsf .wordmark { order: 2; flex: 0 0 100%; height: 46px; margin-bottom: 22px; }
+    .tsf .nav-rule { display: block; order: 3; flex: 0 0 100%; height: 1px; background: var(--rule-soft); }
+    .tsf .nav-links { order: 4; justify-content: center; gap: var(--s-4); font-size: 12px !important; margin-top: 18px; }
+    .tsf .nav-right { order: 5; margin-top: 18px; }
+    /* Donate: quiet underline at rest; desktop-sized crimson box on hover (footprint reserved, so no shift) */
+    .tsf .nav-right .btn-primary { background: transparent; border: 1px solid transparent; border-radius: 0; color: var(--crimson) !important; padding: 10px 16px; font-size: 12px !important; text-decoration: underline !important; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+    .tsf .nav-right .btn-primary:hover { background: transparent; color: var(--crimson-d) !important; border-color: currentColor; text-decoration: none !important; }
+    .tsf .pillars-index, .tsf .feature, .tsf .mission-grid, .tsf .foot-inner { grid-template-columns: 1fr !important; }
+    .tsf .kpi-strip { grid-template-columns: 1fr 1fr; }
+    .tsf .kpi:nth-child(2) { border-right: 0; }
+    .tsf[data-hero="split"] .hero { grid-template-columns: 1fr; }
+    .tsf[data-hero="split"] .hero-img { min-height: 0; aspect-ratio: 3 / 4; }
+    .tsf[data-hero="split"] .hero-inner { padding-top: var(--s-8) !important; }
+    .tsf .foot-inner { text-align: center; gap: var(--s-7); }
+    .tsf .foot-inner > div { display: flex; flex-direction: column; align-items: center; }
+    .tsf .foot ul { align-items: center; }
+    .tsf .foot-base { flex-direction: column; gap: 10px; text-align: center; }
+  }
+  </style>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <span class="nav-vmark" aria-hidden="true"></span>
+      <nav class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/causes">Causes</a>
+        <a href="/about">About</a>
+        <a href="/impact">Impact</a>
+      </nav>
+      <a href="/" aria-label="The Spinner Foundation" class="wordmark"></a>
+      <span class="nav-rule" aria-hidden="true"></span>
+      <div class="nav-right">
+        <a class="btn btn-primary" href="mailto:thespinnerfoundation@gmail.com">Donate</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+  <!-- ===================== HERO (split) ===================== -->
+  <section class="hero">
+    <div class="hero-img" style="background-image: var(--img-hero); background-position: center 72%;"></div>
+    <div class="hero-inner" style="padding-top: 144px">
+      <span class="eyebrow">A Family Foundation &middot; Est. <span class="ph">[YEAR — client]</span></span>
+      <h1 class="display">Where every being has the opportunity to&nbsp;<em>thrive.</em></h1>
+      <p class="lede">
+        The Spinner Foundation supports animal sanctuaries, children&rsquo;s services, and medical
+        causes &mdash; in partnership with the people doing the work on the ground.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/causes">See where we give</a>
+        <a class="btn btn-ghost" href="/impact#rowdy">Read Rowdy&rsquo;s story</a>
+      </div>
+    </div>
+    <p class="hero-caption caption">Inside the stables &mdash; Catskill Animal Sanctuary, Saugerties&nbsp;NY.</p>
+  </section>
+
+  <!-- ===================== MISSION ===================== -->
+  <section class="section mission" id="about">
+    <div class="wrap">
+      <div class="mission-grid">
+        <figure style="margin: 0">
+          <div class="mission-img" style="background-image: var(--img-mission); background-position: 60% center;"></div>
+          <figcaption class="caption mission-img-caption">Nicole and Jim, with sanctuary kids.</figcaption>
+        </figure>
+        <div>
+          <span class="eyebrow"><span class="num">01</span> Our Mission</span>
+          <p class="lede-big" style="margin-top: 32px">
+            We give to organizations that serve the vulnerable with care, dignity,
+            and <span class="pencil-mark">follow-through</span>.
+          </p>
+          <div class="mission-body body" style="margin-top: var(--s-6)">
+            <p>
+              We support animal sanctuaries, children&rsquo;s services, and medical causes &mdash;
+              three pillars that have guided our giving since the family began this work in earnest.
+            </p>
+            <p>
+              We don&rsquo;t take a cut. We don&rsquo;t keep an endowment. Every gift gets placed
+              by hand, in conversation with the people on the ground.
+            </p>
+            <p style="margin-top: var(--s-5)">
+              <a class="btn btn-ghost" href="/about">Read more about the family</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== THREE PILLARS (index) ===================== -->
+  <section class="section">
+    <div class="wrap" style="padding: 10px var(--gutter);">
+      <header style="display: flex; align-items: end; justify-content: space-between; gap: var(--s-5); flex-wrap: wrap;">
+        <div>
+          <span class="eyebrow"><span class="num">02</span> Three Pillars</span>
+          <h2 class="h2" style="margin-top: 16px; max-width: 22ch">
+            Where we go to&nbsp;<em style="font-style:italic;color:var(--crimson)">work</em>.
+          </h2>
+        </div>
+        <a class="btn btn-primary" href="/about#mission">Read the full mission</a>
+      </header>
+    </div>
+
+    <div class="pillars-index">
+      <a class="pillar-card" href="/causes#animals">
+        <div class="meta"><span class="roman">i.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+        <h3>Animals</h3>
+        <p>Sanctuaries, shelters, and rescue programs &mdash; from horses recovering from neglect to working dogs paired with veterans.</p>
+        <div class="pcta"><span>Browse animal causes</span><span class="arrow">→</span></div>
+      </a>
+
+      <a class="pillar-card" href="/causes#families">
+        <div class="meta"><span class="roman">ii.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+        <h3>Children &amp; Families</h3>
+        <p>Family-services nonprofits that protect a child&rsquo;s right to a safe and healthy start &mdash; reducing isolation, preventing harm.</p>
+        <div class="pcta"><span>Browse family causes</span><span class="arrow">→</span></div>
+      </a>
+
+      <a class="pillar-card coming" href="/causes">
+        <div class="meta"><span class="roman">iii.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+        <h3>Medical</h3>
+        <p>Research, treatment, and the institutions that deliver it &mdash; including a named hospital wing in our home state of Connecticut.</p>
+        <div class="pcta"><span>Hospital wing &middot; CT &middot; Coming soon</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURED STORY (Rowdy) ===================== -->
+  <section class="section" id="story">
+    <div class="wrap">
+      <div class="feature">
+        <div class="feature-photo-col">
+          <figure class="photo-frame">
+            <img src="../../design/designer_styleguides/assets/photos/rowdy-2.jpg" alt="Rowdy the horse, portrait" />
+            <figcaption class="label">Rowdy, a few weeks after arriving.<span class="meta">Catskill Animal Sanctuary</span></figcaption>
+          </figure>
+          <figure class="photo-frame">
+            <img src="../../design/designer_styleguides/assets/photos/rowdy-1.jpg" alt="Rowdy in the pasture" />
+            <figcaption class="label">Out in the pasture.<span class="meta">Catskill Animal Sanctuary</span></figcaption>
+          </figure>
+        </div>
+
+        <div class="feature-body">
+          <span class="eyebrow"><span class="num">03</span> A Story We&rsquo;re Proud Of</span>
+          <h2 class="h2">Meet&nbsp;<em style="font-style:italic;color:var(--crimson)">Rowdy.</em></h2>
+          <p class="lede">A gentle soul, rescued from an animal hoarding situation in Saratoga, New York, alongside thirteen other horses.</p>
+          <div class="body">
+            <p>
+              When Rowdy arrived at Catskill Animal Sanctuary, he was several hundred pounds
+              underweight, suffering from rain rot, and had severely neglected hooves. Today, he is
+              one of the horses we sponsor &mdash; part of a 150-acre Hudson Valley refuge that has
+              rescued over 5,000 animals in twenty-five years.
+            </p>
+          </div>
+          <blockquote class="pullquote">
+            &ldquo;Life is life &mdash; whether in a cat, or dog, or man. The idea of difference is
+            a human conception for man&rsquo;s own advantage.&rdquo;
+            <cite>Sri Aurobindo</cite>
+          </blockquote>
+          <dl class="feature-stats">
+            <div><dt>Sanctuary</dt><dd>Catskill Animal Sanctuary</dd></div>
+            <div><dt>Year sponsored</dt><dd>2026</dd></div>
+          </dl>
+          <a class="btn btn-ghost feature-cta" href="/impact#rowdy">Read Rowdy&rsquo;s full story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FROM THE FAMILY ===================== -->
+  <section class="family-quote">
+    <div class="wrap">
+      <figure class="portrait photo-frame" style="transform: rotate(-2deg); max-width: 520px;">
+        <img src="../../design/designer_styleguides/assets/photos/family-quote-cropped.jpg" alt="The Spinner family presenting a $10,000 donation check to Paws of War" style="width: 100%;" />
+        <figcaption class="label">Presenting a $10,000 gift to Paws of War.<span class="meta">The Spinner Family &middot; Nesconset, NY &middot; September 2024</span></figcaption>
+      </figure>
+      <div>
+        <span class="eyebrow"><span class="num">From</span> The Family</span>
+        <blockquote style="margin-top: 24px">
+          To foster empathy and understanding between humans and animals through
+          programs that promote responsible pet care, wildlife conservation, and
+          the ethical treatment of <span class="pencil-mark">all living creatures</span>.
+        </blockquote>
+        <p class="attribution"><span class="name">The Spinner Family</span>From the foundation&rsquo;s mission</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== KPI STRIP ===================== -->
+  <section>
+    <div class="kpi-strip">
+      <div class="kpi"><span class="n"><span class="ph">[#]</span></span><span class="l">Partner organizations</span></div>
+      <div class="kpi"><span class="n"><em><span class="ph">[#]</span></em></span><span class="l">Donations placed</span></div>
+      <div class="kpi"><span class="n"><em>$<span class="ph">[TOTAL]</span></em></span><span class="l">In gifts placed since <span class="ph">[YEAR]</span></span></div>
+      <div class="kpi"><span class="n">Since<br/><span class="ph">[YEAR]</span></span><span class="l">The foundation began this work</span></div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-inner">
+        <div>
+          <a href="/" class="wordmark wordmark-dark" aria-label="The Spinner Foundation"></a>
+          <p class="body" style="color: rgba(255,250,242,.7); font-size: 14px !important; margin-top: 24px; max-width: 36ch">
+            A family-run charitable foundation supporting animal sanctuaries, children&rsquo;s services,
+            and medical causes since <span class="ph">[YEAR — client]</span>.
+          </p>
+          <!-- Social: client has the live URLs — replace each href="#" below. -->
+          <div class="foot-social">
+            <a href="#" aria-label="TikTok" data-social="tiktok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1-2.82h-3.1v12.36a2.6 2.6 0 0 1-2.6 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.48V9.6a5.7 5.7 0 0 0-.8-.06A5.71 5.71 0 0 0 4.2 15.26 5.71 5.71 0 0 0 9.9 21a5.71 5.71 0 0 0 5.7-5.74V8.99a7.33 7.33 0 0 0 4.3 1.38V7.27a4.28 4.28 0 0 1-3.3-1.45z"/></svg></a>
+            <a href="#" aria-label="Instagram" data-social="instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.35 2.67.94 3.34.63 4.13.33 4.9.13 5.77.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.12.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>
+            <a href="#" aria-label="Facebook" data-social="facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a>
+            <a href="#" aria-label="X" data-social="x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41z"/></svg></a>
+            <a href="#" aria-label="Pinterest" data-social="pinterest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.42 7.63 11.16-.11-.95-.2-2.4.04-3.44.22-.93 1.4-5.96 1.4-5.96s-.36-.72-.36-1.78c0-1.66.97-2.9 2.17-2.9 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-1 4-.28 1.2.6 2.18 1.79 2.18 2.15 0 3.8-2.27 3.8-5.54 0-2.9-2.08-4.92-5.05-4.92-3.44 0-5.46 2.58-5.46 5.25 0 1.04.4 2.15.9 2.76.1.12.11.22.08.34l-.34 1.36c-.05.22-.18.27-.41.16-1.5-.7-2.44-2.9-2.44-4.66 0-3.8 2.76-7.29 7.95-7.29 4.17 0 7.42 2.97 7.42 6.95 0 4.15-2.62 7.49-6.25 7.49-1.22 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15C9.57 23.82 10.76 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/causes">Causes &amp; Recipients</a></li>
+            <li><a href="/about">About the Family</a></li>
+            <li><a href="/impact">Impact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get Involved</h4>
+          <ul>
+            <li><a href="mailto:thespinnerfoundation@gmail.com">Make a Donation</a></li>
+            <li><a href="mailto:thespinnerfoundation@gmail.com">Nominate a Cause</a></li>
+            <li><a href="mailto:thespinnerfoundation@gmail.com">Volunteer</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:thespinnerfoundation@gmail.com">thespinnerfoundation@gmail.com</a></li>
+            <li><a href="https://thespinnerfoundation.org">thespinnerfoundation.org</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-base">
+        <span>&copy; 2026 The Spinner Foundation. <span class="ph">A 501(c)(3) nonprofit organization.</span></span>
+        <span><a href="https://quay-cncpts.com" target="_blank" rel="noopener">Quay Concepts</a></span>
+      </div>
+    </div>
+  </footer>
+
+</div>
