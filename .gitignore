@@ -1,7 +1,7 @@
 # OS / editor
 .DS_Store
 Thumbs.db
-
+.claude
 # Local-only working material — not published to the site
 archive
 site_content
