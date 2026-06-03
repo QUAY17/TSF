@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Spinner Foundation — Brand & Design System</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* Brand-guide layout only — all component styles come from assets/styles.css */
+    body { background: var(--paper); }
+    .bg-wrap { max-width: 1080px; margin: 0 auto; padding: 0 var(--gutter); }
+    .bg-masthead { padding: var(--s-10) 0 var(--s-8); border-bottom: 1px solid var(--rule); text-align: center; }
+    .bg-masthead .wordmark { width: 200px; height: 78px; margin: 0 auto var(--s-6); }
+    .bg-masthead h1 { font-family: var(--f-serif); font-size: clamp(40px, 6vw, 68px); font-weight: 400; letter-spacing: -0.015em; }
+    .bg-masthead p { color: var(--ink-2); max-width: 52ch; margin: var(--s-4) auto 0; font-size: 17px; }
+
+    .bg-sec { padding: var(--s-9) 0; border-bottom: 1px solid var(--rule); }
+    .bg-sec > .eyebrow { margin-bottom: var(--s-6); }
+    .bg-sec h2 { font-family: var(--f-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 var(--s-6); letter-spacing: -0.01em; }
+
+    /* Color */
+    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-5); }
+    .swatch .chip { height: 96px; border-radius: 6px; border: 1px solid var(--rule); box-shadow: 0 1px 0 rgba(0,0,0,.03); }
+    .swatch .nm { font-family: var(--f-sans); font-weight: 500; font-size: 13px; margin-top: 10px; }
+    .swatch .vl { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; color: var(--ink-3); margin-top: 3px; }
+    .swatch .role { font-size: 11px; color: var(--ink-2); margin-top: 4px; letter-spacing: .02em; }
+
+    /* Logo grid */
+    .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+    .logo-tile { border: 1px solid var(--rule); border-radius: 8px; padding: var(--s-7); display: flex; align-items: center; justify-content: center; min-height: 180px; }
+    .logo-tile.dark { background: oklch(0.32 0.008 35); border-color: transparent; }
+    .logo-tile .wordmark { width: 220px; height: 84px; }
+    .logo-tile .seal-lg { width: 64px; height: 86px; background: url("assets/mark-seal.png") center/contain no-repeat; }
+    .logo-tile .favi { width: 84px; height: 84px; background: url("assets/favicon.png") center/contain no-repeat; border-radius: 6px; }
+    .logo-cap { font-size: 12px; color: var(--ink-3); letter-spacing: .08em; text-transform: uppercase; margin-top: 10px; text-align: center; }
+
+    /* Type specimens */
+    .spec { border-top: 1px solid var(--rule-soft); padding: var(--s-5) 0; display: grid; grid-template-columns: 160px 1fr; gap: var(--s-6); align-items: baseline; }
+    .spec .label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); font-family: var(--f-sans); }
+    .spec .label small { display: block; text-transform: none; letter-spacing: 0; color: var(--ink-3); margin-top: 4px; font-size: 11px; }
+
+    /* Spacing scale */
+    .scale-row { display: flex; align-items: center; gap: var(--s-5); padding: 6px 0; }
+    .scale-row .bar { height: 14px; background: var(--crimson); border-radius: 2px; }
+    .scale-row .tok { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--ink-2); width: 120px; }
+
+    /* Component gallery */
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); }
+    .comp-card { border: 1px solid var(--rule); border-radius: 8px; padding: var(--s-6); }
+    .comp-card .cl { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: var(--s-5); }
+    .btn-row { display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+    .seal-demo { width: 22px; height: 30px; background: url("assets/mark-seal.png") center/contain no-repeat; }
+    .soc-demo { display: flex; gap: var(--s-5); }
+    .soc-demo svg { width: 20px; height: 20px; fill: var(--ink-2); }
+
+    @media (max-width: 760px) {
+      .bg-wrap { padding: 0 24px; }
+      .swatches { grid-template-columns: 1fr 1fr; }
+      .logo-grid, .comp-grid { grid-template-columns: 1fr; }
+      .spec { grid-template-columns: 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-wrap">
+
+    <header class="bg-masthead">
+      <a class="wordmark" aria-label="The Spinner Foundation" href="index.html"></a>
+      <h1>Brand &amp; Design System</h1>
+      <p>The working visual language of The Spinner Foundation website — tokens, type, and components, all driven by <code>assets/styles.css</code>.</p>
+    </header>
+
+    <!-- LOGO -->
+    <section class="bg-sec">
+      <span class="eyebrow"><span class="num">01</span> Logo &amp; Mark</span>
+      <h2>The wordmark and the family seal.</h2>
+      <div class="logo-grid">
+        <div>
+          <div class="logo-tile"><a class="wordmark" aria-label="Wordmark on light"></a></div>
+          <div class="logo-cap">Wordmark — on cream (wordmark-light.png)</div>
+        </div>
+        <div>
+          <div class="logo-tile dark"><a class="wordmark wordmark-dark" aria-label="Wordmark on dark"></a></div>
+          <div class="logo-cap">Wordmark — on graphite (wordmark-dark.png)</div>
+        </div>
+        <div>
+          <div class="logo-tile"><span class="favi"></span></div>
+          <div class="logo-cap">Favicon — crimson V on cream (favicon.png)</div>
+        </div>
+        <div>
+          <div class="logo-tile"><span class="seal-lg"></span></div>
+          <div class="logo-cap">Family seal — transparent V stamp (mark-seal.png)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOR -->
+    <section class="bg-sec">
+      <span class="eyebrow"><span class="num">02</span> Color</span>
+      <h2>A warm cream ground, crimson accent.</h2>
+      <div class="swatches">
+        <div class="swatch"><div class="chip" style="background:var(--paper)"></div><div class="nm">Paper</div><div class="vl">oklch(.975 .008 75)</div><div class="role">Page background</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--paper-2)"></div><div class="nm">Paper 2</div><div class="vl">oklch(.955 .010 75)</div><div class="role">Shaded bands</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--ink)"></div><div class="nm">Ink</div><div class="vl">oklch(.18 .010 35)</div><div class="role">Headings / body</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--ink-2)"></div><div class="nm">Ink 2</div><div class="vl">oklch(.36 .010 35)</div><div class="role">Secondary text</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--ink-3)"></div><div class="nm">Ink 3</div><div class="vl">oklch(.58 .008 50)</div><div class="role">Meta / captions</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--crimson)"></div><div class="nm">Crimson</div><div class="vl">#8C1A1A</div><div class="role">Primary accent</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--crimson-d)"></div><div class="nm">Crimson Deep</div><div class="vl">#6E1414</div><div class="role">Hover / press</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--honey)"></div><div class="nm">Honey</div><div class="vl">oklch(.66 .13 70)</div><div class="role">Warm accent</div></div>
+      </div>
+    </section>
+
+    <!-- TYPE -->
+    <section class="bg-sec">
+      <span class="eyebrow"><span class="num">03</span> Typography</span>
+      <h2>Cormorant Garamond &amp; Inter.</h2>
+      <div class="spec"><div class="label">Display<small>Cormorant · 400</small></div><div class="display" style="font-size:56px">Where every being can thrive.</div></div>
+      <div class="spec"><div class="label">Heading 2<small>Cormorant · 400</small></div><h2 class="h2" style="font-family:var(--f-serif);font-weight:400;margin:0">A foundation that gives, not gathers.</h2></div>
+      <div class="spec"><div class="label">Eyebrow + numeral<small>Inter 500 · Cormorant italic</small></div><div><span class="eyebrow"><span class="num">01</span> Our Mission</span></div></div>
+      <div class="spec"><div class="label">Lede<small>Cormorant · 20–24px</small></div><div class="lede" style="font-family:var(--f-serif); font-size:22px; color:var(--ink-2)">A gentle soul, rescued alongside thirteen other horses.</div></div>
+      <div class="spec"><div class="label">Body<small>Inter · 16px</small></div><div style="max-width:54ch">We give to organizations that serve the vulnerable with care and dignity — in partnership with the people doing the work on the ground.</div></div>
+      <div class="spec"><div class="label">Caption / meta<small>Inter · 11px · uppercase</small></div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)">Catskill Animal Sanctuary · Saugerties, NY</div></div>
+      <div class="spec"><div class="label">Index numeral<small>Cormorant italic · crimson</small></div><div style="font-family:var(--f-serif);font-style:italic;font-size:40px;color:var(--crimson)">06</div></div>
+    </section>
+
+    <!-- SPACING -->
+    <section class="bg-sec">
+      <span class="eyebrow"><span class="num">04</span> Spacing &amp; Rhythm</span>
+      <h2>An 8-based scale; 144px between sections.</h2>
+      <div class="scale-row"><span class="tok">--s-1 · 4px</span><span class="bar" style="width:4px"></span></div>
+      <div class="scale-row"><span class="tok">--s-2 · 8px</span><span class="bar" style="width:8px"></span></div>
+      <div class="scale-row"><span class="tok">--s-3 · 12px</span><span class="bar" style="width:12px"></span></div>
+      <div class="scale-row"><span class="tok">--s-4 · 16px</span><span class="bar" style="width:16px"></span></div>
+      <div class="scale-row"><span class="tok">--s-5 · 24px</span><span class="bar" style="width:24px"></span></div>
+      <div class="scale-row"><span class="tok">--s-6 · 32px</span><span class="bar" style="width:32px"></span></div>
+      <div class="scale-row"><span class="tok">--s-7 · 48px</span><span class="bar" style="width:48px"></span></div>
+      <div class="scale-row"><span class="tok">--s-8 · 64px</span><span class="bar" style="width:64px"></span></div>
+      <div class="scale-row"><span class="tok">--s-9 · 96px</span><span class="bar" style="width:96px"></span></div>
+      <div class="scale-row"><span class="tok">--s-10 · 144px</span><span class="bar" style="width:144px"></span></div>
+      <p style="color:var(--ink-2);margin-top:var(--s-5);max-width:60ch">Sections use <code>--section-y</code> (144px) top and bottom; the page gutter is <code>--gutter</code> (56px desktop, 24px mobile); content caps at <code>--max-w</code> 1280px.</p>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section class="bg-sec" style="border-bottom:0">
+      <span class="eyebrow"><span class="num">05</span> Components</span>
+      <h2>Built from the live stylesheet.</h2>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div class="cl">Buttons</div>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#">Donate</a>
+            <a class="btn btn-ghost" href="#">Read the story</a>
+          </div>
+        </div>
+        <div class="comp-card">
+          <div class="cl">Eyebrow</div>
+          <span class="eyebrow"><span class="num">02</span> Three Pillars</span>
+        </div>
+        <div class="comp-card">
+          <div class="cl">Family seal</div>
+          <div style="display:flex;align-items:center;gap:14px"><span class="seal-demo"></span><span style="color:var(--ink-3);font-size:13px">Quiet sign-off above the footer</span></div>
+        </div>
+        <div class="comp-card">
+          <div class="cl">Social row</div>
+          <div class="soc-demo">
+            <svg viewBox="0 0 24 24"><path d="M16.6 5.82a4.28 4.28 0 0 1-1-2.82h-3.1v12.36a2.6 2.6 0 0 1-2.6 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.48V9.6a5.7 5.7 0 0 0-.8-.06A5.71 5.71 0 0 0 4.2 15.26 5.71 5.71 0 0 0 9.9 21a5.71 5.71 0 0 0 5.7-5.74V8.99a7.33 7.33 0 0 0 4.3 1.38V7.27a4.28 4.28 0 0 1-3.3-1.45z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.35 2.67.94 3.34.63 4.13.33 4.9.13 5.77.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.12.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.42 7.63 11.16-.11-.95-.2-2.4.04-3.44.22-.93 1.4-5.96 1.4-5.96s-.36-.72-.36-1.78c0-1.66.97-2.9 2.17-2.9 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-1 4-.28 1.2.6 2.18 1.79 2.18 2.15 0 3.8-2.27 3.8-5.54 0-2.9-2.08-4.92-5.05-4.92-3.44 0-5.46 2.58-5.46 5.25 0 1.04.4 2.15.9 2.76.1.12.11.22.08.34l-.34 1.36c-.05.22-.18.27-.41.16-1.5-.7-2.44-2.9-2.44-4.66 0-3.8 2.76-7.29 7.95-7.29 4.17 0 7.42 2.97 7.42 6.95 0 4.15-2.62 7.49-6.25 7.49-1.22 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15C9.57 23.82 10.76 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg>
+          </div>
+        </div>
+      </div>
+      <p style="color:var(--ink-2);margin-top:var(--s-6);max-width:62ch">Page-specific components — directory rows, story rows, the table-of-contents grid, the team grid, the scrapbook gallery, and the crimson CTA bands — live in each page's <code>&lt;style&gt;</code> block and are consolidated in <code>spinner-foundation.css</code>.</p>
+    </section>
+
+    <footer style="padding:var(--s-8) 0;text-align:center;color:var(--ink-3);font-size:13px">
+      The Spinner Foundation · Brand &amp; Design System
+    </footer>
+
+  </div>
+</body>
+</html>

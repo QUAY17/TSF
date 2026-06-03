@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Causes &amp; Recipients · The Spinner Foundation</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    /* Page-specific tweaks */
+    .causes-hero { padding: 144px 0 0; border-bottom: 1px solid var(--rule); background: var(--paper); }
+    body[data-density="compact"] .causes-hero { padding: 96px 0 0; }
+    body[data-density="airy"]    .causes-hero { padding: 200px 0 0; }
+
+    .causes-hero .h1 { max-width: 18ch; }
+    .causes-hero .lede { max-width: 56ch; margin-top: var(--s-5); }
+
+    /* Filter row */
+    .filter-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--s-5); flex-wrap: wrap;
+      margin: var(--s-8) 0 var(--s-6);
+      padding-bottom: var(--s-5);
+      border-bottom: 1px solid var(--rule);
+    }
+    .filter-chips { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+    .chip {
+      font-family: var(--f-sans); font-size: 12px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 8px 14px; border: 1px solid var(--rule); border-radius: 999px;
+      background: transparent; color: var(--ink-2); cursor: pointer;
+      transition: all .15s;
+    }
+    .chip:hover { border-color: var(--ink); color: var(--ink); }
+    .chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .total-pill {
+      font-family: var(--f-sans); font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .total-pill .v {
+      font-family: var(--f-serif); font-style: italic;
+      font-size: 18px; letter-spacing: 0; color: var(--ink);
+      margin-right: 6px;
+    }
+
+    /* Full-detail recipient rows — like a directory */
+    .recipient-row {
+      display: grid;
+      grid-template-columns: 64px 1fr 0.8fr 1fr auto;
+      gap: var(--s-6);
+      align-items: start;
+      padding: var(--s-6) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .recipient-row .idx {
+      font-family: var(--f-serif); font-style: italic;
+      font-size: 24px; color: var(--crimson); padding-top: 6px;
+    }
+    .recipient-row .name { font-family: var(--f-serif); font-size: 30px; line-height: 1.15; font-weight: 500; }
+    .recipient-row .meta {
+      margin-top: 8px;
+      font-family: var(--f-sans); font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-3);
+      display: flex; gap: var(--s-4); flex-wrap: wrap;
+    }
+    .recipient-row .meta .dot { color: var(--crimson); opacity: .7; }
+    .recipient-row .blurb { color: var(--ink-2); font-size: 15px; line-height: 1.55; }
+    .recipient-row .stats {
+      display: flex; flex-direction: column; gap: 4px;
+      font-family: var(--f-sans); font-size: 13px; color: var(--ink-2);
+    }
+    .recipient-row .stats .k {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+    }
+    .recipient-row .stats .amount {
+      font-family: var(--f-serif); font-style: italic; font-size: 22px;
+      color: var(--ink); line-height: 1; margin-top: 2px;
+    }
+    .recipient-row .more {
+      align-self: center; justify-self: end;
+    }
+
+    /* Featured spotlight */
+    .spotlight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-7);
+      align-items: stretch;
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      margin: var(--s-7) 0 var(--s-9);
+    }
+    .spotlight-img {
+      background-size: cover;
+      background-position: center;
+      min-height: 460px;
+    }
+    .spotlight-body {
+      padding: var(--s-7) var(--s-7) var(--s-7) var(--s-6);
+      display: flex; flex-direction: column; gap: var(--s-4);
+      justify-content: center;
+    }
+    .spotlight-body h3 { font-family: var(--f-serif); font-size: 38px; font-weight: 500; line-height: 1.15; max-width: 16ch; }
+    .spotlight-body .blurb { color: var(--ink-2); font-size: 16px; }
+
+    /* Section heads */
+    .section-head { padding: var(--s-9) 0 var(--s-3); border-top: 2px solid var(--crimson); margin-top: var(--s-9); }
+    .section-head .label {
+      font-family: var(--f-sans); font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--crimson);
+      font-weight: 500;
+    }
+    .section-head h2 { margin-top: var(--s-3); max-width: 24ch; }
+
+    @media (max-width: 980px) {
+      .recipient-row {
+        grid-template-columns: 1fr;
+        gap: var(--s-3);
+      }
+      .recipient-row .idx { font-size: 18px; }
+      .recipient-row .name { font-size: 24px; }
+      .spotlight { grid-template-columns: 1fr; }
+      .spotlight-img { min-height: 280px; }
+    }
+    /* Open invitation — crimson CTA replacing the future-partners row */
+    .nominate-cta {
+      background: var(--crimson);
+      color: var(--paper);
+      position: relative;
+    }
+    .nominate-cta-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--s-7);
+      align-items: center;
+      padding-top: var(--section-y);
+      padding-bottom: var(--section-y);
+    }
+    /* Directory keeps its standard 144px bottom padding so the last row (06)
+       has breathing room before the Open Invitation band. */
+    .nominate-cta .eyebrow-cream {
+      font-family: var(--f-sans);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,250,242,.78);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nominate-cta .eyebrow-cream::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: .8;
+      display: inline-block;
+    }
+    .nominate-cta h3 {
+      font-family: var(--f-serif);
+      font-size: clamp(30px, 3vw, 42px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.012em;
+      margin: 12px 0 0;
+      max-width: 22ch;
+      color: var(--paper);
+    }
+    .nominate-cta h3 em {
+      font-style: italic;
+      color: oklch(0.86 0.10 75); /* honey accent on crimson */
+    }
+    .nominate-cta p {
+      margin: var(--s-4) 0 0;
+      color: rgba(255,250,242,.86);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 52ch;
+    }
+    .btn-cream {
+      background: var(--paper);
+      color: var(--crimson);
+      border-color: var(--paper);
+      font-weight: 500;
+    }
+    .btn-cream:hover {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    @media (max-width: 760px) {
+      .nominate-cta-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-layout="a" data-hero="split" data-density="balanced" data-annotate="off">
+
+<header class="nav" data-screen-label="00 Nav" data-sq>
+  <div class="sq-mapping">SQ · Header</div>
+  <div class="nav-inner">
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="causes.html" class="active">Causes</a>
+      <a href="about.html">About</a>
+      <a href="stories.html">Stories</a>
+    </nav>
+    <a href="index.html" aria-label="The Spinner Foundation" class="wordmark"></a>
+    <div class="nav-right">
+      <a class="btn btn-primary" href="mailto:thespinnerfoundation@gmail.com?subject=Making%20a%20Donation">Donate</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     PAGE HERO  — typographic
+============================================================ -->
+<section class="causes-hero" data-screen-label="01 Page Header" data-sq>
+  <div class="sq-mapping">SQ · Page Header / Banner</div>
+  <div class="wrap">
+    <span class="eyebrow">Causes &amp; Recipients</span>
+    <h1 class="h1" style="margin-top: 24px">
+      Where the&nbsp;<em style="font-style:italic;color:var(--crimson)">work</em> goes.
+    </h1>
+    <p class="lede">
+      A growing list of organizations we support across three pillars - animals, children &amp;
+      families, and medical causes. Every gift on this page is a real partner, doing real work.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FILTER + DIRECTORY
+============================================================ -->
+<section class="section" data-screen-label="02 Directory" data-sq style="padding: 45px 0px 144px">
+  <div class="sq-mapping">SQ · Summary Block · List view</div>
+  <div class="wrap">
+
+    <div class="filter-row">
+      <div class="filter-chips">
+        <button class="chip active">All causes</button>
+        <button class="chip">Animals</button>
+        <button class="chip">Children &amp; Families</button>
+        <button class="chip">Medical</button>
+        <button class="chip">CT-based</button>
+      </div>
+      <div class="total-pill"><span class="v">06</span> active partners</div>
+    </div>
+
+    <!-- =========== SPOTLIGHT: CATSKILL ANIMAL SANCTUARY =========== -->
+    <div class="spotlight" id="catskill" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Section (featured)</div>
+      <div class="spotlight-img" style="background-image:url('assets/photos/cas-1.jpg'); background-position: center 30%;"></div>
+      <div class="spotlight-body">
+        <span class="eyebrow"><span class="num">Featured</span> Animal Sanctuary</span>
+        <h3>Catskill Animal Sanctuary</h3>
+        <p class="blurb">
+          A 150-acre refuge in New York&rsquo;s Hudson Valley, rescuing animals from cruelty,
+          neglect, and abandonment for 25 years. We sponsor horses in their
+          care - most recently <em>Rowdy</em>, rescued from an animal hoarding situation
+          alongside thirteen other horses.
+        </p>
+        <div style="display:flex; gap: var(--s-6); margin-top: var(--s-3)">
+          <div>
+            <div class="caption" style="margin-bottom: 4px">Location</div>
+            <div style="font-family:var(--f-serif); font-size: 18px;">Saugerties, NY</div>
+          </div>
+          <div>
+            <div class="caption" style="margin-bottom: 4px">Sponsored since</div>
+            <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;">2026</div>
+          </div>
+          <div>
+            <div class="caption" style="margin-bottom: 4px">Animals rescued</div>
+            <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;">5,000</div>
+          </div>
+        </div>
+        <a class="btn btn-ghost" href="https://casanctuary.org" target="_blank" rel="noopener" style="margin-top: var(--s-3)">Visit casanctuary.org</a>
+      </div>
+    </div>
+
+
+    <!-- =========== ANIMALS ============================ -->
+    <div class="section-head" data-sq style="padding: 45px 0px 12px">
+      <div class="sq-mapping">SQ · Heading Block</div>
+      <div class="label">i. &nbsp; Animals</div>
+      <h2 class="h2">Sanctuaries, shelters,<br/>and rescue programs.</h2>
+    </div>
+
+    <article class="recipient-row" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Card row</div>
+      <div class="idx">01</div>
+      <div>
+        <div class="name">Paws of War</div>
+        <div class="meta"><span>Nesconset, NY</span><span class="dot">·</span><span>Rescue &amp; veterans</span><span class="dot">·</span><span>Active partner</span></div>
+      </div>
+      <div class="blurb">
+        Rescues animals and pairs them with American veterans and first responders, providing
+        healing on both ends of the leash. We made our largest single gift to Paws of War in 2024.
+      </div>
+      <div class="stats">
+        <div><span class="k">Sponsored since</span><br/><span class="amount">2024</span></div>
+        <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# — client]</span></span></div>
+        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount">2024</span></div>
+      </div>
+      <a class="btn btn-ghost more" href="stories.html#paws-of-war">Read story</a>
+    </article>
+
+    <article class="recipient-row" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Card row</div>
+      <div class="idx">02</div>
+      <div>
+        <div class="name">DAWS Animal Welfare Society</div>
+        <div class="meta"><span>Bethel, CT</span><span class="dot">·</span><span>No-kill shelter</span><span class="dot">·</span><span>Annual partner</span></div>
+      </div>
+      <div class="blurb">
+        A no-kill shelter serving Western Connecticut with adoption, foster, and community
+        education programs. Our home-state sanctuary partner since the foundation began.
+      </div>
+      <div class="stats">
+        <div><span class="k">Sponsored since</span><br/><span class="amount">2024</span></div>
+        <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# — client]</span></span></div>
+        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount">2024</span></div>
+      </div>
+      <a class="btn btn-ghost more" href="stories.html#daws">Read story</a>
+    </article>
+
+    <article class="recipient-row" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Card row</div>
+      <div class="idx">03</div>
+      <div>
+        <div class="name">Catherine Violet Hubbard Sanctuary</div>
+        <div class="meta"><span>Newtown, CT</span><span class="dot">·</span><span>Animal sanctuary</span><span class="dot">·</span><span>2024</span></div>
+      </div>
+      <div class="blurb">
+        A 34-acre sanctuary in Newtown, CT carrying forward the memory of Catherine Violet Hubbard
+        through compassion, education, and care. We support their ongoing programming.
+      </div>
+      <div class="stats">
+        <div><span class="k">Sponsored since</span><br/><span class="amount">2024</span></div>
+        <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# — client]</span></span></div>
+        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount">2024</span></div>
+      </div>
+      <a class="btn btn-ghost more" href="stories.html#hubbard">Read story</a>
+    </article>
+
+    <article class="recipient-row" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Card row</div>
+      <div class="idx">04</div>
+      <div>
+        <div class="name">Best Friends Animal Society</div>
+        <div class="meta"><span>Kanab, UT</span><span class="dot">·</span><span>National</span><span class="dot">·</span><span>Gala benefactor</span></div>
+      </div>
+      <div class="blurb">
+        The leading national animal welfare organization, working to end the killing of dogs and
+        cats in America&rsquo;s shelters. Family members attended their Glass House benefit in 2024.
+      </div>
+      <div class="stats">
+        <div><span class="k">Sponsored since</span><br/><span class="amount">2024</span></div>
+        <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# — client]</span></span></div>
+        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount">2024</span></div>
+      </div>
+      <a class="btn btn-ghost more" href="stories.html#best-friends">Read story</a>
+    </article>
+
+
+    <!-- =========== CHILDREN ============================ -->
+    <div class="section-head" data-sq style="padding: 45px 0px 12px">
+      <div class="sq-mapping">SQ · Heading Block</div>
+      <div class="label">ii. &nbsp; Children &amp; Families</div>
+      <h2 class="h2">Programs that protect<br/>a safe and healthy start.</h2>
+    </div>
+
+    <article class="recipient-row" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Card row</div>
+      <div class="idx">05</div>
+      <div>
+        <div class="name">Families Network of Western CT</div>
+        <div class="meta"><span>Danbury, CT</span><span class="dot">·</span><span>Family services</span><span class="dot">·</span><span>Event partner</span></div>
+      </div>
+      <div class="blurb">
+        Their mission is to ensure families receive the support they need to give their children a
+        safe and healthy start. We were granted the joyous privilege of judging their Gingerbread
+        Decorating Contest - reducing isolation, mitigating cabin fever.
+      </div>
+      <div class="stats">
+        <div><span class="k">Sponsored since</span><br/><span class="amount">2024</span></div>
+        <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# — client]</span></span></div>
+        <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount">2024</span></div>
+      </div>
+      <a class="btn btn-ghost more" href="stories.html#families-network">Read story</a>
+    </article>
+
+
+    <!-- =========== MEDICAL — coming soon ============================ -->
+    <div class="section-head" data-sq style="padding: 45px 0px 12px">
+      <div class="sq-mapping">SQ · Heading Block</div>
+      <div class="label">iii. &nbsp; Medical</div>
+      <h2 class="h2">A wing in our home state.</h2>
+    </div>
+
+    <article class="recipient-row" data-sq>
+      <div class="sq-mapping">SQ · Image + Text Card row</div>
+      <div class="idx">06</div>
+      <div>
+        <div class="name">Hospital wing &middot; Connecticut</div>
+        <div class="meta"><span>Connecticut</span><span class="dot">·</span><span>Medical</span><span class="dot">·</span><span>Coming soon</span></div>
+      </div>
+      <div class="blurb">
+        A named hospital wing in our home state of Connecticut. We&rsquo;re holding space for the
+        story here while we put together photographs, dates, and the right way to honor what was built.
+      </div>
+      <div class="stats">
+        <div><span class="k">Status</span><br/><span class="amount"><span class="ph">[opens — client]</span></span></div>
+      </div>
+      <span class="more"></span>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     OPEN INVITATION  — full-bleed CTA band (matches Donate band)
+============================================================ -->
+<section class="nominate-cta" data-screen-label="03 Open Invitation" data-sq>
+  <div class="sq-mapping">SQ · CTA Block (Open Invitation)</div>
+  <div class="wrap">
+    <div class="nominate-cta-inner">
+      <div>
+        <span class="eyebrow-cream">An Open Invitation</span>
+        <h3>Know an organization we&nbsp;<em>should know?</em></h3>
+        <p>
+          The foundation is always open to new partners across all three pillars -
+          animals, children &amp; families, and medical causes. If you know of an
+          organization doing the work, we'd love to hear about them.
+        </p>
+      </div>
+      <a class="btn btn-cream" href="mailto:thespinnerfoundation@gmail.com">Nominate a cause →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     DONATE BAND
+============================================================ -->
+<section class="donate" id="donate" data-screen-label="04 Donate" data-sq>
+  <div class="sq-mapping">SQ · Section · CTA Block</div>
+  <div class="wrap">
+    <div class="donate-inner">
+      <div>
+        <span class="eyebrow"><span class="num">04</span> Get Involved</span>
+        <h2 class="h2">A foundation that&nbsp;<em>gives</em>,<br/>not gathers.</h2>
+        <p class="lede" style="margin-top: 24px">
+          If you'd like to contribute, your gift goes directly to one of these partners.
+          We don't take a cut. We don't keep an endowment.
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start">
+        <a class="btn btn-primary" href="mailto:thespinnerfoundation@gmail.com?subject=Making%20a%20Donation" style="padding: 18px 28px">Make a Donation</a>
+        <a class="btn btn-ghost" href="mailto:thespinnerfoundation@gmail.com">Or write to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<div class="foot-seal">
+  <span class="seal" role="img" aria-label="The Spinner Foundation"></span>
+</div>
+
+<footer class="foot" data-screen-label="09 Footer" data-sq>
+  <div class="sq-mapping">SQ · Footer</div>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <a href="index.html" class="wordmark wordmark-dark" aria-label="The Spinner Foundation"></a>
+        <p class="body" style="color: rgba(255,250,242,.7); font-size: 14px; margin-top: 24px; max-width: 36ch">
+          A family-run charitable foundation supporting animal sanctuaries, children's services,
+          and medical causes since <span class="ph">[YEAR — client]</span>.
+        </p>
+        <!-- DEV: client has the live social URLs — replace each href="#" below. -->
+        <div class="foot-social">
+          <a href="#" aria-label="TikTok" data-social="tiktok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1-2.82h-3.1v12.36a2.6 2.6 0 0 1-2.6 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.48V9.6a5.7 5.7 0 0 0-.8-.06A5.71 5.71 0 0 0 4.2 15.26 5.71 5.71 0 0 0 9.9 21a5.71 5.71 0 0 0 5.7-5.74V8.99a7.33 7.33 0 0 0 4.3 1.38V7.27a4.28 4.28 0 0 1-3.3-1.45z"/></svg></a>
+          <a href="#" aria-label="Instagram" data-social="instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.35 2.67.94 3.34.63 4.13.33 4.9.13 5.77.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.12.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>
+          <a href="#" aria-label="Facebook" data-social="facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a>
+          <a href="#" aria-label="X" data-social="x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41z"/></svg></a>
+          <a href="#" aria-label="Pinterest" data-social="pinterest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.42 7.63 11.16-.11-.95-.2-2.4.04-3.44.22-.93 1.4-5.96 1.4-5.96s-.36-.72-.36-1.78c0-1.66.97-2.9 2.17-2.9 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-1 4-.28 1.2.6 2.18 1.79 2.18 2.15 0 3.8-2.27 3.8-5.54 0-2.9-2.08-4.92-5.05-4.92-3.44 0-5.46 2.58-5.46 5.25 0 1.04.4 2.15.9 2.76.1.12.11.22.08.34l-.34 1.36c-.05.22-.18.27-.41.16-1.5-.7-2.44-2.9-2.44-4.66 0-3.8 2.76-7.29 7.95-7.29 4.17 0 7.42 2.97 7.42 6.95 0 4.15-2.62 7.49-6.25 7.49-1.22 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15C9.57 23.82 10.76 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="causes.html">Causes &amp; Recipients</a></li>
+          <li><a href="about.html">About the Family</a></li>
+          <li><a href="stories.html">Stories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="mailto:thespinnerfoundation@gmail.com?subject=Making%20a%20Donation">Make a Donation</a></li>
+          <li><a href="mailto:thespinnerfoundation@gmail.com">Nominate a Cause</a></li>
+          <li><a href="mailto:thespinnerfoundation@gmail.com">Volunteer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:thespinnerfoundation@gmail.com">thespinnerfoundation@gmail.com</a></li>
+          <li><a href="https://thespinnerfoundation.org">thespinnerfoundation.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 The Spinner Foundation.<span class="ph">A 501(c)(3) nonprofit organization.
+      </span></span>
+      <span><a href="https://quay-cncpts.com" target="_blank" rel="noopener" style="color: #f4b8b8">by Quay</a></span>
+    </div>
+  </div>
+</footer>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks.jsx"></script>
+
+</body>
+</html>
