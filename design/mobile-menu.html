@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TSF — Mobile Menu</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap');
+    :root{
+      --paper:#F7F2EA; --paper-2:#F1EADF; --ink:#221C18; --ink-2:#4B4139; --ink-3:#7F766C;
+      --rule:#E2D6C8; --crimson:#8C1A1A; --crimson-d:#6E1414;
+      --f-serif:"Cormorant Garamond",Georgia,serif; --f-sans:"Inter",system-ui,sans-serif;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;background:#2A2520;font-family:var(--f-sans);min-height:100vh;
+      display:flex;flex-direction:column;align-items:center;gap:22px;padding:28px 16px 48px;}
+    .head{color:#cdbfae;text-align:center;max-width:430px;}
+    .head h1{font-family:var(--f-serif);font-weight:400;font-size:26px;color:#f2e9dc;margin:0 0 6px;}
+    .head p{margin:0;font-size:13px;line-height:1.5;color:#9d9180;}
+
+    /* toggle */
+    .switch{display:inline-flex;background:#3a342d;border-radius:999px;padding:4px;gap:4px;margin-top:14px;}
+    .switch button{border:0;background:transparent;color:#b6a994;font:500 12px/1 var(--f-sans);
+      letter-spacing:.04em;padding:9px 16px;border-radius:999px;cursor:pointer;text-transform:uppercase;}
+    .switch button.on{background:var(--paper);color:var(--ink);}
+
+    /* phone */
+    .phone{width:390px;height:760px;background:var(--paper);border-radius:42px;position:relative;
+      overflow:hidden;box-shadow:0 30px 70px -20px rgba(0,0,0,.6);border:10px solid #15110d;}
+    .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:26px;
+      background:#15110d;border-radius:0 0 16px 16px;z-index:40;}
+
+    /* top bar */
+    .bar{position:absolute;top:0;left:0;right:0;height:84px;display:flex;flex-direction:row-reverse;align-items:center;
+      justify-content:space-between;padding:0 22px;z-index:30;
+      background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--rule);}
+    .v-logo{width:26px;height:35px;background:url("assets/mark-seal.png") center/contain no-repeat;}
+
+    /* hamburger button */
+    .ham{width:46px;height:46px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0;}
+    /* style: rule marks (three lines, crimson middle) */
+    .ham .lines{width:26px;height:14px;position:relative;}
+    .ham .lines i{position:absolute;left:0;right:0;height:1.6px;background:var(--ink);border-radius:2px;transition:.3s;}
+    .ham .lines i:nth-child(1){top:0;}
+    .ham .lines i:nth-child(2){top:6px;background:var(--crimson);width:18px;}
+    .ham .lines i:nth-child(3){top:12px;}
+    /* style: V seal */
+    .ham .vmark{width:24px;height:32px;background:url("assets/mark-seal.png") center/contain no-repeat;display:none;}
+    body[data-ham="v"] .ham .lines{display:none;}
+    body[data-ham="v"] .ham .vmark{display:block;}
+
+    /* open state morph (rule-marks → X) */
+    .phone.open .ham .lines i:nth-child(1){top:6px;transform:rotate(45deg);background:var(--crimson);}
+    .phone.open .ham .lines i:nth-child(2){opacity:0;}
+    .phone.open .ham .lines i:nth-child(3){top:6px;transform:rotate(-45deg);background:var(--crimson);}
+    .phone.open .ham .vmark{opacity:.35;}
+
+    /* a peek of the page behind */
+    .behind{position:absolute;inset:84px 0 0;background:var(--paper);}
+    .behind .hero-img{height:260px;background:#8a7f72 url("assets/photos/cas-2.jpg") center 38%/cover;}
+    .behind .body{padding:26px 22px;}
+    .behind .ey{font:500 11px/1 var(--f-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--crimson);}
+    .behind h2{font-family:var(--f-serif);font-weight:400;font-size:40px;line-height:1.04;margin:14px 0 0;color:var(--ink);}
+    .behind h2 em{font-style:italic;color:var(--crimson);}
+
+    /* MENU overlay */
+    .menu{position:absolute;inset:0;background:var(--paper);z-index:20;
+      transform:translateY(-100%);transition:transform .45s cubic-bezier(.22,.61,.36,1);
+      display:flex;flex-direction:column;padding:96px 30px 30px;}
+    .phone.open .menu{transform:translateY(0);}
+    .menu nav{display:flex;flex-direction:column;margin-top:6px;}
+    .menu nav a{display:flex;align-items:baseline;gap:16px;padding:20px 0;border-bottom:1px solid var(--rule);
+      text-decoration:none;color:var(--ink);font-family:var(--f-serif);font-weight:500;font-size:38px;line-height:1;
+      letter-spacing:-.01em;opacity:0;transform:translateY(12px);transition:.5s;}
+    .phone.open .menu nav a{opacity:1;transform:none;}
+    .phone.open .menu nav a:nth-child(1){transition-delay:.12s;}
+    .phone.open .menu nav a:nth-child(2){transition-delay:.18s;}
+    .phone.open .menu nav a:nth-child(3){transition-delay:.24s;}
+    .phone.open .menu nav a:nth-child(4){transition-delay:.30s;}
+    .menu nav a .n{font-style:italic;font-size:16px;color:var(--crimson);font-weight:500;min-width:20px;}
+    .menu nav a.cur{color:var(--crimson);}
+
+    .menu-foot{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:24px;}
+    .donate{width:100%;text-align:center;background:var(--crimson);color:#fff;text-decoration:none;
+      font:500 12px/1 var(--f-sans);letter-spacing:.1em;text-transform:uppercase;padding:18px;}
+    .soc{display:flex;gap:26px;}
+    .soc svg{width:20px;height:20px;fill:var(--ink-3);}
+    .seal{width:20px;height:27px;background:url("assets/mark-seal.png") center/contain no-repeat;opacity:.85;}
+
+    .cap{color:#7d7264;font-size:12px;max-width:390px;text-align:center;line-height:1.6;}
+    .cap b{color:#cdbfae;font-weight:600;}
+  </style>
+</head>
+<body data-ham="rule">
+
+  <div class="head">
+    <h1>Mobile Menu</h1>
+    <p>Tap the menu button to open. Toggle the button style below to compare.</p>
+    <div class="switch">
+      <button class="on" data-set="rule">Rule-mark</button>
+      <button data-set="v">V&nbsp;seal</button>
+    </div>
+  </div>
+
+  <div class="phone" id="phone">
+    <div class="notch"></div>
+
+    <div class="bar">
+      <span class="v-logo" aria-label="The Spinner Foundation"></span>
+      <button class="ham" id="ham" aria-label="Menu">
+        <span class="lines"><i></i><i></i><i></i></span>
+        <span class="vmark"></span>
+      </button>
+    </div>
+
+    <!-- page peeking behind -->
+    <div class="behind">
+      <div class="hero-img"></div>
+      <div class="body">
+        <span class="ey">A Family Foundation</span>
+        <h2>Where every being has the opportunity to&nbsp;<em>thrive.</em></h2>
+      </div>
+    </div>
+
+    <!-- full-screen menu -->
+    <div class="menu">
+      <nav>
+        <a href="#" class="cur"><span class="n">i</span> Home</a>
+        <a href="#"><span class="n">ii</span> Causes</a>
+        <a href="#"><span class="n">iii</span> About</a>
+        <a href="#"><span class="n">iv</span> Stories</a>
+      </nav>
+      <div class="menu-foot">
+        <a class="donate" href="#">Donate</a>
+        <div class="soc">
+          <svg viewBox="0 0 24 24"><path d="M16.6 5.82a4.28 4.28 0 0 1-1-2.82h-3.1v12.36a2.6 2.6 0 0 1-2.6 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.48V9.6a5.7 5.7 0 0 0-.8-.06A5.71 5.71 0 0 0 4.2 15.26 5.71 5.71 0 0 0 9.9 21a5.71 5.71 0 0 0 5.7-5.74V8.99a7.33 7.33 0 0 0 4.3 1.38V7.27a4.28 4.28 0 0 1-3.3-1.45z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.35 2.67.94 3.34.63 4.13.33 4.9.13 5.77.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.12.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.42 7.63 11.16-.11-.95-.2-2.4.04-3.44.22-.93 1.4-5.96 1.4-5.96s-.36-.72-.36-1.78c0-1.66.97-2.9 2.17-2.9 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-1 4-.28 1.2.6 2.18 1.79 2.18 2.15 0 3.8-2.27 3.8-5.54 0-2.9-2.08-4.92-5.05-4.92-3.44 0-5.46 2.58-5.46 5.25 0 1.04.4 2.15.9 2.76.1.12.11.22.08.34l-.34 1.36c-.05.22-.18.27-.41.16-1.5-.7-2.44-2.9-2.44-4.66 0-3.8 2.76-7.29 7.95-7.29 4.17 0 7.42 2.97 7.42 6.95 0 4.15-2.62 7.49-6.25 7.49z"/></svg>
+        </div>
+        <span class="seal"></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="cap"><b>Recommendation:</b> the rule-mark button (three hairlines with a crimson middle stroke) reads clearly as &ldquo;menu,&rdquo; echoes the wordmark&rsquo;s rule marks, and animates cleanly into a crimson X. The V-seal is beautiful but reads as a logo, not a control. My pick: rule-mark button, with the V seal as the mobile logo.</p>
+
+  <script>
+    const phone=document.getElementById('phone'), ham=document.getElementById('ham');
+    ham.addEventListener('click',()=>phone.classList.toggle('open'));
+    document.querySelectorAll('.menu nav a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();phone.classList.remove('open');}));
+    document.querySelectorAll('.switch button').forEach(b=>b.addEventListener('click',()=>{
+      document.querySelectorAll('.switch button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      document.body.dataset.ham=b.dataset.set;
+    }));
+  </script>
+</body>
+</html>

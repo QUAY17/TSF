@@ -46,6 +46,7 @@
     --logo-foot  : url('../../design/designer_styleguides/assets/wordmark-dark.png');
     --img-hero   : url('../../design/designer_styleguides/assets/photos/cas-2.jpg');
     --img-mission: url('../../design/designer_styleguides/assets/photos/family-7226.jpg');
+    --logo-v     : url('../../branding_new_logos/The-Spinner-Foundation-Logo_6.png');
   }
 
   /* ============================================================
@@ -331,11 +332,11 @@
      ============================================================ */
   .tsf .tsf-menu { display: none; }
   @media (max-width: 760px) {
-    .tsf .tsf-menu { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 200; background: color-mix(in oklch, var(--paper) 72%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); padding: 84px 30px 36px; transform: translateY(-100%); transition: transform .45s cubic-bezier(.22,.61,.36,1); }
+    .tsf .tsf-menu { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 200; background: color-mix(in oklch, var(--paper) 85%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); padding: 84px 30px 36px; transform: translateY(-100%); transition: transform .45s cubic-bezier(.22,.61,.36,1); }
     .tsf .tsf-menu.open { transform: translateY(0); }
     .tsf .tsf-menu-close { position: absolute; top: 20px; left: 22px; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--ink-2); cursor: pointer; line-height: 1; font-family: var(--f-sans) !important; font-size: 32px !important; }
     .tsf .tsf-menu-nav { display: flex; flex-direction: column; margin-top: 6px; }
-    .tsf .tsf-menu-nav a { display: flex; align-items: baseline; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule); font-family: var(--f-serif) !important; font-weight: 400 !important; font-size: 38px !important; line-height: 1 !important; letter-spacing: -0.01em !important; text-transform: none !important; color: var(--ink-2); }
+    .tsf .tsf-menu-nav a { display: flex; align-items: baseline; gap: 16px; padding: 20px 0; border-bottom: 1px solid rgba(40,28,24,0.16); font-family: var(--f-serif) !important; font-weight: 400 !important; font-size: 38px !important; line-height: 1 !important; letter-spacing: -0.01em !important; text-transform: none !important; color: var(--ink-2); }
     .tsf .tsf-menu-nav a .n { font-family: var(--f-serif) !important; font-style: italic; font-size: 16px !important; font-weight: 500 !important; color: var(--ink-2); min-width: 20px; }
     .tsf .tsf-menu-nav a.cur { color: var(--ink-2); }
     .tsf .tsf-menu-foot { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 24px; padding-top: 32px; }
@@ -358,10 +359,9 @@
     .tsf .lk-spinner { font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 30px !important; letter-spacing: 0.10em !important; text-indent: 0.10em; text-transform: uppercase; color: var(--ink); margin: 3px 0; }
     .tsf .lk-spinner em { font-style: normal; color: var(--crimson); }
     .tsf .lk-foundation { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 13px !important; letter-spacing: 0.20em !important; text-transform: uppercase; color: var(--ink); }
-    .tsf .lk-v { position: relative; font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 30px !important; line-height: 1 !important; color: var(--ink); padding: 4px 0; }
-    .tsf .lk-v::before, .tsf .lk-v::after { content: ""; position: absolute; left: 50%; transform: translateX(-50%); width: 22px; height: 1px; background: var(--ink); }
-    .tsf .lk-v::before { top: 0; }
-    .tsf .lk-v::after { bottom: 0; }
+    /* Ruled-V suffix: brand PNG art (ink, transparent) — keeps the rules above/below
+       the V pixel-consistent. Replaces the earlier live-type glyph + CSS pseudo-rules. */
+    .tsf .lk-v { width: 34px; height: 48px; background: var(--logo-v) center / contain no-repeat; }
   }
   </style>
 
@@ -382,7 +382,7 @@
           <span class="lk-spinner">Spin<em>n</em>er</span>
           <span class="lk-foundation">Foundation</span>
         </span>
-        <span class="lk-v" aria-hidden="true">V</span>
+        <span class="lk-v" aria-hidden="true"></span>
       </div>
       <span class="nav-rule" aria-hidden="true"></span>
       <div class="nav-right">
