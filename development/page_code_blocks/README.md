@@ -75,6 +75,7 @@ replace the paths:
 |---|---|
 | `--logo-nav` | `wordmark-light.png` |
 | `--logo-foot` | `wordmark-dark.png` |
+| `--logo-v` (mobile masthead) | `branding_new_logos/tsf-ruled-v.png` (tight-cropped ruled-V) |
 | `--img-hero` | `photos/cas-2.jpg` |
 | `--img-mission` | `photos/family-7226.jpg` |
 | `<img>` feature top | `photos/rowdy-2.jpg` |
