@@ -21,8 +21,8 @@
    ============================================================ */
 .tsf {
   /* — Color — */
-  --paper      : oklch(0.975 0.008 75);    /* warm cream */
-  --paper-2    : oklch(0.955 0.010 75);    /* shaded cream */
+  --paper      : #F7F2EA;                   /* warm cream */
+  --paper-2    : #F1EADF;                   /* shaded cream */
   --ink        : oklch(0.18  0.010 35);    /* warm near-black */
   --ink-2      : oklch(0.36  0.010 35);    /* secondary */
   --ink-3      : oklch(0.58  0.008 50);    /* tertiary */
@@ -190,8 +190,8 @@
   top: 0;
   z-index: 50;
   background: color-mix(in oklch, var(--paper) 88%, transparent);
-  -webkit-backdrop-filter: blur(18px) saturate(120%);
-  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--rule-soft);
 }
 .tsf .nav-inner {
@@ -235,15 +235,13 @@
 .tsf .foot .wordmark { background-image: var(--logo-foot); }
 .tsf .foot .wordmark { width: 154px; height: 60px; }
 
-/* Ruled V brand mark — mobile masthead only (hidden on desktop) */
-.tsf .nav-vmark {
+/* Mobile menu button — rule-mark hamburger (hidden on desktop). It's a <button>, so reset chrome. */
+.tsf .nav-toggle {
   display: none;
-  background-image: var(--logo-vmark);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  -webkit-appearance: none; appearance: none; border: 0; padding: 0;
+  background: transparent; cursor: pointer;
 }
-.tsf .nav-rule { display: none; } /* mobile masthead hairline (shown ≤760px) */
+.tsf .nav-rule { display: none; }
 
 /* ============================================================
    BUTTONS
@@ -715,30 +713,18 @@
 }
 @media (max-width: 760px) {
   .tsf { --gutter: 24px; --section-y: 64px; }
-  /* Mobile masthead — persistent nav, no hamburger:
-     ruled V → wordmark → hairline → [ links · Donate ] (Donate inline, after Impact). */
+  /* Mobile masthead — rule-mark menu button in the top-left corner, wordmark centered.
+     The menu's X opens in that same corner, so trigger → open is one continuous spot. */
   .tsf .nav { position: static; }
-  .tsf .nav-inner {
-    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-    gap: 0 16px; height: auto; padding: 18px var(--gutter) 16px;
-  }
-  .tsf .nav-vmark { display: block; order: 1; flex: 0 0 100%; height: 50px; margin-bottom: 12px; }
-  /* MARGIN (not padding) below the wordmark = real breathing room above the hairline.
-     The wordmark is a background image, which paints into padding, so padding here
-     would NOT show as a gap. The hairline is the standalone .nav-rule element. */
-  .tsf .wordmark { order: 2; flex: 0 0 100%; height: 46px; margin-bottom: 22px; }
-  .tsf .nav-rule { display: block; order: 3; flex: 0 0 100%; height: 1px; background: var(--rule-soft); }
-  .tsf .nav-links { order: 4; justify-content: center; gap: var(--s-4); font-size: 12px !important; margin-top: 18px; }
-  .tsf .nav-right { order: 5; margin-top: 18px; }
-  /* Donate: quiet underlined link at rest; on hover a desktop-sized crimson box appears.
-     The box footprint is reserved (transparent border + padding) so there's no layout shift;
-     the rest underline uses text-decoration so it hugs the word, not the padded box. */
-  .tsf .nav-right .btn-primary {
-    background: transparent; border: 1px solid transparent; border-radius: 0;
-    color: var(--crimson) !important; padding: 10px 16px; font-size: 12px !important;
-    text-decoration: underline !important; text-underline-offset: 4px; text-decoration-thickness: 1px;
-  }
-  .tsf .nav-right .btn-primary:hover { background: transparent; color: var(--crimson-d) !important; border-color: currentColor; text-decoration: none !important; }
+  .tsf .nav-inner { display: flex; align-items: center; justify-content: center; position: relative; gap: 0; height: auto; padding: 20px var(--gutter); }
+  .tsf .nav-toggle { display: block; position: absolute; left: calc(var(--gutter) - 9px); top: 50%; transform: translateY(-50%); width: 44px; height: 44px; }
+  .tsf .nav-toggle .lines { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 26px; height: 14px; }
+  .tsf .nav-toggle .lines i { position: absolute; left: 0; right: 0; height: 1.6px; border-radius: 2px; background: var(--ink); }
+  .tsf .nav-toggle .lines i:nth-child(1) { top: 0; }
+  .tsf .nav-toggle .lines i:nth-child(2) { top: 6px; width: 18px; }
+  .tsf .nav-toggle .lines i:nth-child(3) { top: 12px; }
+  .tsf .wordmark { height: 44px; }
+  .tsf .nav-rule, .tsf .nav-links, .tsf .nav-right { display: none; }
   .tsf .pillars-index,
   .tsf .feature,
   .tsf .mission-grid,
@@ -753,4 +739,52 @@
   .tsf .foot-inner > div { display: flex; flex-direction: column; align-items: center; }
   .tsf .foot ul { align-items: center; }
   .tsf .foot-base { flex-direction: column; gap: 10px; text-align: center; }
+}
+
+/* ============================================================
+   MOBILE DROP-DOWN MENU (≤760px) — opened by the brand V button.
+   Ported from design/mobile-menu.html, namespaced under .tsf.
+   Requires per-page markup (.tsf-menu) + the toggle <script> — see home.html.
+   ============================================================ */
+.tsf .tsf-menu { display: none; }
+@media (max-width: 760px) {
+  .tsf .tsf-menu {
+    display: flex; flex-direction: column;
+    position: fixed; inset: 0; z-index: 200;
+    background: color-mix(in oklch, var(--paper) 72%, transparent);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    padding: 84px 30px 36px;
+    transform: translateY(-100%);
+    transition: transform .45s cubic-bezier(.22,.61,.36,1);
+  }
+  .tsf .tsf-menu.open { transform: translateY(0); }
+  .tsf .tsf-menu-close {
+    position: absolute; top: 20px; left: 22px;
+    width: 44px; height: 44px; padding: 0; border: 0; background: transparent;
+    color: var(--ink-2); cursor: pointer; line-height: 1;
+    font-family: var(--f-sans) !important; font-size: 32px !important;
+  }
+  .tsf .tsf-menu-nav { display: flex; flex-direction: column; margin-top: 6px; }
+  .tsf .tsf-menu-nav a {
+    display: flex; align-items: baseline; gap: 16px; padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--f-serif) !important; font-weight: 400 !important;
+    font-size: 38px !important; line-height: 1 !important; letter-spacing: -0.01em !important;
+    text-transform: none !important; color: var(--ink-2);
+  }
+  .tsf .tsf-menu-nav a .n {
+    font-family: var(--f-serif) !important; font-style: italic;
+    font-size: 16px !important; font-weight: 500 !important; color: var(--ink-2); min-width: 20px;
+  }
+  .tsf .tsf-menu-nav a.cur { color: var(--ink-2); }
+  .tsf .tsf-menu-foot { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 24px; padding-top: 32px; }
+  .tsf .tsf-menu-donate {
+    width: 100%; text-align: center; background: var(--crimson); color: var(--paper) !important;
+    font-family: var(--f-sans) !important; font-weight: 500 !important; font-size: 12px !important;
+    letter-spacing: 0.1em !important; text-transform: uppercase !important; line-height: 1 !important;
+    padding: 18px; text-decoration: none !important; box-shadow: none !important;
+  }
+  .tsf .tsf-menu-social { display: flex; gap: 26px; }
+  .tsf .tsf-menu-social a { color: var(--ink-3); display: inline-flex; }
+  .tsf .tsf-menu-social svg { width: 20px; height: 20px; fill: currentColor; display: block; }
 }

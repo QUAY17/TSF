@@ -75,7 +75,6 @@ replace the paths:
 |---|---|
 | `--logo-nav` | `wordmark-light.png` |
 | `--logo-foot` | `wordmark-dark.png` |
-| `--logo-vmark` | `branding_new_logos/The-Spinner-Foundation-Logo_6.png` (all-ink ruled V — mobile masthead) |
 | `--img-hero` | `photos/cas-2.jpg` |
 | `--img-mission` | `photos/family-7226.jpg` |
 | `<img>` feature top | `photos/rowdy-2.jpg` |
