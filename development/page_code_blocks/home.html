@@ -57,8 +57,8 @@
      Fonts (Cormorant Garamond + Inter) loaded via <link> above.
      ============================================================ */
   .tsf {
-    --paper      : #F7F2EA;
-    --paper-2    : #F1EADF;
+    --paper      : oklch(0.975 0.008 75);
+    --paper-2    : oklch(0.955 0.010 75);
     --ink        : oklch(0.18  0.010 35);
     --ink-2      : oklch(0.36  0.010 35);
     --ink-3      : oklch(0.58  0.008 50);
@@ -122,8 +122,8 @@
   .tsf .h3 { font-size: clamp(22px, 2.0vw, 28px) !important; line-height: 1.2  !important; font-weight: 500 !important; }
   .tsf .h4 { font-size: 18px !important; line-height: 1.3 !important; font-weight: 500 !important; }
   .tsf .lede {
-    font-family: var(--f-serif) !important; font-weight: 400 !important; font-size: clamp(20px, 1.8vw, 26px) !important;
-    line-height: 1.42 !important; letter-spacing: 0.002em !important; text-transform: none !important; color: var(--ink-2);
+    font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: clamp(20px, 1.8vw, 26px) !important;
+    line-height: 1.45 !important; letter-spacing: 0.002em !important; text-transform: none !important; color: var(--ink);
   }
   .tsf .body { font-family: var(--f-sans) !important; font-size: 16px !important; line-height: 1.65 !important; text-transform: none !important; color: var(--ink-2); }
   .tsf .body p { margin: 0 0 1em; }
@@ -152,7 +152,7 @@
   .tsf .wordmark { display: inline-block; width: 154px; height: 60px; background-image: var(--logo-nav); background-repeat: no-repeat; background-position: center; background-size: contain; }
   .tsf .wordmark-lg { width: 264px; height: 100px; }
   .tsf .wordmark-dark, .tsf .foot .wordmark { background-image: var(--logo-foot); }
-  .tsf .foot .wordmark { width: 154px; height: 60px; }
+  .tsf .foot .wordmark { width: 184px; height: 72px; }
   .tsf .nav-toggle { display: none; -webkit-appearance: none; appearance: none; border: 0; padding: 0; background: transparent; cursor: pointer; }
   .tsf .nav-rule { display: none; }
 
@@ -251,7 +251,7 @@
   .tsf .feature-stats dd em { font-style: italic; color: var(--crimson); }
 
   /* — Editorial photo frame — */
-  .tsf .photo-frame { display: inline-flex; flex-direction: column; gap: 14px; padding: 18px 18px 22px; background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 18px 30px -22px rgba(20,16,14,.18); align-self: start; max-width: 360px; transform: rotate(-1.8deg); transform-origin: 50% 70%; transition: transform .35s ease; }
+  .tsf .photo-frame { display: inline-flex; flex-direction: column; gap: 14px; padding: 18px 18px 22px; background: oklch(0.995 0.004 82); border: 1px solid var(--rule); box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 18px 30px -22px rgba(20,16,14,.18); align-self: start; max-width: 360px; transform: rotate(-1.8deg); transform-origin: 50% 70%; transition: transform .35s ease; }
   .tsf .photo-frame:hover { transform: rotate(-0.5deg) translateY(-2px); }
   .tsf .photo-frame:nth-of-type(2n) { transform: rotate(2.4deg); }
   .tsf .photo-frame:nth-of-type(2n):hover { transform: rotate(0.5deg) translateY(-2px); }
@@ -334,7 +334,7 @@
      ============================================================ */
   .tsf .tsf-menu { display: none; }
   @media (max-width: 760px) {
-    .tsf .tsf-menu { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 200; overflow-y: auto; background: rgba(247,242,234,0.80); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); padding: 72px 30px 32px; transform: translateY(-100%); transition: transform .45s cubic-bezier(.22,.61,.36,1); }
+    .tsf .tsf-menu { display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 200; overflow-y: auto; background: oklch(0.975 0.008 75 / 0.82); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); padding: 72px 30px 32px; transform: translateY(-100%); transition: transform .45s cubic-bezier(.22,.61,.36,1); }
     .tsf .tsf-menu.open { transform: translateY(0); }
     .tsf .tsf-menu-close { position: absolute; top: 20px; left: 22px; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--ink-2); cursor: pointer; line-height: 1; font-family: var(--f-sans) !important; font-size: 32px !important; }
     .tsf .tsf-menu-nav { display: flex; flex-direction: column; margin-top: 6px; }
@@ -347,9 +347,9 @@
     .tsf .tsf-menu-social a { color: var(--ink-3); display: inline-flex; }
     .tsf .tsf-menu-social svg { width: 20px; height: 20px; fill: currentColor; display: block; }
     /* Brand block at the top of the open menu: large grey ruled-V + tagline stacked. */
-    .tsf .tsf-menu-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 2px 0 10px; }
-    .tsf .tsf-menu-v { width: 86px; height: 104px; background: var(--logo-v) center / contain no-repeat; opacity: 0.55; }
-    .tsf .tsf-menu-tag { margin: 0; font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 14px !important; letter-spacing: 0.16em !important; text-transform: uppercase; color: var(--ink-3); text-align: center; }
+    .tsf .tsf-menu-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 2px 0 30px; }
+    .tsf .tsf-menu-v { width: 100px; height: 122px; background: var(--logo-v) center / contain no-repeat; opacity: 0.72; }
+    .tsf .tsf-menu-tag { margin: 0; font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 16px !important; letter-spacing: 0.14em !important; text-transform: uppercase; color: var(--ink-2); text-align: center; }
   }
   /* ============================================================
      WORDMARK LOCKUP (live type) + ruled-V suffix — DESKTOP + MOBILE.
@@ -366,7 +366,7 @@
   .tsf .lk-foundation { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 13px !important; letter-spacing: 0.20em !important; text-transform: uppercase; color: var(--ink); }
   /* Ruled-V suffix: brand PNG art tucked next to SPINNER. Darker on desktop (main logo);
      softened to grey on mobile where it sits beside the ink hamburger (override below). */
-  .tsf .lk-v { width: 44px; height: 60px; background: var(--logo-v) center / contain no-repeat; opacity: 0.8; }
+  .tsf .lk-v { width: 44px; height: 60px; background: var(--logo-v) center / contain no-repeat; opacity: 0.85; }
   </style>
 
   <!-- ===================== NAV ===================== -->
@@ -488,21 +488,21 @@
 
     <div class="pillars-index">
       <a class="pillar-card" href="/giving#animals">
-        <div class="meta"><span class="roman">i.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+        <div class="meta"><span class="roman">i.</span><span class="partners">7 Partners</span></div>
         <h3>Animals</h3>
         <p>Sanctuaries, shelters, and rescue programs &mdash; from horses recovering from neglect to working dogs paired with veterans.</p>
         <div class="pcta"><span>Browse animal causes</span><span class="arrow">→</span></div>
       </a>
 
       <a class="pillar-card" href="/giving#families">
-        <div class="meta"><span class="roman">ii.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+        <div class="meta"><span class="roman">ii.</span><span class="partners">3 Partners</span></div>
         <h3>Children &amp; Families</h3>
         <p>Family-services nonprofits that protect a child&rsquo;s right to a safe and healthy start &mdash; reducing isolation, preventing harm.</p>
         <div class="pcta"><span>Browse family causes</span><span class="arrow">→</span></div>
       </a>
 
       <a class="pillar-card coming" href="/giving">
-        <div class="meta"><span class="roman">iii.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
+        <div class="meta"><span class="roman">iii.</span><span class="partners">3 Partners</span></div>
         <h3>Medical</h3>
         <p>Research, treatment, and the institutions that deliver it &mdash; including a named hospital wing in our home state of Connecticut.</p>
         <div class="pcta"><span>Hospital wing &middot; CT &middot; Coming soon</span></div>
