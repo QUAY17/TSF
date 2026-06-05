@@ -236,6 +236,18 @@
   .tsf .kpi .n small { font-size: 0.42em; color: var(--ink-3); margin-left: 4px; font-weight: 500; letter-spacing: 0.02em; }
   .tsf .kpi .l { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); }
 
+  /* By the Numbers — editorial tally (home page) */
+  .tsf .tally-head { border-bottom: 1px solid var(--rule); padding-bottom: var(--s-7); }
+  .tsf .tally-h { font-family: var(--f-serif) !important; font-size: clamp(24px, 2.4vw, 34px) !important; font-weight: 400 !important; line-height: 1.15 !important; letter-spacing: -0.005em !important; color: var(--ink); margin: var(--s-4) 0 0; max-width: 26ch; }
+  .tsf .tally-h em { font-style: italic; color: var(--crimson); }
+  .tsf .tally-row { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .tsf .tally-stat { padding: var(--s-7) var(--s-6) var(--s-6) 0; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: var(--s-3); }
+  .tsf .tally-stat:last-child { border-right: 0; }
+  .tsf .tally-stat .tn { font-family: var(--f-serif) !important; font-size: clamp(52px, 5.2vw, 78px) !important; font-weight: 400 !important; line-height: 0.92 !important; letter-spacing: -0.025em !important; color: var(--ink); font-variant-numeric: tabular-nums; display: block; }
+  .tsf .tally-stat .tn em { font-style: italic; color: var(--crimson); }
+  .tsf .tally-stat .tn sup { font-size: 0.3em; vertical-align: 0.9em; color: var(--ink-3); font-weight: 500; letter-spacing: 0.02em; font-style: normal; }
+  .tsf .tally-stat .tl { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); max-width: 20ch; line-height: 1.5; }
+
   /* — Featured story (Rowdy) — */
   .tsf .feature { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--s-8); align-items: start; }
   .tsf .feature-img { aspect-ratio: 4 / 5; background-size: cover; background-position: center; }
@@ -321,6 +333,10 @@
     .tsf .pillars-index, .tsf .feature, .tsf .mission-grid, .tsf .foot-inner { grid-template-columns: 1fr !important; }
     .tsf .kpi-strip { grid-template-columns: 1fr 1fr; }
     .tsf .kpi:nth-child(2) { border-right: 0; }
+    .tsf .tally-row { grid-template-columns: 1fr 1fr; }
+    .tsf .tally-stat { padding-right: 0; }
+    .tsf .tally-stat:nth-child(2) { border-right: 0; }
+    .tsf .tally-stat:nth-child(n+3) { border-top: 1px solid var(--rule); padding-top: var(--s-6); }
     .tsf[data-hero="split"] .hero { grid-template-columns: 1fr; }
     .tsf[data-hero="split"] .hero-img { min-height: 0; aspect-ratio: 3 / 4; }
     .tsf[data-hero="split"] .hero-inner { padding-top: var(--s-8) !important; }
@@ -572,13 +588,31 @@
     </div>
   </section>
 
-  <!-- ===================== KPI STRIP ===================== -->
-  <section>
-    <div class="kpi-strip">
-      <div class="kpi"><span class="n">12+</span><span class="l">Partner organizations</span></div>
-      <div class="kpi"><span class="n"><em><span class="ph">[#]</span></em></span><span class="l">Donations placed</span></div>
-      <div class="kpi"><span class="n"><em>$2M+</em></span><span class="l">In gifts placed since 2021</span></div>
-      <div class="kpi"><span class="n">Since<br/>2021</span><span class="l">The foundation began this work</span></div>
+  <!-- ===================== BY THE NUMBERS ===================== -->
+  <section class="section tally">
+    <div class="wrap">
+      <div class="tally-head">
+        <span class="eyebrow"><span class="num">05</span> By the Numbers</span>
+        <h2 class="tally-h">What the giving&nbsp;<em>adds up&nbsp;to</em>.</h2>
+      </div>
+      <div class="tally-row">
+        <div class="tally-stat">
+          <span class="tn">12<sup>+</sup></span>
+          <span class="tl">Partner organizations</span>
+        </div>
+        <div class="tally-stat">
+          <span class="tn"><em><span class="ph">[#]</span></em></span>
+          <span class="tl">Donations placed</span>
+        </div>
+        <div class="tally-stat">
+          <span class="tn"><em>$2M<sup>+</sup></em></span>
+          <span class="tl">In gifts placed since&nbsp;2021</span>
+        </div>
+        <div class="tally-stat">
+          <span class="tn"><em>2021</em></span>
+          <span class="tl">The foundation began this work</span>
+        </div>
+      </div>
     </div>
   </section>
 

@@ -470,6 +470,9 @@
   }
   .tsf .spotlight-body h3 { font-family: var(--f-serif) !important; font-size: 38px !important; font-weight: 500 !important; line-height: 1.15 !important; letter-spacing: -0.005em !important; text-transform: none !important; max-width: 16ch; }
   .tsf .spotlight-body .blurb { color: var(--ink-2); font-family: var(--f-sans) !important; font-size: 16px !important; line-height: 1.55 !important; text-transform: none !important; }
+  /* Org-name links on directory rows + spotlight */
+  .tsf .recipient-row .name a, .tsf .spotlight-body h3 a { color: inherit; text-decoration: none !important; transition: color .15s; }
+  .tsf .recipient-row .name a:hover, .tsf .spotlight-body h3 a:hover { color: var(--crimson); }
 
   /* — Section heads — */
   .tsf .section-head { padding: var(--s-9) 0 var(--s-3); border-top: 2px solid var(--crimson); margin-top: var(--s-9); }
@@ -591,8 +594,9 @@
         Where the&nbsp;<em style="font-style:italic;color:var(--crimson)">giving</em> goes.
       </h1>
       <p class="lede">
-        A growing list of organizations we support across three pillars &mdash; animals, children &amp;
-        families, and medical causes. Every gift on this page is a real partner, doing real work.
+        A growing list of the organizations we support across three pillars &mdash; animals, children &amp;
+        families, and medical causes. Every gift here is placed by hand and in conversation with the
+        people on the ground &mdash; real partners, doing the quiet, day-to-day work of care.
       </p>
     </div>
   </section>
@@ -617,7 +621,7 @@
         <div class="spotlight-img" style="background-image: var(--img-spotlight); background-position: center 30%;"></div>
         <div class="spotlight-body">
           <span class="eyebrow"><span class="num">Featured</span> Animal Sanctuary</span>
-          <h3>Catskill Animal Sanctuary</h3>
+          <h3><a href="https://casanctuary.org" target="_blank" rel="noopener">Catskill Animal Sanctuary</a></h3>
           <p class="blurb">
             A 150-acre refuge in New York&rsquo;s Hudson Valley, rescuing animals from cruelty,
             neglect, and abandonment for 25 years. We sponsor horses in their
@@ -651,7 +655,7 @@
       <article class="recipient-row">
         <div class="idx">01</div>
         <div>
-          <div class="name">Paws of War</div>
+          <div class="name"><a href="https://pawsofwar.org" target="_blank" rel="noopener">Paws of War</a></div>
           <div class="meta"><span>Nesconset, NY</span><span class="dot">&middot;</span><span>Rescue &amp; veterans</span><span class="dot">&middot;</span><span>Active partner</span></div>
         </div>
         <div class="blurb">
@@ -669,7 +673,7 @@
       <article class="recipient-row">
         <div class="idx">02</div>
         <div>
-          <div class="name">DAWS Animal Welfare Society</div>
+          <div class="name"><a href="https://www.dawsct.org" target="_blank" rel="noopener">DAWS Animal Welfare Society</a></div>
           <div class="meta"><span>Bethel, CT</span><span class="dot">&middot;</span><span>No-kill shelter</span><span class="dot">&middot;</span><span>Annual partner</span></div>
         </div>
         <div class="blurb">
@@ -687,7 +691,7 @@
       <article class="recipient-row">
         <div class="idx">03</div>
         <div>
-          <div class="name">Catherine Violet Hubbard Sanctuary</div>
+          <div class="name"><a href="https://cvhfoundation.org" target="_blank" rel="noopener">Catherine Violet Hubbard Sanctuary</a></div>
           <div class="meta"><span>Newtown, CT</span><span class="dot">&middot;</span><span>Animal sanctuary</span><span class="dot">&middot;</span><span><span class="ph">[year &mdash; client]</span></span></div>
         </div>
         <div class="blurb">
@@ -705,7 +709,7 @@
       <article class="recipient-row">
         <div class="idx">04</div>
         <div>
-          <div class="name">Best Friends Animal Society</div>
+          <div class="name"><a href="https://bestfriends.org" target="_blank" rel="noopener">Best Friends Animal Society</a></div>
           <div class="meta"><span>Kanab, UT</span><span class="dot">&middot;</span><span>National</span><span class="dot">&middot;</span><span>Gala benefactor</span></div>
         </div>
         <div class="blurb">
@@ -759,13 +763,13 @@
       <article class="recipient-row">
         <div class="idx">07</div>
         <div>
-          <div class="name">Families Network of Western CT</div>
+          <div class="name"><a href="https://familiesnetworkct.org" target="_blank" rel="noopener">Families Network of Western CT</a></div>
           <div class="meta"><span>Danbury, CT</span><span class="dot">&middot;</span><span>Family services</span><span class="dot">&middot;</span><span>Event partner</span></div>
         </div>
         <div class="blurb">
           Their mission is to ensure families receive the support they need to give their children a
           safe and healthy start. We were granted the joyous privilege of judging their Gingerbread
-          Decorating Contest &mdash; reducing isolation, mitigating cabin fever.
+          Decorating Contest &mdash; an event set up to reduce holiday stress, isolation, and tension at home.
         </div>
         <div class="stats">
           <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
@@ -814,15 +818,15 @@
       <article class="recipient-row">
         <div class="idx">10</div>
         <div>
-          <div class="name">Danbury Hospital</div>
-          <div class="meta"><span>Danbury, CT</span><span class="dot">&middot;</span><span>Medical</span><span class="dot">&middot;</span><span>Coming soon</span></div>
+          <div class="name"><a href="https://www.nuvancehealth.org/find-a-location/danbury-hospital" target="_blank" rel="noopener">Danbury Hospital</a></div>
+          <div class="meta"><span>Danbury, CT</span><span class="dot">&middot;</span><span>Medical</span><span class="dot">&middot;</span><span>Opened 2021</span></div>
         </div>
         <div class="blurb">
-          A named hospital wing in our home state of Connecticut. We&rsquo;re holding space for the
-          story here while we put together photographs, dates, and the right way to honor what was built.
+          A named wing at Danbury Hospital in our home state of Connecticut, established in 2021.
+          We&rsquo;re gathering photographs and the full story &mdash; space held here to honor what was built.
         </div>
         <div class="stats">
-          <div><span class="k">Status</span><br/><span class="amount"><span class="ph">[opens &mdash; client]</span></span></div>
+          <div><span class="k">Opened</span><br/><span class="amount">2021</span></div>
         </div>
         <span class="more"></span>
       </article>
