@@ -531,7 +531,27 @@
     .tsf .donate-inner { grid-template-columns: 1fr; }
     .tsf .causes-hero { padding-top: var(--s-8); }
   }
-  </style>
+  
+  /* — Also Supported — compact ledger list — */
+  .tsf .also-band { border-top: 2px solid var(--ink); margin-top: var(--s-9); padding-top: var(--s-7); }
+  .tsf .also-band-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--s-6); flex-wrap: wrap; gap: var(--s-4); }
+  .tsf .also-band-head h3 { font-family: var(--f-serif) !important; font-size: clamp(22px, 2.2vw, 30px) !important; font-weight: 400 !important; letter-spacing: -0.005em !important; color: var(--ink); margin: 0; }
+  .tsf .also-band-head .also-note { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; color: var(--ink-3); max-width: 44ch; line-height: 1.5; text-align: right; }
+  .tsf .also-list { list-style: none; padding: 0; margin: 0; }
+  .tsf .also-item { display: grid; grid-template-columns: 1fr 160px 140px; gap: var(--s-5); align-items: baseline; padding: var(--s-4) 0; border-bottom: 1px solid var(--rule-soft); }
+  .tsf .also-item:first-child { border-top: 1px solid var(--rule-soft); }
+  .tsf .also-item .ai-name { font-family: var(--f-serif) !important; font-size: 22px !important; font-weight: 500 !important; letter-spacing: -0.005em !important; color: var(--ink); }
+  .tsf .also-item .ai-name a { color: inherit; text-decoration: none !important; transition: color .15s; }
+  .tsf .also-item .ai-name a:hover { color: var(--crimson); }
+  .tsf .also-item .ai-loc { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; color: var(--ink-3); }
+  .tsf .also-item .ai-cat { font-family: var(--f-sans) !important; font-size: 11px !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; color: var(--ink-3); text-align: right; }
+  @media (max-width: 760px) {
+    .tsf .also-item { grid-template-columns: 1fr; gap: 4px; }
+    .tsf .also-item .ai-cat { text-align: left; }
+    .tsf .also-band-head .also-note { text-align: left; }
+  }
+
+</style>
 
   <!-- ===================== NAV ===================== -->
   <header class="nav">
@@ -602,7 +622,7 @@
   </section>
 
   <!-- ===================== FILTER + DIRECTORY ===================== -->
-  <section class="section" style="padding: 45px 0 144px">
+  <section class="section" style="padding: 24px 0 144px">
     <div class="wrap">
 
       <div class="filter-row">
@@ -613,7 +633,7 @@
           <button class="chip" type="button">Medical</button>
           <button class="chip" type="button">CT-based</button>
         </div>
-        <div class="total-pill"><span class="v">12+</span> active partners</div>
+        <div class="total-pill"><span class="v">13</span> active partners</div>
       </div>
 
       <!-- =========== SPOTLIGHT: CATSKILL ANIMAL SANCTUARY =========== -->
@@ -623,10 +643,12 @@
           <span class="eyebrow"><span class="num">Featured</span> Animal Sanctuary</span>
           <h3><a href="https://casanctuary.org" target="_blank" rel="noopener">Catskill Animal Sanctuary</a></h3>
           <p class="blurb">
-            A 150-acre refuge in New York&rsquo;s Hudson Valley, rescuing animals from cruelty,
-            neglect, and abandonment for 25 years. We sponsor horses in their
-            care &mdash; most recently <em>Rowdy</em>, rescued from an animal hoarding situation
-            alongside thirteen other horses.
+            A 150-acre refuge in New York&rsquo;s Hudson Valley, rescuing over 5,000 farm animals from cruelty,
+            neglect, and abandonment for 25 years. We are proud members and have had the privilege of sponsoring
+            several horses in their care &mdash; most recently <em>Rowdy</em>, rescued from an animal hoarding
+            situation in Saratoga alongside thirteen other horses. When Rowdy arrived he was several hundred pounds
+            underweight, suffering from rain rot and severely neglected hooves. With daily care and vitamin&nbsp;E
+            supplementation, he is now comfortable, continues to do well, and is adored by his caregivers.
           </p>
           <div style="display:flex; gap: var(--s-6); margin-top: var(--s-3); flex-wrap: wrap">
             <div>
@@ -639,51 +661,53 @@
             </div>
             <div>
               <div class="caption" style="margin-bottom: 4px">Animals rescued</div>
-              <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;">5,000</div>
+              <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;">5,000+</div>
             </div>
           </div>
-          <a class="btn btn-ghost" href="https://casanctuary.org" target="_blank" rel="noopener" style="margin-top: var(--s-3)">Visit casanctuary.org</a>
+          <a class="btn btn-ghost" href="/stories#rowdy" style="margin-top: var(--s-3)">Read Rowdy&rsquo;s story</a>
         </div>
       </div>
 
-      <!-- =========== ANIMALS =========== -->
-      <div class="section-head" id="animals" style="padding: 45px 0 12px">
-        <div class="label">i. &nbsp; Animals</div>
-        <h2 class="h2">Sanctuaries, shelters,<br/>and rescue programs.</h2>
+      <!-- =========== SECTION I · ANIMALS =========== -->
+      <div class="section-head" style="padding: 48px 0 12px">
+        <span class="label"><em style="font-family:var(--f-serif);font-style:italic;font-size:18px;letter-spacing:0;color:var(--crimson);text-transform:none;font-weight:400">I</em>&ensp;Animals</span>
+        <h2 class="h3" style="margin-top: 12px; font-weight:400">Every animal deserves a soft place to land.</h2>
       </div>
 
       <article class="recipient-row">
         <div class="idx">01</div>
         <div>
           <div class="name"><a href="https://pawsofwar.org" target="_blank" rel="noopener">Paws of War</a></div>
-          <div class="meta"><span>Nesconset, NY</span><span class="dot">&middot;</span><span>Rescue &amp; veterans</span><span class="dot">&middot;</span><span>Active partner</span></div>
+          <div class="meta"><span>Bohemia, NY</span><span class="dot">&middot;</span><span>Animals</span><span class="dot">&middot;</span><span>National</span></div>
         </div>
         <div class="blurb">
-          Rescues animals and pairs them with American veterans and first responders, providing
-          healing on both ends of the leash. We made our largest single gift to Paws of War in 2024.
+          Paws of War stands beside active-duty military, veterans, and the animals who serve as their
+          loyal companions. Their mission reaches conflict zones overseas &mdash; rescuing animals bonded
+          with soldiers and reuniting them stateside. We support their rescue operations, including
+          emergency efforts to bring animals home from active combat areas.
         </div>
         <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
+          <div><span class="k">Focus</span><br/><span class="amount" style="font-size:18px">Veterans &amp; animals</span></div>
+          <div style="margin-top: 8px"><span class="k">Reach</span><br/><span class="amount" style="font-size:18px">National</span></div>
         </div>
-        <a class="btn btn-ghost more" href="/stories#paws-of-war">Read story</a>
+        <a class="btn btn-ghost more" href="https://pawsofwar.org" target="_blank" rel="noopener">Visit org</a>
       </article>
 
       <article class="recipient-row">
         <div class="idx">02</div>
         <div>
           <div class="name"><a href="https://www.dawsct.org" target="_blank" rel="noopener">DAWS Animal Welfare Society</a></div>
-          <div class="meta"><span>Bethel, CT</span><span class="dot">&middot;</span><span>No-kill shelter</span><span class="dot">&middot;</span><span>Annual partner</span></div>
+          <div class="meta"><span>Bethel, CT</span><span class="dot">&middot;</span><span>Animals</span><span class="dot">&middot;</span><span>CT-based</span></div>
         </div>
         <div class="blurb">
-          A no-kill shelter serving Western Connecticut with adoption, foster, and community
-          education programs. Our home-state sanctuary partner since the foundation began.
+          DAWS serves the greater Danbury region from their shelter at 147 Grassy Plain Street in Bethel,
+          providing care and adoption services for animals in need. Our family has maintained a long-standing
+          relationship with DAWS &mdash; their team describes our support as &ldquo;continued and unwavering,&rdquo;
+          and we are proud to stand behind the work they do every day.
         </div>
         <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
+          <div><span class="k">Total gifts</span><br/><span class="amount"><span class="ph">[$ &mdash; client]</span></span></div>
+          <div style="margin-top: 8px"><span class="k">Partner since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
         </div>
         <a class="btn btn-ghost more" href="/stories#daws">Read story</a>
       </article>
@@ -692,16 +716,18 @@
         <div class="idx">03</div>
         <div>
           <div class="name"><a href="https://cvhfoundation.org" target="_blank" rel="noopener">Catherine Violet Hubbard Sanctuary</a></div>
-          <div class="meta"><span>Newtown, CT</span><span class="dot">&middot;</span><span>Animal sanctuary</span><span class="dot">&middot;</span><span><span class="ph">[year &mdash; client]</span></span></div>
+          <div class="meta"><span>Newtown, CT</span><span class="dot">&middot;</span><span>Animal sanctuary</span><span class="dot">&middot;</span><span>CT-based</span></div>
         </div>
         <div class="blurb">
-          A 34-acre sanctuary in Newtown, CT carrying forward the memory of Catherine Violet Hubbard
-          through compassion, education, and care. We support their ongoing programming.
+          Named in memory of Catherine Violet Hubbard, this Newtown sanctuary enriches the lives of all
+          beings through compassion and acceptance. Programming includes <em>Monarchs, Meadows &amp; More</em>
+          (a free butterfly &amp; pollinator showcase), goat yoga, llama nature hikes, and an annual fun run.
+          Their mission &mdash; &ldquo;creating a kinder and gentler world for all&rdquo; &mdash; is one
+          we are proud to support with a $2,500 gift toward their ongoing work.
         </div>
         <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
+          <div><span class="k">Donation</span><br/><span class="amount"><em>$2,500</em></span></div>
+          <div style="margin-top: 8px"><span class="k">Location</span><br/><span class="amount" style="font-size:18px">Newtown, CT</span></div>
         </div>
         <a class="btn btn-ghost more" href="/stories#hubbard">Read story</a>
       </article>
@@ -710,159 +736,129 @@
         <div class="idx">04</div>
         <div>
           <div class="name"><a href="https://bestfriends.org" target="_blank" rel="noopener">Best Friends Animal Society</a></div>
-          <div class="meta"><span>Kanab, UT</span><span class="dot">&middot;</span><span>National</span><span class="dot">&middot;</span><span>Gala benefactor</span></div>
+          <div class="meta"><span>Kanab, UT</span><span class="dot">&middot;</span><span>Animals</span><span class="dot">&middot;</span><span>National</span></div>
         </div>
         <div class="blurb">
-          The leading national animal welfare organization, working to end the killing of dogs and
-          cats in America&rsquo;s shelters. Family members attended their Glass House benefit in 2024.
+          The country&rsquo;s leading no-kill organization, working to ensure every shelter animal that
+          can be treated or adopted finds a home. Their policy: any animal adopted from them will always
+          be welcome back if circumstances change &mdash; they will always have a soft place to land.
+          We contribute generously to their mission, and family members attended their benefit gala
+          at the Glass House in September 2024.
         </div>
         <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
+          <div><span class="k">Total gifts</span><br/><span class="amount"><span class="ph">[$ &mdash; client]</span></span></div>
+          <div style="margin-top: 8px"><span class="k">Mission</span><br/><span class="amount" style="font-size:18px">No-kill USA</span></div>
         </div>
         <a class="btn btn-ghost more" href="/stories#best-friends">Read story</a>
       </article>
 
-      <article class="recipient-row">
-        <div class="idx">05</div>
-        <div>
-          <div class="name">BARC Brooklyn</div>
-          <div class="meta"><span class="ph">[location &mdash; client]</span><span class="dot">&middot;</span><span class="ph">[focus &mdash; client]</span></div>
-        </div>
-        <div class="blurb"><span class="ph">[blurb &mdash; client]</span></div>
-        <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-        </div>
-        <span class="more"></span>
-      </article>
-
-      <article class="recipient-row">
-        <div class="idx">06</div>
-        <div>
-          <div class="name">Brooklyn Cat Cafe</div>
-          <div class="meta"><span class="ph">[location &mdash; client]</span><span class="dot">&middot;</span><span class="ph">[focus &mdash; client]</span></div>
-        </div>
-        <div class="blurb"><span class="ph">[blurb &mdash; client]</span></div>
-        <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-        </div>
-        <span class="more"></span>
-      </article>
-
-      <!-- =========== CHILDREN & FAMILIES =========== -->
-      <div class="section-head" id="families" style="padding: 45px 0 12px">
-        <div class="label">ii. &nbsp; Children &amp; Families</div>
-        <h2 class="h2">Programs that protect<br/>a safe and healthy start.</h2>
+      <!-- =========== SECTION II · CHILDREN & FAMILIES =========== -->
+      <div class="section-head" style="padding: 48px 0 12px">
+        <span class="label"><em style="font-family:var(--f-serif);font-style:italic;font-size:18px;letter-spacing:0;color:var(--crimson);text-transform:none;font-weight:400">II</em>&ensp;Children &amp; Families</span>
+        <h2 class="h3" style="margin-top: 12px; font-weight:400">Every child deserves a safe and healthy start.</h2>
       </div>
 
       <article class="recipient-row">
-        <div class="idx">07</div>
+        <div class="idx">01</div>
         <div>
           <div class="name"><a href="https://familiesnetworkct.org" target="_blank" rel="noopener">Families Network of Western CT</a></div>
-          <div class="meta"><span>Danbury, CT</span><span class="dot">&middot;</span><span>Family services</span><span class="dot">&middot;</span><span>Event partner</span></div>
+          <div class="meta"><span>Connecticut</span><span class="dot">&middot;</span><span>Children &amp; Families</span><span class="dot">&middot;</span><span>CT-based</span></div>
         </div>
         <div class="blurb">
-          Their mission is to ensure families receive the support they need to give their children a
-          safe and healthy start. We were granted the joyous privilege of judging their Gingerbread
-          Decorating Contest &mdash; an event set up to reduce holiday stress, isolation, and tension at home.
+          Families Network ensures families get the support they need to give their children a safe and
+          healthy start. We were granted the joyous privilege of judging their Gingerbread Decorating
+          Contest &mdash; an event designed to reduce holiday stress, isolation, and tension at home.
+          Kits were distributed alongside winter fun ideas and safety handouts; designed to reduce
+          social isolation and lower the risk of childhood maltreatment during high-pressure seasons.
+          Every participating family received a grocery gift card &mdash; everyone was a winner.
         </div>
         <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
+          <div><span class="k">Total gifts</span><br/><span class="amount"><span class="ph">[$ &mdash; client]</span></span></div>
+          <div style="margin-top: 8px"><span class="k">Partner since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
         </div>
         <a class="btn btn-ghost more" href="/stories#families-network">Read story</a>
       </article>
 
       <article class="recipient-row">
-        <div class="idx">08</div>
+        <div class="idx">02</div>
         <div>
-          <div class="name">University of Dayton</div>
-          <div class="meta"><span class="ph">[location &mdash; client]</span><span class="dot">&middot;</span><span class="ph">[focus &mdash; client]</span></div>
-        </div>
-        <div class="blurb"><span class="ph">[blurb &mdash; client]</span></div>
-        <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-        </div>
-        <span class="more"></span>
-      </article>
-
-      <article class="recipient-row">
-        <div class="idx">09</div>
-        <div>
-          <div class="name">Desert Ministries</div>
-          <div class="meta"><span>Hurricane, UT</span><span class="dot">&middot;</span><span>Community outreach</span><span class="dot">&middot;</span><span>Active partner</span></div>
+          <div class="name"><a href="https://desertministries.org" target="_blank" rel="noopener">Desert Ministries</a></div>
+          <div class="meta"><span>Hurricane, UT</span><span class="dot">&middot;</span><span>Children &amp; Families</span><span class="dot">&middot;</span><span>No paid staff</span></div>
         </div>
         <div class="blurb">
-          A volunteer-run 501(c)(3) outreach nonprofit in southern Utah&rsquo;s Hurricane Valley &mdash; no paid
-          staff, so every dollar goes straight into the work. We support its Zion Giving Garden (locally grown
-          produce for families in need) and the Zion Adventure Club (outdoor recreation for local youth).
+          A 501(c)(3) community outreach nonprofit in the Hurricane Valley of southern Utah. No paid employees &mdash;
+          every penny raised goes directly into programs. We support two: the <em>Zion Giving Garden</em>,
+          providing locally grown produce to families in need, and the <em>Zion Adventure Club</em>,
+          which addresses elevated substance use and suicide rates among local youth through enriching
+          outdoor recreation. No overhead. Just care, on the ground.
         </div>
         <div class="stats">
-          <div><span class="k">Sponsored since</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Donations placed</span><br/><span class="amount"><span class="ph">[# &mdash; client]</span></span></div>
-          <div style="margin-top: 8px"><span class="k">Most recent</span><br/><span class="amount"><span class="ph">[year &mdash; client]</span></span></div>
+          <div><span class="k">Programs</span><br/><span class="amount" style="font-size:18px">Giving Garden</span></div>
+          <div style="margin-top: 8px"><span class="k">&nbsp;</span><br/><span class="amount" style="font-size:18px">Adventure Club</span></div>
         </div>
-        <span class="more"></span>
+        <a class="btn btn-ghost more" href="https://desertministries.org" target="_blank" rel="noopener">Visit org</a>
       </article>
 
-      <!-- =========== MEDICAL — holding space =========== -->
-      <div class="section-head" id="medical" style="padding: 45px 0 12px">
-        <div class="label">iii. &nbsp; Medical</div>
-        <h2 class="h2">A wing in our home state.</h2>
+      <!-- =========== SECTION III · MEDICAL =========== -->
+      <div class="section-head" style="padding: 48px 0 12px">
+        <span class="label"><em style="font-family:var(--f-serif);font-style:italic;font-size:18px;letter-spacing:0;color:var(--crimson);text-transform:none;font-weight:400">III</em>&ensp;Medical</span>
+        <h2 class="h3" style="margin-top: 12px; font-weight:400">Care, access, and the people who make it possible.</h2>
       </div>
 
       <article class="recipient-row">
-        <div class="idx">10</div>
+        <div class="idx">01</div>
         <div>
-          <div class="name"><a href="https://www.danburyhospital.org" target="_blank" rel="noopener">Danbury Hospital</a></div>
-          <div class="meta"><span>Danbury, CT</span><span class="dot">&middot;</span><span>Medical &middot; Northwell Health</span><span class="dot">&middot;</span><span>Partner since 2019</span></div>
+          <div class="name"><a href="https://www.nuvancehealth.org/find-a-location/danbury-hospital" target="_blank" rel="noopener">Danbury Hospital</a></div>
+          <div class="meta"><span>Danbury, CT</span><span class="dot">&middot;</span><span>Medical</span><span class="dot">&middot;</span><span>Opened 2021</span></div>
         </div>
         <div class="blurb">
-          A 456-bed acute care hospital in Danbury, CT &mdash; now part of Northwell Health. The foundation has
-          given over $700,000 since 2019, from cardiac care and fellowship funding to the Yoriko McClure Surgical
-          Suite, emergency preparedness, Cleveland Clinic training, and bilingual peer navigation. Our family has
-          been cared for here over the years; getting involved was a no-brainer.
+          A 456-bed acute care hospital delivering award-winning care for over 130 years, now part of
+          Northwell Health. Our family has received impeccable care here over the years &mdash; getting
+          involved was a no-brainer. We started with cardiac care and fellow funding, then extended to
+          Cleveland Clinic training, the emergency preparedness fund, the Yoriko McClure Surgical Suite,
+          and bilingual peer navigation services.
         </div>
         <div class="stats">
-          <div><span class="k">Total gifts</span><br/><span class="amount">$700K+</span></div>
-          <div style="margin-top: 8px"><span class="k">Partner since</span><br/><span class="amount">2019</span></div>
+          <div><span class="k">Total donated</span><br/><span class="amount"><em>$700K+</em></span></div>
+          <div style="margin-top: 8px"><span class="k">Since</span><br/><span class="amount" style="font-size:18px">2019</span></div>
         </div>
-        <a class="btn btn-ghost more" href="/stories#medical">Read story</a>
+        <a class="btn btn-ghost more" href="/stories#danbury-hospital">Read story</a>
       </article>
 
-      <article class="recipient-row">
-        <div class="idx">11</div>
-        <div>
-          <div class="name">Nuvance Health</div>
-          <div class="meta"><span class="ph">[location &mdash; client]</span><span class="dot">&middot;</span><span>Medical</span><span class="dot">&middot;</span><span>Coming soon</span></div>
+      <!-- =========== ALSO SUPPORTED =========== -->
+      <div class="also-band">
+        <div class="also-band-head">
+          <h3>Also supported</h3>
+          <p class="also-note">Organizations we support &mdash; full write-ups coming as we gather their stories.</p>
         </div>
-        <div class="blurb"><span class="ph">[blurb &mdash; client]</span></div>
-        <div class="stats">
-          <div><span class="k">Status</span><br/><span class="amount"><span class="ph">[opens &mdash; client]</span></span></div>
-        </div>
-        <span class="more"></span>
-      </article>
-
-      <article class="recipient-row">
-        <div class="idx">12</div>
-        <div>
-          <div class="name">Northwell Health</div>
-          <div class="meta"><span class="ph">[location &mdash; client]</span><span class="dot">&middot;</span><span>Medical</span><span class="dot">&middot;</span><span>Coming soon</span></div>
-        </div>
-        <div class="blurb"><span class="ph">[blurb &mdash; client]</span></div>
-        <div class="stats">
-          <div><span class="k">Status</span><br/><span class="amount"><span class="ph">[opens &mdash; client]</span></span></div>
-        </div>
-        <span class="more"></span>
-      </article>
+        <ul class="also-list">
+          <li class="also-item">
+            <span class="ai-name"><a href="https://barcbrooklyn.org" target="_blank" rel="noopener">BARC Brooklyn</a></span>
+            <span class="ai-loc">Brooklyn, NY</span>
+            <span class="ai-cat">Animals</span>
+          </li>
+          <li class="also-item">
+            <span class="ai-name"><a href="https://brooklyncatcafe.com" target="_blank" rel="noopener">Brooklyn Cat Caf&eacute;</a></span>
+            <span class="ai-loc">Brooklyn, NY</span>
+            <span class="ai-cat">Animals</span>
+          </li>
+          <li class="also-item">
+            <span class="ai-name"><a href="https://udayton.edu" target="_blank" rel="noopener">University of Dayton</a></span>
+            <span class="ai-loc">Dayton, OH</span>
+            <span class="ai-cat">Children &amp; Families</span>
+          </li>
+          <li class="also-item">
+            <span class="ai-name"><a href="https://www.nuvancehealth.org" target="_blank" rel="noopener">NuVance Health</a></span>
+            <span class="ai-loc">Danbury, CT</span>
+            <span class="ai-cat">Medical</span>
+          </li>
+          <li class="also-item">
+            <span class="ai-name"><a href="https://northwell.edu" target="_blank" rel="noopener">Northwell Health</a></span>
+            <span class="ai-loc">New Hyde Park, NY</span>
+            <span class="ai-cat">Medical</span>
+          </li>
+        </ul>
+      </div>
 
     </div>
   </section>
