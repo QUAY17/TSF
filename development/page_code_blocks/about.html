@@ -1,8 +1,10 @@
 <!-- ============================================================
-     THE SPINNER FOUNDATION — HOMEPAGE  (single Squarespace Code Block)
+     THE SPINNER FOUNDATION — ABOUT  (single Squarespace Code Block)
      ------------------------------------------------------------
-     PASTE-READY. One self-contained block = the entire homepage.
-     Faithful to design/desktop_design/index.html (layout a, hero split).
+     PASTE-READY. One self-contained block = the entire About page.
+     Chrome (nav, mobile menu, footer, script, core <style>) is byte-for-byte
+     identical to home.html. Main content faithful to
+     design/designer_styleguides/about.html.
 
      SQUARESPACE PLACEMENT
        1. Page → add a BLANK SECTION. Fill Screen OFF. Top/bottom
@@ -12,22 +14,23 @@
        3. Hide SS's native header/footer (custom ones live here) via
           Settings → Advanced → Code Injection (Header) — see handoff notes.
 
-     IMAGES — upload these 7 files to Squarespace, then paste their
+     IMAGES — upload these files to Squarespace, then paste their
      SS-hosted URLs into the IMAGE SOURCES block just below. Until then
      the local repo paths render for design review.
-       --logo-nav   → assets/wordmark-light.png   (nav wordmark)
        --logo-foot  → assets/wordmark-dark.png     (footer wordmark)
-       --logo-v     → branding_new_logos/tsf-ruled-v.png (mobile masthead ruled-V)
-       --img-hero   → assets/photos/cas-2.jpg      (hero, split-left)
-       --img-mission→ assets/photos/family-7226.jpg(mission photo)
-       <img> rowdy  → assets/photos/rowdy-2.jpg    (feature, top frame)
-       <img> rowdy  → assets/photos/rowdy-1.jpg    (feature, lower frame)
-       <img> family → assets/photos/family-quote-cropped.jpg (family-quote portrait)
+       --logo-v     → branding_new_logos/tsf-ruled-v.png (ruled-V suffix + mobile menu)
+       --img-banner → assets/photos/family-quote.jpg     (about-hero 21:9 banner)
+       --img-james  → assets/photos/portrait-james.jpg   (family card 1)
+       --img-nicole → assets/photos/portrait-nicole.jpg  (family card 2)
+       --img-matthew→ assets/photos/portrait-matthew.jpg (family card 3)
+       --img-pam    → assets/photos/portrait-pam-jim.jpg (family card 4)
+       <img> sb-1..8 → event-22 / event-19 / family-15 / pow-dog /
+                       event-23 / event-24 / pow-1 / event-26 .jpg (scrapbook gallery)
      Social icons (footer + mobile menu) are wired to the live TikTok/Instagram/
      Facebook/X/Pinterest profiles.
 
-     PLACEHOLDERS — the loud crimson .ph pills mark client data still
-     needed (see CLIENT-QUESTIONS.md): [YEAR], partner counts, $ totals.
+     PLACEHOLDERS — the loud crimson .ph pill marks client data still
+     needed (see CLIENT-QUESTIONS.md): the 501(c)(3) status line in the footer.
      To resolve: drop in the real value AND remove the <span class="ph"> wrapper.
      ============================================================ -->
 <div class="tsf" data-layout="a" data-hero="split" data-density="balanced">
@@ -38,17 +41,20 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap">
 
   <style>
-  /* ====== IMAGE SOURCES — swap these 5 URLs after Squarespace upload ======
+  /* ====== IMAGE SOURCES — swap these URLs after Squarespace upload ======
      Replace each local path with the SS-hosted URL (e.g.
-     url('https://static1.squarespace.com/static/…/cas-2.jpg')).
-     The 3 <img> photos in the featured story / family quote are swapped
-     directly on their src="" attributes in the markup below. */
+     url('https://static1.squarespace.com/static/…/family-quote.jpg')).
+     The 8 scrapbook <img> photos are swapped directly on their src=""
+     attributes in the markup below. */
   .tsf {
-    --logo-nav   : url('../../design/designer_styleguides/assets/wordmark-light.png');
-    --logo-foot  : url('../../design/designer_styleguides/assets/wordmark-dark.png');
-    --img-hero   : url('../../design/designer_styleguides/assets/photos/cas-2.jpg');
-    --img-mission: url('../../design/designer_styleguides/assets/photos/family-7226.jpg');
-    --logo-v     : url('../../branding_new_logos/tsf-ruled-v.png');
+    --logo-nav    : url('../../design/designer_styleguides/assets/wordmark-light.png');
+    --logo-foot   : url('../../design/designer_styleguides/assets/wordmark-dark.png');
+    --logo-v      : url('../../branding_new_logos/tsf-ruled-v.png');
+    --img-banner  : url('../../design/designer_styleguides/assets/photos/family-quote.jpg');
+    --img-james   : url('../../design/designer_styleguides/assets/photos/portrait-james.jpg');
+    --img-nicole  : url('../../design/designer_styleguides/assets/photos/portrait-nicole.jpg');
+    --img-matthew : url('../../design/designer_styleguides/assets/photos/portrait-matthew.jpg');
+    --img-pam     : url('../../design/designer_styleguides/assets/photos/portrait-pam-jim.jpg');
   }
 
   /* ============================================================
@@ -367,6 +373,114 @@
   /* Ruled-V suffix: brand PNG art tucked next to SPINNER. Darker on desktop (main logo);
      softened to grey on mobile where it sits beside the ink hamburger (override below). */
   .tsf .lk-v { width: 44px; height: 60px; background: var(--logo-v) center / contain no-repeat; opacity: 0.8; }
+
+  /* ============================================================
+     ABOUT PAGE — page-specific (appended; shared rules above untouched).
+     Ported from design/designer_styleguides/about.html <style> (about-hero,
+     family-grid/.person, mission-long) and from assets/styles.css
+     (.scrapbook/.sb-card, .donate/.donate-inner). Namespaced under .tsf and
+     Squarespace-hardened (!important on font props + link resets).
+     ============================================================ */
+
+  /* — About hero — */
+  .tsf .about-hero { padding: 144px 0 0; border-bottom: 1px solid var(--rule); }
+  .tsf .about-hero .lede { max-width: 56ch; margin-top: var(--s-5); }
+  .tsf .about-hero h1 { max-width: 18ch; }
+  .tsf .about-hero-img {
+    margin-top: var(--s-8); width: 100%; aspect-ratio: 21 / 9;
+    background-size: cover; background-position: center 38%; border: 1px solid var(--rule);
+  }
+  .tsf .about-hero-cap { margin-top: var(--s-3); text-align: right; color: var(--ink-3); }
+
+  /* — The Family grid — 2x2 landscape cards — */
+  .tsf .family-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); margin-top: var(--s-7); }
+  .tsf .person { display: flex; flex-direction: column; gap: var(--s-4); }
+  .tsf .person-photo {
+    aspect-ratio: 16 / 10; background-size: cover; background-color: var(--paper-2);
+    border: 1px solid var(--rule); position: relative;
+    box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 22px 30px -28px rgba(20,16,14,.22);
+  }
+  .tsf .person-meta { display: flex; gap: var(--s-3); align-items: baseline; flex-wrap: wrap; }
+  .tsf .person-name {
+    font-family: var(--f-serif) !important; font-size: 30px !important; line-height: 1.1 !important;
+    font-weight: 500 !important; letter-spacing: -0.005em !important; text-transform: none !important;
+  }
+  .tsf .person-name em { font-style: italic; color: var(--crimson); font-weight: 400; }
+  .tsf .person-role {
+    font-family: var(--f-sans) !important; font-size: 11px !important; letter-spacing: 0.14em !important;
+    text-transform: uppercase !important; line-height: 1.4 !important; color: var(--crimson); font-weight: 500 !important;
+  }
+  .tsf .person-bio {
+    font-family: var(--f-sans) !important; font-size: 15px !important; line-height: 1.6 !important;
+    text-transform: none !important; color: var(--ink-2); margin: 0; max-width: 50ch;
+  }
+  .tsf .person-place {
+    font-family: var(--f-serif) !important; font-style: italic; font-size: 14px !important;
+    letter-spacing: 0 !important; text-transform: none !important; color: var(--ink-3); margin-top: -4px;
+  }
+  .tsf .person-place::before {
+    content: "Photographed "; font-style: normal; font-family: var(--f-sans) !important;
+    font-size: 10px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important;
+    color: var(--ink-3); margin-right: 8px;
+  }
+
+  /* — Mission long-form — single column, centered — */
+  .tsf .mission-long { max-width: 760px; margin: 0 auto; }
+  .tsf .mission-long-head { text-align: left; margin-bottom: var(--s-7); padding-bottom: var(--s-5); border-bottom: 1px solid var(--rule-soft); }
+  .tsf .mission-long-head h2 { margin-top: var(--s-3); max-width: 18ch; line-height: 1.04 !important; }
+  .tsf .mission-long .lede {
+    font-family: var(--f-serif) !important; font-size: clamp(24px, 2.3vw, 32px) !important;
+    line-height: 1.32 !important; letter-spacing: -0.005em !important; text-transform: none !important;
+    color: var(--ink); margin: 0 0 var(--s-6);
+  }
+  .tsf .mission-long .lede em { font-style: italic; color: var(--crimson); }
+  .tsf .mission-long .body p {
+    font-family: var(--f-sans) !important; font-size: 17px !important; line-height: 1.75 !important;
+    text-transform: none !important; color: var(--ink-2); margin: 0 0 1.2em;
+  }
+  .tsf .mission-long .body p:last-child { margin-bottom: 0; }
+  .tsf .mission-long .pull {
+    font-family: var(--f-serif) !important; font-style: italic; font-size: clamp(22px, 2.2vw, 30px) !important;
+    line-height: 1.36 !important; text-transform: none !important; color: var(--ink); margin: var(--s-7) 0;
+    padding: var(--s-3) 0 var(--s-3) var(--s-5); border-left: 2px solid var(--crimson); max-width: none;
+  }
+
+  /* — Scrapbook gallery (ported from styles.css) — overlapping tilted photos — */
+  .tsf .scrapbook { position: relative; padding: var(--section-y) 0; background: var(--paper-2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); overflow: hidden; }
+  .tsf .scrapbook-inner { position: relative; max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); min-height: 540px; }
+  .tsf .scrapbook .head { margin-bottom: var(--s-7); max-width: 28ch; }
+  .tsf .scrapbook .head h2 { margin-top: 16px; font-size: clamp(32px, 3.4vw, 44px) !important; font-weight: 400 !important; }
+  .tsf .scrapbook-grid { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--s-5) var(--s-3); align-items: end; }
+  .tsf .sb-card { background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 22px 30px -24px rgba(20,16,14,.22); padding: 12px 12px 16px; display: flex; flex-direction: column; gap: 8px; transition: transform .3s ease; }
+  .tsf .sb-card:hover { transform: rotate(0deg) translateY(-4px); z-index: 10; }
+  .tsf .sb-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .tsf .sb-card .cap { font-family: var(--f-serif) !important; font-style: italic; font-size: 14px !important; letter-spacing: 0 !important; text-transform: none !important; line-height: 1.4 !important; color: var(--ink-2); padding: 4px 4px 0; }
+  .tsf .sb-1 { grid-column: 1 / 3; transform: rotate(-3deg); margin-top: 12px; }
+  .tsf .sb-2 { grid-column: 3 / 5; transform: rotate(1.6deg); margin-top: -8px; }
+  .tsf .sb-3 { grid-column: 5 / 7; transform: rotate(-1deg); margin-top: 18px; }
+  .tsf .sb-4 { grid-column: 2 / 4; transform: rotate(2.4deg); margin-top: -10px; z-index: 2; }
+  .tsf .sb-5 { grid-column: 4 / 6; transform: rotate(-2deg); margin-top: 22px; }
+  .tsf .sb-6 { grid-column: 1 / 3; transform: rotate(2.2deg); margin-top: 28px; }
+  .tsf .sb-7 { grid-column: 3 / 5; transform: rotate(-2.4deg); margin-top: -6px; z-index: 1; }
+  .tsf .sb-8 { grid-column: 5 / 7; transform: rotate(1.2deg); margin-top: 22px; }
+
+  /* — Donate band (ported from styles.css) — */
+  .tsf .donate { background: linear-gradient(to bottom, var(--paper-2) 0%, var(--paper-2) 55%, var(--paper) 100%); }
+  .tsf .donate-inner { display: grid; grid-template-columns: 1fr auto; gap: var(--s-8); align-items: end; padding-top: var(--section-y); padding-bottom: var(--section-y); }
+  .tsf .donate-inner .lede { max-width: 48ch; }
+  .tsf .donate-inner h2 { max-width: 18ch; margin-top: var(--s-4); }
+  .tsf .donate-inner h2 em { font-style: italic; color: var(--crimson); }
+
+  /* — About responsive — */
+  @media (max-width: 980px) {
+    .tsf .family-grid { grid-template-columns: 1fr; }
+    .tsf .scrapbook-grid { grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+    .tsf .sb-1, .tsf .sb-2, .tsf .sb-3, .tsf .sb-4, .tsf .sb-5, .tsf .sb-6, .tsf .sb-7, .tsf .sb-8 { grid-column: auto; transform: none; margin-top: 0; }
+  }
+  @media (max-width: 760px) {
+    .tsf .donate-inner { grid-template-columns: 1fr; }
+    .tsf .about-hero { padding-top: var(--s-8); }
+  }
   </style>
 
   <!-- ===================== NAV ===================== -->
@@ -374,8 +488,8 @@
     <div class="nav-inner">
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-controls="tsf-menu"><span class="lines"><i></i><i></i><i></i></span></button>
       <nav class="nav-links">
-        <a href="/" class="active">Home</a>
-        <a href="/about">About</a>
+        <a href="/">Home</a>
+        <a href="/about" class="active">About</a>
         <a href="/giving">Giving</a>
         <a href="/stories">Stories</a>
       </nav>
@@ -403,8 +517,8 @@
       <p class="tsf-menu-tag">Compassion. Protection. Sanctuary.</p>
     </div>
     <nav class="tsf-menu-nav">
-      <a href="/" class="cur"><span class="n">i</span> Home</a>
-      <a href="/about"><span class="n">ii</span> About</a>
+      <a href="/"><span class="n">i</span> Home</a>
+      <a href="/about" class="cur"><span class="n">ii</span> About</a>
       <a href="/giving"><span class="n">iii</span> Giving</a>
       <a href="/stories"><span class="n">iv</span> Stories</a>
     </nav>
@@ -422,163 +536,192 @@
 
   <main>
 
-  <!-- ===================== HERO (split) ===================== -->
-  <section class="hero">
-    <div class="hero-img" style="background-image: var(--img-hero); background-position: center 72%;"></div>
-    <div class="hero-inner" style="padding-top: 144px">
-      <span class="eyebrow">A Family Foundation &middot; Est. 2021</span>
-      <h1 class="display">Where every being has the opportunity to&nbsp;<em>thrive.</em></h1>
+  <!-- ===================== ABOUT HERO ===================== -->
+  <section class="about-hero">
+    <div class="wrap">
+      <span class="eyebrow">About the Foundation</span>
+      <h1 class="h1" style="margin-top: 24px">
+        A family <em style="font-style:italic;color:var(--crimson)">in the work</em>,<br/>
+        not at a distance from it.
+      </h1>
       <p class="lede">
-        The Spinner Foundation supports animal sanctuaries, children&rsquo;s services, and medical
-        causes &mdash; in partnership with the people doing the work on the ground.
+        The Spinner Foundation is a family-run charitable foundation supporting animal
+        sanctuaries, children&rsquo;s services, and medical causes. We started giving in earnest
+        in 2021, and we show up to the places we support whenever we can.
       </p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="/giving">See where we give</a>
-        <a class="btn btn-ghost" href="/stories#rowdy">Read Rowdy&rsquo;s story</a>
-      </div>
-    </div>
-    <p class="hero-caption caption">Inside the stables &mdash; Catskill Animal Sanctuary, Saugerties&nbsp;NY.</p>
-  </section>
 
-  <!-- ===================== MISSION ===================== -->
-  <section class="section mission" id="about">
-    <div class="wrap">
-      <div class="mission-grid">
-        <figure style="margin: 0">
-          <div class="mission-img" style="background-image: var(--img-mission); background-position: 60% center;"></div>
-          <figcaption class="caption mission-img-caption">Nicole, with sanctuary kids.</figcaption>
-        </figure>
-        <div>
-          <span class="eyebrow"><span class="num">01</span> Our Mission</span>
-          <p class="lede-big" style="margin-top: 32px">
-            We give to organizations that serve the vulnerable with care, dignity,
-            and <span class="pencil-mark">follow-through</span>.
-          </p>
-          <div class="mission-body body" style="margin-top: var(--s-6)">
-            <p>
-              We support animal sanctuaries, children&rsquo;s services, and medical causes &mdash;
-              three pillars that have guided our giving since the family began this work in earnest.
-            </p>
-            <p>
-              We don&rsquo;t take a cut. We don&rsquo;t keep an endowment. Every gift gets placed
-              by hand, in conversation with the people on the ground.
-            </p>
-            <p style="margin-top: var(--s-5)">
-              <a class="btn btn-ghost" href="/about">Read more about the family</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== THREE PILLARS (index) ===================== -->
-  <section class="section">
-    <div class="wrap" style="padding: 10px var(--gutter);">
-      <header style="display: flex; align-items: end; justify-content: space-between; gap: var(--s-5); flex-wrap: wrap;">
-        <div>
-          <span class="eyebrow"><span class="num">02</span> Three Pillars</span>
-          <h2 class="h2" style="margin-top: 16px; max-width: 22ch">
-            Where we go to&nbsp;<em style="font-style:italic;color:var(--crimson)">work</em>.
-          </h2>
-        </div>
-        <a class="btn btn-primary" href="/about#mission">Read the full mission</a>
-      </header>
-    </div>
-
-    <div class="pillars-index">
-      <a class="pillar-card" href="/giving#animals">
-        <div class="meta"><span class="roman">i.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
-        <h3>Animals</h3>
-        <p>Sanctuaries, shelters, and rescue programs &mdash; from horses recovering from neglect to working dogs paired with veterans.</p>
-        <div class="pcta"><span>Browse animal causes</span><span class="arrow">→</span></div>
-      </a>
-
-      <a class="pillar-card" href="/giving#families">
-        <div class="meta"><span class="roman">ii.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
-        <h3>Children &amp; Families</h3>
-        <p>Family-services nonprofits that protect a child&rsquo;s right to a safe and healthy start &mdash; reducing isolation, preventing harm.</p>
-        <div class="pcta"><span>Browse family causes</span><span class="arrow">→</span></div>
-      </a>
-
-      <a class="pillar-card coming" href="/giving">
-        <div class="meta"><span class="roman">iii.</span><span class="partners"><span class="ph">[# — client]</span></span></div>
-        <h3>Medical</h3>
-        <p>Research, treatment, and the institutions that deliver it &mdash; including a named hospital wing in our home state of Connecticut.</p>
-        <div class="pcta"><span>Hospital wing &middot; CT &middot; Coming soon</span></div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ===================== FEATURED STORY (Rowdy) ===================== -->
-  <section class="section" id="story">
-    <div class="wrap">
-      <div class="feature">
-        <div class="feature-photo-col">
-          <figure class="photo-frame">
-            <img src="../../design/designer_styleguides/assets/photos/rowdy-2.jpg" alt="Rowdy the horse, portrait" />
-            <figcaption class="label">Rowdy, a few weeks after arriving.<span class="meta">Catskill Animal Sanctuary</span></figcaption>
-          </figure>
-          <figure class="photo-frame">
-            <img src="../../design/designer_styleguides/assets/photos/rowdy-1.jpg" alt="Rowdy in the pasture" />
-            <figcaption class="label">Out in the pasture.<span class="meta">Catskill Animal Sanctuary</span></figcaption>
-          </figure>
-        </div>
-
-        <div class="feature-body">
-          <span class="eyebrow"><span class="num">03</span> A Story We&rsquo;re Proud Of</span>
-          <h2 class="h2">Meet&nbsp;<em style="font-style:italic;color:var(--crimson)">Rowdy.</em></h2>
-          <p class="lede">A gentle soul, rescued from an animal hoarding situation in Saratoga, New York, alongside thirteen other horses.</p>
-          <div class="body">
-            <p>
-              When Rowdy arrived at Catskill Animal Sanctuary, he was several hundred pounds
-              underweight, suffering from rain rot, and had severely neglected hooves. Today, he is
-              one of the horses we sponsor &mdash; part of a 150-acre Hudson Valley refuge that has
-              rescued over 5,000 animals in twenty-five years.
-            </p>
-          </div>
-          <blockquote class="pullquote">
-            &ldquo;Life is life &mdash; whether in a cat, or dog, or man. The idea of difference is
-            a human conception for man&rsquo;s own advantage.&rdquo;
-            <cite>Sri Aurobindo</cite>
-          </blockquote>
-          <dl class="feature-stats">
-            <div><dt>Sanctuary</dt><dd>Catskill Animal Sanctuary</dd></div>
-            <div><dt>Year sponsored</dt><dd>2026</dd></div>
-          </dl>
-          <a class="btn btn-ghost feature-cta" href="/stories#rowdy">Read Rowdy&rsquo;s full story</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FROM THE FAMILY ===================== -->
-  <section class="family-quote">
-    <div class="wrap">
-      <figure class="portrait photo-frame" style="transform: rotate(-2deg); max-width: 520px;">
-        <img src="../../design/designer_styleguides/assets/photos/family-quote-cropped.jpg" alt="The Spinner family presenting a $10,000 donation check to Paws of War" style="width: 100%;" />
-        <figcaption class="label">Presenting a $10,000 gift to Paws of War.<span class="meta">The Spinner Family &middot; Nesconset, NY &middot; September 2024</span></figcaption>
+      <figure style="margin: 0">
+        <div class="about-hero-img" style="background-image: var(--img-banner); background-position: center 38%;"></div>
+        <figcaption class="caption about-hero-cap">
+          Presenting a $10,000 gift to Paws of War, September 2024.
+        </figcaption>
       </figure>
-      <div>
-        <span class="eyebrow"><span class="num">04</span> In Their Words</span>
-        <h2 class="h2" style="margin: 14px 0 0;">From The Family</h2>
-        <blockquote style="margin-top: 24px">
-          To foster empathy and understanding between humans and animals through
-          programs that promote responsible pet care, wildlife conservation, and
-          the ethical treatment of <span class="pencil-mark">all living creatures</span>.
-        </blockquote>
-        <p class="attribution"><span class="name">The Spinner Family</span>From the foundation&rsquo;s mission</p>
+    </div>
+  </section>
+
+  <!-- ===================== THE FAMILY ===================== -->
+  <section class="section">
+    <div class="wrap">
+      <header>
+        <span class="eyebrow"><span class="num">01</span> The Family</span>
+        <h2 class="h2" style="margin-top: 16px; max-width: 22ch">
+          Jim, Nicole, Matthew, and&nbsp;<em style="font-style:italic;color:var(--crimson)">Pam.</em>
+        </h2>
+        <p class="lede" style="margin-top: var(--s-4); max-width: 56ch">
+          The foundation is run by the four of us together. We don&rsquo;t take salaries,
+          we don&rsquo;t keep an endowment, and we show up to the places we support whenever
+          we can. Below: each of us, in the work itself.
+        </p>
+      </header>
+
+      <div class="family-grid">
+        <article class="person">
+          <div class="person-photo" style="background-image: var(--img-james); background-position: center 35%;"></div>
+          <div class="person-role">Father &middot; Founder</div>
+          <div class="person-name">James <em>Jim</em> Spinner</div>
+          <div class="person-place">Catskill Animal Sanctuary, NY &middot; with two of the sponsored horses</div>
+          <p class="person-bio">
+            Jim founded the foundation and signs every check. His name is on the donation
+            ledger; his hands have been on most of the deliveries.
+          </p>
+        </article>
+
+        <article class="person">
+          <div class="person-photo" style="background-image: var(--img-nicole); background-position: 80% center;"></div>
+          <div class="person-role">Daughter &middot; Programs</div>
+          <div class="person-name">Nicole Spinner</div>
+          <div class="person-place">At the chapel, on a sanctuary visit</div>
+          <p class="person-bio">
+            Nicole drives outreach and is usually the first to arrive at a sanctuary.
+            She vets new partners, scouts the work, and writes the introductions.
+          </p>
+        </article>
+
+        <article class="person">
+          <div class="person-photo" style="background-image: var(--img-matthew); background-position: center 45%;"></div>
+          <div class="person-role">Son &middot; Operations</div>
+          <div class="person-name">Matthew Spinner</div>
+          <div class="person-place">With a sanctuary goat, on a winter visit</div>
+          <p class="person-bio">
+            Matthew handles operations and follows up on every gift &mdash; making sure what
+            was promised actually arrives, and that it gets where it was meant to go.
+          </p>
+        </article>
+
+        <article class="person">
+          <div class="person-photo" style="background-image: var(--img-pam); background-position: center 40%;"></div>
+          <div class="person-role">Mother &middot; Director</div>
+          <div class="person-name">Pam Spinner</div>
+          <div class="person-place">Best Friends Animal Sanctuary, Kanab UT &middot; with Jim</div>
+          <p class="person-bio">
+            Pam is the foundation&rsquo;s quiet center &mdash; the one keeping the relationships warm
+            across years and the one who hears about the next cause first.
+          </p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ===================== KPI STRIP ===================== -->
-  <section>
-    <div class="kpi-strip">
-      <div class="kpi"><span class="n">12+</span><span class="l">Partner organizations</span></div>
-      <div class="kpi"><span class="n"><em><span class="ph">[#]</span></em></span><span class="l">Donations placed</span></div>
-      <div class="kpi"><span class="n"><em>$2M+</em></span><span class="l">In gifts placed since 2021</span></div>
-      <div class="kpi"><span class="n">Since<br/>2021</span><span class="l">The foundation began this work</span></div>
+  <!-- ===================== MISSION (long-form) ===================== -->
+  <section class="section" id="mission" style="padding-top: 0">
+    <div class="wrap">
+      <div class="mission-long">
+        <header class="mission-long-head">
+          <span class="eyebrow"><span class="num">02</span> Our Mission</span>
+          <h2 class="h2">Compassion, innovation,&nbsp;<em style="font-style:italic;color:var(--crimson)">collaboration</em>.</h2>
+        </header>
+
+        <p class="lede">
+          The Spinner Foundation provides unwavering support to animals, children,
+          and medical causes &mdash; improving the well-being of vulnerable and deserving
+          groups through partnership, persistence, and care.
+        </p>
+
+        <div class="body">
+          <p>
+            We partner with sanctuaries, shelters, family-services organizations,
+            and hospitals that share one quality above all others: the people inside
+            them do the unglamorous, day-to-day work of caring for someone or
+            something that cannot care for itself.
+          </p>
+
+          <p class="pull">
+            We don&rsquo;t ask for credit. We ask to be useful.
+          </p>
+
+          <p style="padding: 0px 0px 32px">
+            Through strategic partnerships, fundraising initiatives, and community
+            engagement, we work to raise awareness, inspire philanthropy, and make
+            a lasting impact &mdash; in service of a world where every being has the
+            opportunity to thrive, be protected, and experience genuine compassion.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== IN THE FIELD (scrapbook) ===================== -->
+  <section class="scrapbook">
+    <div class="scrapbook-inner">
+      <header class="head">
+        <span class="eyebrow"><span class="num">03</span> In The Field</span>
+        <h2>Moments with our partners.</h2>
+      </header>
+
+      <div class="scrapbook-grid">
+        <figure class="sb-card sb-1">
+          <img src="../../design/designer_styleguides/assets/photos/event-22.jpg" alt="Jim with a pot-bellied pig at Best Friends Animal Sanctuary" />
+          <figcaption class="cap">With a pot-bellied pig, Best Friends, Kanab UT.</figcaption>
+        </figure>
+        <figure class="sb-card sb-2">
+          <img src="../../design/designer_styleguides/assets/photos/event-19.jpg" alt="Pam and Nicole at the Best Friends Animal Sanctuary sign" />
+          <figcaption class="cap">Pam and Nicole at the Best Friends sign.</figcaption>
+        </figure>
+        <figure class="sb-card sb-3">
+          <img src="../../design/designer_styleguides/assets/photos/family-15.jpg" alt="A young goat peeking out of a wooden barn at the sanctuary" />
+          <figcaption class="cap">A young goat, peeking out.</figcaption>
+        </figure>
+        <figure class="sb-card sb-4">
+          <img src="../../design/designer_styleguides/assets/photos/pow-dog.jpg" alt="A golden retriever rescue from Paws of War" />
+          <figcaption class="cap">A Paws of War rescue.</figcaption>
+        </figure>
+        <figure class="sb-card sb-5">
+          <img src="../../design/designer_styleguides/assets/photos/event-23.jpg" alt="An orange and white cat in the catio at Best Friends Animal Sanctuary" />
+          <figcaption class="cap">A sanctuary cat in the catio, Best Friends.</figcaption>
+        </figure>
+        <figure class="sb-card sb-6">
+          <img src="../../design/designer_styleguides/assets/photos/event-24.jpg" alt="Bighorn sheep on a red rock outcrop near Kanab" />
+          <figcaption class="cap">Bighorn sheep on red rock, near Kanab.</figcaption>
+        </figure>
+        <figure class="sb-card sb-7">
+          <img src="../../design/designer_styleguides/assets/photos/pow-1.jpg" alt="Jim presenting the $10,000 check at the Paws of War office" />
+          <figcaption class="cap">Presenting the gift, Paws of War HQ.</figcaption>
+        </figure>
+        <figure class="sb-card sb-8">
+          <img src="../../design/designer_styleguides/assets/photos/event-26.jpg" alt="A small gray-and-white kitten with a stuffed toy" />
+          <figcaption class="cap">A kitten waiting for a home.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DONATE BAND ===================== -->
+  <section class="donate" id="donate">
+    <div class="wrap">
+      <div class="donate-inner">
+        <div>
+          <span class="eyebrow"><span class="num">04</span> Get Involved</span>
+          <h2 class="h2">A foundation that&nbsp;<em>gives</em>,<br/>not gathers.</h2>
+          <p class="lede" style="margin-top: 24px">
+            If you&rsquo;d like to contribute, your gift goes directly to one of our partner
+            organizations. We don&rsquo;t take a cut. We don&rsquo;t keep an endowment.
+          </p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start">
+          <a class="btn btn-primary" href="mailto:thespinnerfoundation@gmail.com?subject=Making%20a%20Donation" style="padding: 18px 28px">Make a Donation</a>
+          <a class="btn btn-ghost" href="mailto:thespinnerfoundation@gmail.com">Or write to us</a>
+        </div>
+      </div>
     </div>
   </section>
 

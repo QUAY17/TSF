@@ -117,3 +117,26 @@ These are short phrases I drafted that sound brand-y but aren't from your source
 ## Photos needed
 
 - **Any additions or modifications to the photos chosen are welcome.
+
+---
+
+## Client answers received (2026-06-04)
+
+**Resolved:**
+- Founded: **2021** (fills `[YEAR]` across all pages, incl. About hero + footers)
+- Partner organizations: **12+**
+- Charitable dollars placed: **$2M+ since 2021**
+- "Where we go to work" partner list (preliminary - confirm spellings before launch):
+  - Animals: Catskill Animal Sanctuary, Best Friends, DAWS, Catherine Violet Hubbard (Sanctuary), BARC Brooklyn (client wrote "Bac Brooklyn" - confirm), Brooklyn Cat Cafe, Paws of War
+  - Children & Family: University of Dayton (client wrote "Daton"), Families Network of Western CT (client wrote "Families of Western Connecticut"), Desert Ministries
+  - Medical: Danbury Hospital, Nuvance, Northwell Health (client wrote "North Well Health")
+
+**Still pending:**
+- Donation COUNT (number of individual gifts) - only the dollar total ($2M+) was given
+- Family bios (4) + role confirmation - not supplied yet; current bios stay as drafts
+- 501(c)(3) status confirmation
+- Per-recipient Causes/Giving stats - client will cover in the walk-through with Jim; if not received in a few days, remove the per-Cause stat sections for now
+
+**To clarify:**
+- "2021 - Danbury Hospital" under About - milestone/timeline element, or context only?
+- "Take Jim's name out of the caption of the picture below" - which photo's caption?
