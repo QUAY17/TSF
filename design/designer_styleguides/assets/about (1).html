@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About · The Spinner Foundation</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    /* About page-specific */
+    .about-hero { padding: 144px 0 0; border-bottom: 1px solid var(--rule); }
+    .about-hero .lede { max-width: 56ch; margin-top: var(--s-5); }
+    .about-hero h1 { max-width: 18ch; }
+
+    .about-hero-img {
+      margin-top: var(--s-8);
+      width: 100%;
+      aspect-ratio: 21 / 9;
+      background-size: cover;
+      background-position: center 45%;
+      border: 1px solid var(--rule);
+    }
+    .about-hero-cap {
+      margin-top: var(--s-3);
+      text-align: right;
+      color: var(--ink-3);
+    }
+
+    /* The Family grid — 2x2 landscape cards (environmental shots, not headshots) */
+    .family-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-6);
+      margin-top: var(--s-7);
+    }
+    .person {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-4);
+    }
+    .person-photo {
+      aspect-ratio: 16 / 10;
+      background-size: cover;
+      background-color: var(--paper-2);
+      border: 1px solid var(--rule);
+      position: relative;
+      box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 22px 30px -28px rgba(20,16,14,.22);
+    }
+    /* When the image isn't filled yet, show a striped placeholder + label */
+    .person-photo[data-placeholder] {
+      background-image: repeating-linear-gradient(45deg,
+        var(--paper) 0 8px,
+        var(--paper-2) 8px 16px);
+    }
+    .person-photo[data-placeholder]::after {
+      content: attr(data-placeholder);
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 10px 14px;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      background: color-mix(in oklch, var(--paper) 88%, transparent);
+      backdrop-filter: blur(6px);
+    }
+    .person-meta {
+      display: flex;
+      gap: var(--s-3);
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    .person-name {
+      font-family: var(--f-serif);
+      font-size: 30px;
+      line-height: 1.1;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+    }
+    .person-name em {
+      font-style: italic;
+      color: var(--crimson);
+      font-weight: 400;
+    }
+    .person-role {
+      font-family: var(--f-sans);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      font-weight: 500;
+    }
+    .person-bio {
+      font-family: var(--f-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      margin: 0;
+      max-width: 50ch;
+    }
+    .person-place {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-3);
+      margin-top: -4px;
+    }
+    .person-place::before {
+      content: "Photographed ";
+      font-style: normal;
+      font-family: var(--f-sans);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-right: 8px;
+    }
+
+    /* Mission long-form — single column, centered, no drop-cap */
+    .mission-long {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .mission-long-head {
+      text-align: left;
+      margin-bottom: var(--s-7);
+      padding-bottom: var(--s-5);
+      border-bottom: 1px solid var(--rule-soft);
+    }
+    .mission-long-head h2 {
+      margin-top: var(--s-3);
+      max-width: 18ch;
+      line-height: 1.04;
+    }
+    .mission-long .lede {
+      font-family: var(--f-serif);
+      font-size: clamp(24px, 2.3vw, 32px);
+      line-height: 1.32;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+      margin: 0 0 var(--s-6);
+    }
+    .mission-long .lede em { font-style: italic; color: var(--crimson); }
+    .mission-long .body p {
+      font-family: var(--f-sans);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink-2);
+      margin: 0 0 1.2em;
+    }
+    .mission-long .body p:last-child { margin-bottom: 0; }
+    .mission-long .pull {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: clamp(22px, 2.2vw, 30px);
+      line-height: 1.36;
+      color: var(--ink);
+      margin: var(--s-7) 0;
+      padding: var(--s-3) 0 var(--s-3) var(--s-5);
+      border-left: 2px solid var(--crimson);
+      max-width: none;
+    }
+
+    /* Pillars detail (long-form) */
+    .pillar-detail {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr;
+      gap: var(--s-7);
+      padding: var(--s-7) 0;
+      border-top: 1px solid var(--rule);
+      align-items: start;
+    }
+    .pillar-detail:last-of-type { border-bottom: 1px solid var(--rule); }
+    .pillar-detail .roman {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-size: 40px;
+      color: var(--crimson);
+      line-height: 1;
+    }
+    .pillar-detail h3 {
+      font-family: var(--f-serif);
+      font-size: clamp(28px, 2.4vw, 36px);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+    .pillar-detail .summary { color: var(--ink-2); font-size: 16px; line-height: 1.55; }
+
+    @media (max-width: 980px) {
+      .family-grid { grid-template-columns: 1fr; }
+      .pillar-detail { grid-template-columns: 1fr; gap: var(--s-3); }
+    }
+  </style>
+</head>
+<body data-layout="a" data-hero="split" data-density="balanced" data-annotate="off">
+
+<header class="nav" data-screen-label="00 Nav" data-sq>
+  <div class="sq-mapping">SQ · Header</div>
+  <div class="nav-inner">
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="causes.html">Causes</a>
+      <a href="about.html" class="active">About</a>
+      <a href="stories.html">Stories</a>
+    </nav>
+    <a href="index.html" aria-label="The Spinner Foundation" class="wordmark"></a>
+    <div class="nav-right">
+      <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#017569647271686f6f6473676e746f656075686e6f41666c60686d2f626e6c3e7274636b6462753c4c606a686f6624333160243331456e6f6075686e6f">Donate</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     PAGE HERO
+============================================================ -->
+<section class="about-hero" data-screen-label="01 About Hero" data-sq>
+  <div class="sq-mapping">SQ · Banner Section</div>
+  <div class="wrap">
+    <span class="eyebrow">About the Foundation</span>
+    <h1 class="h1" style="margin-top: 24px">
+      A family <em style="font-style:italic;color:var(--crimson)">in the work</em>,<br/>
+      not at a distance from it.
+    </h1>
+    <p class="lede">
+      The Spinner Foundation is a family-run charitable foundation supporting animal
+      sanctuaries, children's services, and medical causes. We started giving in earnest
+      in 2021, and we show up to the places we support whenever we can.
+    </p>
+
+    <figure>
+      <div class="about-hero-img" style="background-image: url('assets/photos/family-quote.jpg'); background-position: center 38%;"></div>
+      <figcaption class="caption about-hero-cap">
+        Presenting a $10,000 gift to Paws of War, September 2024.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     THE FAMILY  — four members
+============================================================ -->
+<section class="section" data-screen-label="02 The Family" data-sq>
+  <div class="sq-mapping">SQ · Image + Text Section (Team grid)</div>
+  <div class="wrap">
+    <header>
+      <span class="eyebrow"><span class="num">01</span> The Family</span>
+      <h2 class="h2" style="margin-top: 16px; max-width: 22ch">
+        Jim, Nicole, Matthew, and&nbsp;<em style="font-style:italic;color:var(--crimson)">Pam.</em>
+      </h2>
+      <p class="lede" style="margin-top: var(--s-4); max-width: 56ch">
+        The foundation is run by the four of us together. We don't take salaries,
+        we don't keep an endowment, and we show up to the places we support whenever
+        we can. Below: each of us, in the work itself.
+      </p>
+    </header>
+
+    <div class="family-grid">
+      <article class="person" data-sq>
+        <div class="sq-mapping">SQ · Image Card</div>
+        <div class="person-photo" style="background-image: url('assets/photos/portrait-james.jpg'); background-position: center 35%;"></div>
+        <div class="person-role">Father · Founder</div>
+        <div class="person-name">James <em>Jim</em> Spinner</div>
+        <div class="person-place">Catskill Animal Sanctuary, NY · with two of the sponsored horses</div>
+        <p class="person-bio">
+          Jim founded the foundation and signs every check. His name is on the donation
+          ledger; his hands have been on most of the deliveries.
+        </p>
+      </article>
+
+      <article class="person" data-sq>
+        <div class="sq-mapping">SQ · Image Card</div>
+        <div class="person-photo" style="background-image: url('assets/photos/portrait-nicole.jpg'); background-position: 80% center; background-size: cover;"></div>
+        <div class="person-role">Daughter · Programs</div>
+        <div class="person-name">Nicole Spinner</div>
+        <div class="person-place">At the chapel, on a sanctuary visit</div>
+        <p class="person-bio">
+          Nicole drives outreach and is usually the first to arrive at a sanctuary.
+          She vets new partners, scouts the work, and writes the introductions.
+        </p>
+      </article>
+
+      <article class="person" data-sq>
+        <div class="sq-mapping">SQ · Image Card</div>
+        <div class="person-photo" style="background-image: url('assets/photos/portrait-matthew.jpg'); background-position: center 45%;"></div>
+        <div class="person-role">Son · Operations</div>
+        <div class="person-name">Matthew Spinner</div>
+        <div class="person-place">With a sanctuary goat, on a winter visit</div>
+        <p class="person-bio">
+          Matthew handles operations and follows up on every gift - making sure what
+          was promised actually arrives, and that it gets where it was meant to go.
+        </p>
+      </article>
+
+      <article class="person" data-sq>
+        <div class="sq-mapping">SQ · Image Card</div>
+        <div class="person-photo" style="background-image: url('assets/photos/portrait-pam-jim.jpg'); background-position: center 40%;"></div>
+        <div class="person-role">Mother · Director</div>
+        <div class="person-name">Pam Spinner</div>
+        <div class="person-place">Best Friends Animal Sanctuary, Kanab UT · with Jim</div>
+        <p class="person-bio">
+          Pam is the foundation's quiet center - the one keeping the relationships warm
+          across years and the one who hears about the next cause first.
+        </p>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MISSION  — long-form, single column
+============================================================ -->
+<section class="section" id="mission" style="padding-top: 0" data-screen-label="03 Mission" data-sq>
+  <div class="sq-mapping">SQ · Text Block (Long-form)</div>
+  <div class="wrap">
+    <div class="mission-long">
+      <header class="mission-long-head">
+        <span class="eyebrow"><span class="num">02</span> Our Mission</span>
+        <h2 class="h2">Compassion, innovation,&nbsp;<em style="font-style:italic;color:var(--crimson)">collaboration</em>.</h2>
+      </header>
+
+      <p class="lede">
+        The Spinner Foundation provides unwavering support to animals, children,
+        and medical causes - improving the well-being of vulnerable and deserving
+        groups through partnership, persistence, and care.
+      </p>
+
+      <div class="body">
+        <p>
+          We partner with sanctuaries, shelters, family-services organizations,
+          and hospitals that share one quality above all others: the people inside
+          them do the unglamorous, day-to-day work of caring for someone or
+          something that cannot care for itself.
+        </p>
+
+        <p class="pull">
+          We don't ask for credit. We ask to be useful.
+        </p>
+
+        <p style="padding: 0px 0px 32px">
+          Through strategic partnerships, fundraising initiatives, and community
+          engagement, we work to raise awareness, inspire philanthropy, and make
+          a lasting impact - in service of a world where every being has the
+          opportunity to thrive, be protected, and experience genuine compassion.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SCRAPBOOK GALLERY — "In the field" · extended on Causes
+     Maps to Squarespace : Gallery Block (Stack with captions)
+============================================================ -->
+<section class="scrapbook" data-screen-label="03 In The Field" data-sq>
+  <div class="sq-mapping">SQ · Gallery Block · Stack (with captions)</div>
+  <div class="scrapbook-inner">
+    <header class="head">
+      <span class="eyebrow"><span class="num">03</span> In The Field</span>
+      <h2>Moments with our partners.</h2>
+    </header>
+
+    <div class="scrapbook-grid">
+      <figure class="sb-card sb-1">
+        <img src="assets/photos/event-22.jpg" alt="Jim with a pot-bellied pig at Best Friends Animal Sanctuary" />
+        <figcaption class="cap">With a pot-bellied pig, Best Friends, Kanab UT.</figcaption>
+      </figure>
+      <figure class="sb-card sb-2">
+        <img src="assets/photos/event-19.jpg" alt="Pam and Nicole at the Best Friends Animal Sanctuary sign" />
+        <figcaption class="cap">Pam and Nicole at the Best Friends sign.</figcaption>
+      </figure>
+      <figure class="sb-card sb-3">
+        <img src="assets/photos/family-15.jpg" alt="A young goat peeking out of a wooden barn at the sanctuary" />
+        <figcaption class="cap">A young goat, peeking out.</figcaption>
+      </figure>
+      <figure class="sb-card sb-4">
+        <img src="assets/photos/pow-dog.jpg" alt="A golden retriever rescue from Paws of War" />
+        <figcaption class="cap">A Paws of War rescue.</figcaption>
+      </figure>
+      <figure class="sb-card sb-5">
+        <img src="assets/photos/event-23.jpg" alt="An orange and white cat in the catio at Best Friends Animal Sanctuary" />
+        <figcaption class="cap">A sanctuary cat in the catio, Best Friends.</figcaption>
+      </figure>
+      <figure class="sb-card sb-6">
+        <img src="assets/photos/event-24.jpg" alt="Bighorn sheep on a red rock outcrop near Kanab" />
+        <figcaption class="cap">Bighorn sheep on red rock, near Kanab.</figcaption>
+      </figure>
+      <figure class="sb-card sb-7">
+        <img src="assets/photos/pow-1.jpg" alt="Jim presenting the $10,000 check at the Paws of War office" />
+        <figcaption class="cap">Presenting the gift, Paws of War HQ.</figcaption>
+      </figure>
+      <figure class="sb-card sb-8">
+        <img src="assets/photos/event-26.jpg" alt="A small gray-and-white kitten with a stuffed toy" />
+        <figcaption class="cap">A kitten waiting for a home.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     DONATE BAND (shared)
+============================================================ -->
+<section class="donate" id="donate" data-screen-label="05 Donate" data-sq>
+  <div class="sq-mapping">SQ · Section · CTA Block</div>
+  <div class="wrap">
+    <div class="donate-inner">
+      <div>
+        <span class="eyebrow"><span class="num">04</span> Get Involved</span>
+        <h2 class="h2">A foundation that&nbsp;<em>gives</em>,<br/>not gathers.</h2>
+        <p class="lede" style="margin-top: 24px">
+          If you'd like to contribute, your gift goes directly to one of our partner
+          organizations. We don't take a cut. We don't keep an endowment.
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start">
+        <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#b5c1ddd0c6c5dcdbdbd0c7d3dac0dbd1d4c1dcdadbf5d2d8d4dcd99bd6dad88ac6c0d7dfd0d6c188f8d4dedcdbd2908785d4908785f1dadbd4c1dcdadb" style="padding: 18px 28px">Make a Donation</a>
+        <a class="btn btn-ghost" href="/cdn-cgi/l/email-protection#0e7a666b7d7e6760606b7c68617b606a6f7a6761604e69636f6762206d6163">Or write to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<div class="foot-seal">
+  <span class="seal" role="img" aria-label="The Spinner Foundation"></span>
+</div>
+
+<footer class="foot" data-screen-label="09 Footer" data-sq>
+  <div class="sq-mapping">SQ · Footer</div>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <a href="index.html" class="wordmark wordmark-dark" aria-label="The Spinner Foundation"></a>
+        <p class="body" style="color: rgba(255,250,242,.7); font-size: 14px; margin-top: 24px; max-width: 36ch">
+          A family-run charitable foundation supporting animal sanctuaries, children's services,
+          and medical causes since 2021.
+        </p>
+        <!-- DEV: client has the live social URLs — replace each href="#" below. -->
+        <div class="foot-social">
+          <a href="#" aria-label="TikTok" data-social="tiktok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1-2.82h-3.1v12.36a2.6 2.6 0 0 1-2.6 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.48V9.6a5.7 5.7 0 0 0-.8-.06A5.71 5.71 0 0 0 4.2 15.26 5.71 5.71 0 0 0 9.9 21a5.71 5.71 0 0 0 5.7-5.74V8.99a7.33 7.33 0 0 0 4.3 1.38V7.27a4.28 4.28 0 0 1-3.3-1.45z"/></svg></a>
+          <a href="#" aria-label="Instagram" data-social="instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.12 1.38C1.35 2.67.94 3.34.63 4.13.33 4.9.13 5.77.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.12.66.66 1.33 1.07 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>
+          <a href="#" aria-label="Facebook" data-social="facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a>
+          <a href="#" aria-label="X" data-social="x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41z"/></svg></a>
+          <a href="#" aria-label="Pinterest" data-social="pinterest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.42 7.63 11.16-.11-.95-.2-2.4.04-3.44.22-.93 1.4-5.96 1.4-5.96s-.36-.72-.36-1.78c0-1.66.97-2.9 2.17-2.9 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-1 4-.28 1.2.6 2.18 1.79 2.18 2.15 0 3.8-2.27 3.8-5.54 0-2.9-2.08-4.92-5.05-4.92-3.44 0-5.46 2.58-5.46 5.25 0 1.04.4 2.15.9 2.76.1.12.11.22.08.34l-.34 1.36c-.05.22-.18.27-.41.16-1.5-.7-2.44-2.9-2.44-4.66 0-3.8 2.76-7.29 7.95-7.29 4.17 0 7.42 2.97 7.42 6.95 0 4.15-2.62 7.49-6.25 7.49-1.22 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15C9.57 23.82 10.76 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="causes.html">Causes &amp; Recipients</a></li>
+          <li><a href="about.html">About the Family</a></li>
+          <li><a href="stories.html">Stories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#116579746261787f7f7463777e647f757065787e7f51767c70787d3f727e7c2e6264737b7472652c5c707a787f7634232170342321557e7f7065787e7f">Make a Donation</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#43372b2630332a2d2d2631252c362d2722372a2c2d03242e222a2f6d202c2e">Nominate a Cause</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#9ce8f4f9efecf5f2f2f9eefaf3e9f2f8fde8f5f3f2dcfbf1fdf5f0b2fff3f1">Volunteer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#c4b0aca1b7b4adaaaaa1b6a2abb1aaa0a5b0adabaa84a3a9a5ada8eaa7aba9"><span class="__cf_email__" data-cfemail="f4809c9187849d9a9a9186929b819a9095809d9b9ab49399959d98da979b99">[email&#160;protected]</span></a></li>
+          <li><a href="https://thespinnerfoundation.org">thespinnerfoundation.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2021 The Spinner Foundation.<span class="ph">A 501(c)(3) nonprofit organization.
+      </span></span>
+      <span><a href="https://quay-cncpts.com" target="_blank" rel="noopener" style="color: #f4b8b8">by Quay</a></span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks.jsx"></script>
+
+</body>
+</html>
