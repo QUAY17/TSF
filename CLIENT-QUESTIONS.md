@@ -140,3 +140,100 @@ These are short phrases I drafted that sound brand-y but aren't from your source
 **To clarify:**
 - "2021 - Danbury Hospital" under About - milestone/timeline element, or context only?
 - "Take Jim's name out of the caption of the picture below" - which photo's caption?
+
+---
+
+# Round 2 - open items as of 2026-06-05
+
+Snapshot of everything still open after the latest build (Giving directory
+redesign, Stories enrichment, and the client data drop for Danbury, Desert
+Ministries, Best Friends, and Catskill). The first round above is mostly
+resolved; this is the current "what we still need" list, in rough priority
+order. Anything not listed here is considered final unless you tell us
+otherwise.
+
+## A. Per-recipient Giving numbers (the walk-through with Jim)
+
+Most recipient rows now read correctly, but four still show
+`[$ - client]` / `[year - client]` placeholders. We need:
+
+| Recipient | Still need |
+|---|---|
+| Catskill Animal Sanctuary | Year first sponsored ("Sponsored since") |
+| DAWS Animal Welfare Society | Total gifts ($) + partner-since year |
+| Best Friends Animal Society | Total gifts ($) |
+| Families Network of Western CT | Total gifts ($) + partner-since year |
+
+Already filled from your data - **please confirm these are OK to publish:**
+- Catherine Violet Hubbard Sanctuary - $2,500 gift
+- Danbury Hospital - $700K+ since 2019
+
+If you'd rather not publish dollar figures at all, say the word and we'll
+swap them for a softer label (e.g. "Partner since" only).
+
+## B. "Also Supported" organizations - write-ups to promote them
+
+Five orgs currently appear as a simple name / location / category line at the
+bottom of the Giving page (the "Also Supported" ledger). To give each a full
+write-up like the others, we need 2-4 sentences on what TSF funded and why -
+plus a year and a photo if you have them:
+
+- BARC Brooklyn (Brooklyn, NY - Animals)
+- Brooklyn Cat Cafe (Brooklyn, NY - Animals)
+- University of Dayton (Dayton, OH - Children & Families)
+- NuVance Health (Danbury, CT - Medical)
+- Northwell Health (New Hyde Park, NY - Medical)
+
+No rush - they read perfectly well as a list until the stories are ready.
+
+## C. Danbury / NuVance / Northwell - how should these relate?
+
+Right now Danbury Hospital is a full write-up that links to nuvancehealth.org,
+**and** NuVance Health and Northwell Health each also appear separately in the
+"Also Supported" list. Your note said Danbury is "now part of Northwell."
+Question: do you want all three shown separately, or should Danbury sit under
+Northwell (and NuVance merge in or drop off)? A one-line description of the
+current corporate relationship would let us represent it correctly.
+
+## D. Danbury Hospital story photo (Stories page)
+
+The Danbury medical story is written ($700K+ since 2019, departments funded),
+but it's still using a placeholder image. We need one photo - the hospital, a
+funded department/suite (e.g. the Yoriko McClure Surgical Suite), or a
+dedication moment.
+
+## E. 501(c)(3) status line (carried from Round 1)
+
+Every footer reads "A 501(c)(3) nonprofit organization." We still need:
+the exact legal entity name and confirmation of 501(c)(3) status - or tell us
+to remove the line for now.
+
+## F. Homepage details
+
+- **"By the Numbers" partner count.** The home tally bar still shows `[#]`
+  for partner organizations. Round 1 gave "12+" - confirm the exact number to
+  display (or we keep "12+").
+- **Hospital-wing card.** The homepage still has a "Hospital wing - CT -
+  Coming soon" card. Now that the Danbury Hospital story exists, should this
+  card link to that story, be relabeled, or be removed?
+
+## G. Spelling / naming confirmations (carried from Round 1)
+
+Please give a thumbs-up (or correction) on each - these are how they currently
+appear on the site:
+
+- BARC Brooklyn (you wrote "Bac Brooklyn")
+- University of Dayton (you wrote "Daton")
+- Families Network of Western CT (you wrote "Families of Western Connecticut")
+- Northwell Health (you wrote "North Well Health")
+- Catherine Violet Hubbard Sanctuary
+
+## H. Still open from Round 1 (unchanged)
+
+- **Family bios (About page)** - 4 bios + role confirmation; current text is
+  still placeholder draft.
+- **Donation count** - the number of individual gifts ($2M+ total is in).
+- **Donate flow** - which option to build (A: on-site donations, B: intake
+  form, C: mailing address). We can stage B now and upgrade to A later.
+- **Tone & positioning phrases** - the brand-y lines we drafted (see Round 1
+  list) still need a voice check.

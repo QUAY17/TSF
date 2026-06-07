@@ -237,16 +237,29 @@
   .tsf .kpi .l { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); }
 
   /* By the Numbers — editorial tally (home page) */
-  .tsf .tally-head { border-bottom: 1px solid var(--rule); padding-bottom: var(--s-7); }
-  .tsf .tally-h { font-family: var(--f-serif) !important; font-size: clamp(24px, 2.4vw, 34px) !important; font-weight: 400 !important; line-height: 1.15 !important; letter-spacing: -0.005em !important; color: var(--ink); margin: var(--s-4) 0 0; max-width: 26ch; }
+  /* By the Numbers — shifted layout: head left, stacked 2x2 stat grid right (not full-width) */
+  .tsf .tally-layout { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: var(--s-9); align-items: center; }
+  .tsf .tally-h { font-family: var(--f-serif) !important; font-size: clamp(24px, 2.4vw, 34px) !important; font-weight: 400 !important; line-height: 1.15 !important; letter-spacing: -0.005em !important; color: var(--ink); margin: var(--s-4) 0 0; max-width: 18ch; }
   .tsf .tally-h em { font-style: italic; color: var(--crimson); }
-  .tsf .tally-row { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .tsf .tally-stat { padding: var(--s-7) var(--s-6) var(--s-6) 0; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: var(--s-3); }
-  .tsf .tally-stat:last-child { border-right: 0; }
-  .tsf .tally-stat .tn { font-family: var(--f-serif) !important; font-size: clamp(52px, 5.2vw, 78px) !important; font-weight: 400 !important; line-height: 0.92 !important; letter-spacing: -0.025em !important; color: var(--ink); font-variant-numeric: tabular-nums; display: block; }
+  .tsf .tally-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .tsf .tally-stat { padding: var(--s-6) var(--s-6); display: flex; flex-direction: column; gap: var(--s-3); }
+  .tsf .tally-stat:nth-child(odd) { border-right: 1px solid var(--rule); }
+  .tsf .tally-stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .tsf .tally-stat .tn { font-family: var(--f-serif) !important; font-size: clamp(44px, 4.2vw, 64px) !important; font-weight: 400 !important; line-height: 0.92 !important; letter-spacing: -0.025em !important; color: var(--ink); font-variant-numeric: tabular-nums; display: block; }
   .tsf .tally-stat .tn em { font-style: italic; color: var(--crimson); }
   .tsf .tally-stat .tn sup { font-size: 0.3em; vertical-align: 0.9em; color: var(--ink-3); font-weight: 500; letter-spacing: 0.02em; font-style: normal; }
   .tsf .tally-stat .tl { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); max-width: 20ch; line-height: 1.5; }
+
+  /* Open Invitation — crimson CTA band (ported from giving.html) */
+  .tsf .nominate-cta { background: var(--crimson); color: var(--paper); position: relative; }
+  .tsf .nominate-cta-inner { display: grid; grid-template-columns: 1fr auto; gap: var(--s-7); align-items: center; padding-top: var(--section-y); padding-bottom: var(--section-y); }
+  .tsf .nominate-cta .eyebrow-cream { font-family: var(--f-sans) !important; font-size: 11px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; line-height: 1.4 !important; color: rgba(255,250,242,.78); font-weight: 500 !important; display: inline-flex; align-items: center; gap: 10px; }
+  .tsf .nominate-cta .eyebrow-cream::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: .8; display: inline-block; flex: none; }
+  .tsf .nominate-cta h3 { font-family: var(--f-serif) !important; font-size: clamp(30px, 3vw, 42px) !important; font-weight: 400 !important; line-height: 1.1 !important; letter-spacing: -0.012em !important; text-transform: none !important; margin: 12px 0 0; max-width: 22ch; color: var(--paper); }
+  .tsf .nominate-cta h3 em { font-style: italic; color: oklch(0.86 0.10 75); }
+  .tsf .nominate-cta p { margin: var(--s-4) 0 0; color: rgba(255,250,242,.86); font-family: var(--f-sans) !important; font-size: 15px !important; line-height: 1.6 !important; text-transform: none !important; max-width: 52ch; }
+  .tsf .btn-cream { background: var(--paper); color: var(--crimson) !important; border-color: var(--paper); font-weight: 500 !important; }
+  .tsf .btn-cream:hover { background: var(--ink); color: var(--paper) !important; border-color: var(--ink); }
 
   /* — Featured story (Rowdy) — */
   .tsf .feature { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--s-8); align-items: start; }
@@ -333,10 +346,8 @@
     .tsf .pillars-index, .tsf .feature, .tsf .mission-grid, .tsf .foot-inner { grid-template-columns: 1fr !important; }
     .tsf .kpi-strip { grid-template-columns: 1fr 1fr; }
     .tsf .kpi:nth-child(2) { border-right: 0; }
-    .tsf .tally-row { grid-template-columns: 1fr 1fr; }
-    .tsf .tally-stat { padding-right: 0; }
-    .tsf .tally-stat:nth-child(2) { border-right: 0; }
-    .tsf .tally-stat:nth-child(n+3) { border-top: 1px solid var(--rule); padding-top: var(--s-6); }
+    .tsf .tally-layout { grid-template-columns: 1fr; gap: var(--s-7); }
+    .tsf .nominate-cta-inner { grid-template-columns: 1fr; }
     .tsf[data-hero="split"] .hero { grid-template-columns: 1fr; }
     .tsf[data-hero="split"] .hero-img { min-height: 0; aspect-ratio: 3 / 4; }
     .tsf[data-hero="split"] .hero-inner { padding-top: var(--s-8) !important; }
@@ -591,6 +602,7 @@
   <!-- ===================== BY THE NUMBERS ===================== -->
   <section class="section tally">
     <div class="wrap">
+      <div class="tally-layout">
       <div class="tally-head">
         <span class="eyebrow"><span class="num">05</span> By the Numbers</span>
         <h2 class="tally-h">What the giving&nbsp;<em>adds up&nbsp;to</em>.</h2>
@@ -601,7 +613,7 @@
           <span class="tl">Partner organizations</span>
         </div>
         <div class="tally-stat">
-          <span class="tn"><em><span class="ph">[#]</span></em></span>
+          <span class="tn"><em>50<sup>+</sup></em></span>
           <span class="tl">Donations placed</span>
         </div>
         <div class="tally-stat">
@@ -612,6 +624,25 @@
           <span class="tn"><em>2021</em></span>
           <span class="tl">The foundation began this work</span>
         </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPEN INVITATION (full-bleed CTA) ===================== -->
+  <section class="nominate-cta">
+    <div class="wrap">
+      <div class="nominate-cta-inner">
+        <div>
+          <span class="eyebrow-cream">An Open Invitation</span>
+          <h3>Know an organization we&nbsp;<em>should know?</em></h3>
+          <p>
+            The foundation is always open to new partners across all three pillars &mdash;
+            animals, children &amp; families, and medical causes. If you know of an
+            organization doing the work, we&rsquo;d love to hear about them.
+          </p>
+        </div>
+        <a class="btn btn-cream" href="mailto:thespinnerfoundation@gmail.com?subject=Nominate%20a%20Cause">Nominate a cause &rarr;</a>
       </div>
     </div>
   </section>
@@ -662,8 +693,8 @@
         </div>
       </div>
       <div class="foot-base">
-        <span>&copy; 2026 The Spinner Foundation. <span class="ph">A 501(c)(3) nonprofit organization.</span></span>
-        <span><a href="https://quay-cncpts.com" target="_blank" rel="noopener">Quay Concepts</a></span>
+        <span>&copy; 2026 The Spinner Foundation. A 501(c)(3) nonprofit organization.</span>
+        <span><a href="https://quay-cncpts.com" target="_blank" rel="noopener">by QUAY</a></span>
       </div>
     </div>
   </footer>
