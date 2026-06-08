@@ -1,10 +1,12 @@
 <!-- ============================================================
-     THE SPINNER FOUNDATION — GIVING  (single Squarespace Code Block)
+     THE SPINNER FOUNDATION — STORIES PAGE  (single Squarespace Code Block)
      ------------------------------------------------------------
-     PASTE-READY. One self-contained block = the entire Giving page.
-     Faithful to design/designer_styleguides/causes.html (renamed Causes → Giving).
-     Chrome (nav, mobile menu, footer, script + the entire <style>) is
-     byte-for-byte identical to home.html — do not diverge.
+     PASTE-READY. One self-contained block = the entire Stories page.
+     Faithful to design/designer_styleguides/stories.html (long-form rows).
+
+     CHROME (nav, mobile menu, footer, script, embedded <style>) is
+     byte-for-byte identical to home.html — the shared core. Stories
+     page-specific CSS is appended to that <style> just before </style>.
 
      SQUARESPACE PLACEMENT
        1. Page → add a BLANK SECTION. Fill Screen OFF. Top/bottom
@@ -15,22 +17,20 @@
           Settings → Advanced → Code Injection (Header) — see handoff notes.
 
      IMAGES — upload these files to Squarespace, then paste their
-     SS-hosted URLs into the IMAGE SOURCES block just below. Until then
-     the local repo paths render for design review.
-       --logo-nav     → assets/wordmark-light.png   (nav wordmark)
-       --logo-foot    → assets/wordmark-dark.png     (footer wordmark)
-       --logo-v       → branding_new_logos/tsf-ruled-v.png (mobile masthead ruled-V)
-       --img-spotlight→ assets/photos/cas-1.jpg      (Catskill spotlight)
+     SS-hosted URLs into the IMAGE SOURCES block / story rows below.
+     Until then the local repo paths render for design review.
+       --logo-nav   → assets/wordmark-light.png   (nav wordmark)
+       --logo-foot  → assets/wordmark-dark.png     (footer wordmark)
+       --logo-v     → branding_new_logos/tsf-ruled-v.png (mobile masthead ruled-V)
+       Story photos (inline on each .story-img background-image):
+         cricket.png, rowdy-2.jpg, paws-of-war.jpg, event-21.jpg,
+         event-19.jpg, event-15.jpg, event-11.jpg
      Social icons (footer + mobile menu) are wired to the live TikTok/Instagram/
      Facebook/X/Pinterest profiles.
 
      PLACEHOLDERS — the loud crimson .ph pills mark client data still
-     needed (see CLIENT-QUESTIONS.md). On this page: per-recipient stats
-     (sponsored-since / donations / most-recent) and the new recipients'
-     locations + blurbs are all pending Jim's walk-through. New rows
-     (BARC Brooklyn, Brooklyn Cat Cafe, University of Dayton, Desert
-     Ministries, Nuvance Health, Northwell Health) are name + .ph only.
-     To resolve: drop in the real value AND remove the <span class="ph"> wrapper.
+     needed (see CLIENT-QUESTIONS.md). To resolve: drop in the real value
+     AND remove the <span class="ph"> wrapper.
      ============================================================ -->
 <div class="tsf" data-layout="a" data-hero="split" data-density="balanced">
 
@@ -43,16 +43,14 @@
   /* ====== IMAGE SOURCES — swap these 5 URLs after Squarespace upload ======
      Replace each local path with the SS-hosted URL (e.g.
      url('https://static1.squarespace.com/static/…/cas-2.jpg')).
-     The 3 <img> photos in the featured story / family quote are swapped
-     directly on their src="" attributes in the markup below. */
+     The story photos are swapped directly on their background-image in the
+     markup below. */
   .tsf {
-    --logo-nav   : url('../../design/designer_styleguides/assets/wordmark-light.png');
-    --logo-foot  : url('../../design/designer_styleguides/assets/wordmark-dark.png');
-    --img-hero   : url('../../design/designer_styleguides/assets/photos/cas-2.jpg');
-    --img-mission: url('../../design/designer_styleguides/assets/photos/family-7226.jpg');
-    --logo-v     : url('../../branding_new_logos/tsf-ruled-v.png');
-    /* Giving page — Catskill spotlight photo */
-    --img-spotlight: url('../../design/designer_styleguides/assets/photos/cas-1.jpg');
+    --logo-nav   : url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f6939ebf0a4771e06cc7/1780872851658/wordmark-light.png');
+    --logo-foot  : url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f68ec5cfb40d7361ff76/1780872846894/wordmark-dark.png');
+    --img-hero   : url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25eab0b653877d9ce2dbb9/1780869812229/cas-2.jpg');
+    --img-mission: url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f4f6ca7dbc0fe9a69341/1780872438800/family-7226.jpg');
+    --logo-v     : url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f84e37cb0c548db6303d/1780873294542/tsf-ruled-v.png');
   }
 
   /* ============================================================
@@ -244,6 +242,18 @@
   .tsf .kpi .n small { font-size: 0.42em; color: var(--ink-3); margin-left: 4px; font-weight: 500; letter-spacing: 0.02em; }
   .tsf .kpi .l { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); }
 
+  /* By the Numbers — editorial tally (home page) */
+  .tsf .tally-head { border-bottom: 1px solid var(--rule); padding-bottom: var(--s-7); }
+  .tsf .tally-h { font-family: var(--f-serif) !important; font-size: clamp(24px, 2.4vw, 34px) !important; font-weight: 400 !important; line-height: 1.15 !important; letter-spacing: -0.005em !important; color: var(--ink); margin: var(--s-4) 0 0; max-width: 26ch; }
+  .tsf .tally-h em { font-style: italic; color: var(--crimson); }
+  .tsf .tally-row { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .tsf .tally-stat { padding: var(--s-7) var(--s-6) var(--s-6) 0; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: var(--s-3); }
+  .tsf .tally-stat:last-child { border-right: 0; }
+  .tsf .tally-stat .tn { font-family: var(--f-serif) !important; font-size: clamp(52px, 5.2vw, 78px) !important; font-weight: 400 !important; line-height: 0.92 !important; letter-spacing: -0.025em !important; color: var(--ink); font-variant-numeric: tabular-nums; display: block; }
+  .tsf .tally-stat .tn em { font-style: italic; color: var(--crimson); }
+  .tsf .tally-stat .tn sup { font-size: 0.3em; vertical-align: 0.9em; color: var(--ink-3); font-weight: 500; letter-spacing: 0.02em; font-style: normal; }
+  .tsf .tally-stat .tl { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; color: var(--ink-3); max-width: 20ch; line-height: 1.5; }
+
   /* — Featured story (Rowdy) — */
   .tsf .feature { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--s-8); align-items: start; }
   .tsf .feature-img { aspect-ratio: 4 / 5; background-size: cover; background-position: center; }
@@ -329,6 +339,10 @@
     .tsf .pillars-index, .tsf .feature, .tsf .mission-grid, .tsf .foot-inner { grid-template-columns: 1fr !important; }
     .tsf .kpi-strip { grid-template-columns: 1fr 1fr; }
     .tsf .kpi:nth-child(2) { border-right: 0; }
+    .tsf .tally-row { grid-template-columns: 1fr 1fr; }
+    .tsf .tally-stat { padding-right: 0; }
+    .tsf .tally-stat:nth-child(2) { border-right: 0; }
+    .tsf .tally-stat:nth-child(n+3) { border-top: 1px solid var(--rule); padding-top: var(--s-6); }
     .tsf[data-hero="split"] .hero { grid-template-columns: 1fr; }
     .tsf[data-hero="split"] .hero-img { min-height: 0; aspect-ratio: 3 / 4; }
     .tsf[data-hero="split"] .hero-inner { padding-top: var(--s-8) !important; }
@@ -377,185 +391,178 @@
   .tsf .lk-v { width: 44px; height: 60px; background: var(--logo-v) center / contain no-repeat; opacity: 0.85; }
 
   /* ============================================================
-     GIVING PAGE — page-specific (ported from designer causes.html).
-     Namespaced under .tsf, Squarespace-hardened (!important on type;
-     link resets). Shared rules above are untouched.
+     STORIES PAGE — page-specific CSS (ported from stories design <style>).
+     Namespaced under .tsf and Squarespace-hardened (!important on
+     font-family/size/line-height/letter-spacing/text-transform; link/color
+     resets). Donate band reused from about.html. Skips foot-seal.
      ============================================================ */
+  .tsf .stories-hero { padding: 144px 0 0; border-bottom: 1px solid var(--rule); }
+  .tsf .stories-hero h1 { max-width: 16ch; }
+  .tsf .stories-hero .lede { max-width: 56ch; margin-top: var(--s-5); }
 
-  /* — Page hero (typographic) — */
-  .tsf .causes-hero { padding: 144px 0 var(--s-7); border-bottom: 1px solid var(--rule); background: var(--paper); }
-  .tsf[data-density="compact"] .causes-hero { padding: 96px 0 0; }
-  .tsf[data-density="airy"]    .causes-hero { padding: 200px 0 0; }
-  .tsf .causes-hero .h1 { max-width: 18ch; }
-  .tsf .causes-hero .lede { max-width: 56ch; margin-top: var(--s-5); }
-
-  /* — Filter row — */
-  .tsf .filter-row {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: var(--s-5); flex-wrap: wrap;
-    margin: var(--s-8) 0 var(--s-6);
-    padding-bottom: var(--s-5);
+  /* Scrollable index of long-form story blocks */
+  .tsf .stories-list { padding: var(--section-y) 0; }
+  .tsf .stories-list:has(+ .donate) { padding-bottom: 0; }
+  .tsf .story {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--s-8);
+    align-items: center;
+    padding: var(--s-9) 0;
     border-bottom: 1px solid var(--rule);
   }
-  .tsf .filter-chips { display: flex; gap: var(--s-2); flex-wrap: wrap; }
-  .tsf .chip {
-    font-family: var(--f-sans) !important; font-size: 12px !important;
-    letter-spacing: 0.08em !important; text-transform: uppercase !important; line-height: 1 !important;
-    padding: 8px 14px; border: 1px solid var(--rule); border-radius: 999px;
-    background: transparent; color: var(--ink-2); cursor: pointer;
-    transition: all .15s;
+  .tsf .story:nth-child(even) {
+    grid-template-columns: 1fr 1.1fr;
   }
-  .tsf .chip:hover { border-color: var(--ink); color: var(--ink); }
-  .tsf .chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .tsf .total-pill {
-    font-family: var(--f-sans) !important; font-size: 11px !important;
-    letter-spacing: 0.12em !important; text-transform: uppercase !important;
-    color: var(--ink-3);
-  }
-  .tsf .total-pill .v {
-    font-family: var(--f-serif) !important; font-style: italic;
-    font-size: 18px !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--ink);
-    margin-right: 6px;
-  }
+  .tsf .story:nth-child(even) .story-img { order: 2; }
+  .tsf .story:nth-child(even) .story-body { order: 1; }
 
-  /* — Full-detail recipient rows (directory) — */
-  .tsf .recipient-row {
-    display: grid;
-    grid-template-columns: 64px 1fr 0.8fr 1fr auto;
-    gap: var(--s-6);
-    align-items: start;
-    padding: var(--s-6) 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .tsf .recipient-row .idx {
-    font-family: var(--f-serif) !important; font-style: italic;
-    font-size: 24px !important; letter-spacing: 0 !important; text-transform: none !important;
-    color: var(--crimson); padding-top: 6px;
-  }
-  .tsf .recipient-row .name { font-family: var(--f-serif) !important; font-size: 30px !important; line-height: 1.15 !important; letter-spacing: -0.005em !important; text-transform: none !important; font-weight: 500 !important; color: var(--ink); }
-  .tsf .recipient-row .meta {
-    margin-top: 8px;
-    font-family: var(--f-sans) !important; font-size: 11px !important;
-    letter-spacing: 0.1em !important; text-transform: uppercase !important; line-height: 1.4 !important;
-    color: var(--ink-3);
-    display: flex; gap: var(--s-4); flex-wrap: wrap;
-  }
-  .tsf .recipient-row .meta .dot { color: var(--crimson); opacity: .7; }
-  .tsf .recipient-row .blurb { color: var(--ink-2); font-family: var(--f-sans) !important; font-size: 15px !important; line-height: 1.55 !important; text-transform: none !important; }
-  .tsf .recipient-row .stats {
-    display: flex; flex-direction: column; gap: 4px;
-    font-family: var(--f-sans) !important; font-size: 13px !important; color: var(--ink-2);
-  }
-  .tsf .recipient-row .stats .k {
-    font-family: var(--f-sans) !important; font-size: 11px !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; color: var(--ink-3);
-  }
-  .tsf .recipient-row .stats .amount {
-    font-family: var(--f-serif) !important; font-style: italic; font-size: 22px !important;
-    letter-spacing: 0 !important; text-transform: none !important;
-    color: var(--ink); line-height: 1; margin-top: 2px;
-  }
-  .tsf .recipient-row .more { align-self: center; justify-self: end; }
-
-  /* — Featured spotlight — */
-  .tsf .spotlight {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-7);
-    align-items: stretch;
-    background: var(--paper-2);
+  .tsf .story-img {
+    aspect-ratio: 4 / 5;
+    background-size: cover;
+    background-position: center;
     border: 1px solid var(--rule);
-    margin: var(--s-7) 0 var(--s-9);
-  }
-  .tsf .spotlight-img { background-size: cover; background-position: center; min-height: 460px; }
-  .tsf .spotlight-body {
-    padding: var(--s-7) var(--s-7) var(--s-7) var(--s-6);
-    display: flex; flex-direction: column; gap: var(--s-4);
-    justify-content: center;
-  }
-  .tsf .spotlight-body h3 { font-family: var(--f-serif) !important; font-size: 38px !important; font-weight: 500 !important; line-height: 1.15 !important; letter-spacing: -0.005em !important; text-transform: none !important; max-width: 16ch; }
-  .tsf .spotlight-body .blurb { color: var(--ink-2); font-family: var(--f-sans) !important; font-size: 16px !important; line-height: 1.55 !important; text-transform: none !important; }
-  /* Org-name links on directory rows + spotlight */
-  .tsf .recipient-row .name a, .tsf .spotlight-body h3 a { color: inherit; text-decoration: none !important; transition: color .15s; }
-  .tsf .recipient-row .name a:hover, .tsf .spotlight-body h3 a:hover { color: var(--crimson); }
-
-  /* — Section heads — */
-  .tsf .section-head { padding: var(--s-9) 0 var(--s-3); border-top: 2px solid var(--crimson); margin-top: var(--s-9); }
-  .tsf .section-head .label {
-    font-family: var(--f-sans) !important; font-size: 11px !important;
-    letter-spacing: 0.14em !important; text-transform: uppercase !important; line-height: 1.4 !important;
-    color: var(--crimson); font-weight: 500 !important;
-  }
-  .tsf .section-head h2 { margin-top: var(--s-3); max-width: 24ch; }
-
-  @media (max-width: 980px) {
-    .tsf .recipient-row { grid-template-columns: 1fr; gap: var(--s-4); padding: var(--s-7) 0; }
-    .tsf .recipient-row .idx { font-size: 18px !important; }
-    .tsf .recipient-row .name { font-size: 24px !important; }
-    .tsf .recipient-row .more { justify-self: start; }
-    .tsf .spotlight { grid-template-columns: 1fr; }
-    .tsf .spotlight-img { min-height: 280px; }
   }
 
-  /* — Open Invitation — crimson CTA band (full-bleed via .tsf breakout) — */
-  .tsf .nominate-cta { background: var(--crimson); color: var(--paper); position: relative; }
-  .tsf .nominate-cta-inner {
-    display: grid; grid-template-columns: 1fr auto;
-    gap: var(--s-7); align-items: center;
-    padding-top: var(--section-y); padding-bottom: var(--section-y);
+  .tsf .story-body { padding: 0 var(--s-3); }
+  .tsf .story-body .org {
+    font-family: var(--f-sans) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: var(--crimson);
+    font-weight: 500 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
   }
-  .tsf .nominate-cta .eyebrow-cream {
-    font-family: var(--f-sans) !important; font-size: 11px !important;
-    letter-spacing: 0.14em !important; text-transform: uppercase !important; line-height: 1.4 !important;
-    color: rgba(255,250,242,.78); font-weight: 500 !important;
-    display: inline-flex; align-items: center; gap: 10px;
+  .tsf .story-body .org .dot { color: var(--crimson); opacity: .7; }
+  .tsf .story-body h2 {
+    margin-top: var(--s-3);
+    font-family: var(--f-serif) !important;
+    font-size: clamp(36px, 4vw, 52px) !important;
+    line-height: 1.05 !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.012em !important;
+    text-transform: none !important;
+    max-width: 16ch;
   }
-  .tsf .nominate-cta .eyebrow-cream::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: .8; display: inline-block; flex: none; }
-  .tsf .nominate-cta h3 {
-    font-family: var(--f-serif) !important; font-size: clamp(30px, 3vw, 42px) !important;
-    font-weight: 400 !important; line-height: 1.1 !important; letter-spacing: -0.012em !important; text-transform: none !important;
-    margin: 12px 0 0; max-width: 22ch; color: var(--paper);
+  .tsf .story-body h2 em { font-style: italic; color: var(--crimson); }
+  .tsf .story-body .lede {
+    margin-top: var(--s-5);
+    font-family: var(--f-serif) !important;
+    font-size: clamp(20px, 1.7vw, 24px) !important;
+    line-height: 1.42 !important;
+    letter-spacing: 0.002em !important;
+    text-transform: none !important;
+    color: var(--ink-2);
+    max-width: 38ch;
   }
-  .tsf .nominate-cta h3 em { font-style: italic; color: oklch(0.86 0.10 75); }
-  .tsf .nominate-cta p {
-    margin: var(--s-4) 0 0; color: rgba(255,250,242,.86);
-    font-family: var(--f-sans) !important; font-size: 15px !important; line-height: 1.6 !important; text-transform: none !important; max-width: 52ch;
+  .tsf .story-body .body { margin-top: var(--s-5); max-width: 52ch; }
+  .tsf .story-body .body p { margin: 0 0 1em; }
+  .tsf .story-body .meta {
+    margin-top: var(--s-5);
+    display: flex;
+    gap: var(--s-5);
+    font-family: var(--f-sans) !important;
+    font-size: 12px !important;
+    letter-spacing: 0.04em !important;
+    text-transform: none !important;
+    color: var(--ink-3);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s-3);
   }
-  .tsf .btn-cream { background: var(--paper); color: var(--crimson) !important; border-color: var(--paper); font-weight: 500 !important; }
-  .tsf .btn-cream:hover { background: var(--ink); color: var(--paper) !important; border-color: var(--ink); }
+  .tsf .story-body .meta strong {
+    display: block;
+    margin-bottom: 2px;
+    font-family: var(--f-sans) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: var(--ink-3);
+    font-weight: 500 !important;
+  }
+  .tsf .story-body .meta .v {
+    font-family: var(--f-serif) !important;
+    font-style: italic;
+    font-size: 18px !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: var(--ink);
+  }
 
-  /* — Donate band (ported from about.html) — */
+  .tsf .story-index-num {
+    font-family: var(--f-serif) !important;
+    font-style: italic;
+    font-size: 16px !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: var(--crimson);
+    margin-right: 12px;
+  }
+
+  /* Bookmark-style anchor list at top */
+  .tsf .story-toc {
+    margin-top: var(--s-7);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .tsf .story-toc a {
+    padding: var(--s-5) var(--s-4);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background .2s, color .2s;
+  }
+  .tsf .story-toc a:hover { background: var(--paper-2); color: var(--crimson); }
+  .tsf .story-toc .toc-num {
+    font-family: var(--f-serif) !important;
+    font-style: italic;
+    font-weight: 500 !important;
+    font-size: 32px !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: var(--crimson);
+  }
+  .tsf .story-toc .toc-name {
+    font-family: var(--f-serif) !important;
+    font-size: 20px !important;
+    line-height: 1.2 !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.005em !important;
+    text-transform: none !important;
+    color: var(--ink);
+  }
+  .tsf .story-toc .toc-org {
+    font-family: var(--f-sans) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: var(--ink-3);
+  }
+
+  /* — Donate band (ported from about.html / styles.css) — */
   .tsf .donate { background: linear-gradient(to bottom, var(--paper-2) 0%, var(--paper-2) 55%, var(--paper) 100%); }
   .tsf .donate-inner { display: grid; grid-template-columns: 1fr auto; gap: var(--s-8); align-items: end; padding-top: var(--section-y); padding-bottom: var(--section-y); }
   .tsf .donate-inner .lede { max-width: 48ch; }
   .tsf .donate-inner h2 { max-width: 18ch; margin-top: var(--s-4); }
   .tsf .donate-inner h2 em { font-style: italic; color: var(--crimson); }
 
+  /* — Stories responsive — */
+  @media (max-width: 980px) {
+    .tsf .story, .tsf .story:nth-child(even) { grid-template-columns: 1fr; gap: var(--s-5); }
+    .tsf .story:nth-child(even) .story-img { order: 0; }
+    .tsf .story:nth-child(even) .story-body { order: 0; }
+    .tsf .story-toc { grid-template-columns: 1fr; }
+  }
   @media (max-width: 760px) {
-    .tsf .nominate-cta-inner { grid-template-columns: 1fr; }
     .tsf .donate-inner { grid-template-columns: 1fr; }
-    .tsf .causes-hero { padding-top: var(--s-8); }
+    .tsf .stories-hero { padding-top: var(--s-8); }
   }
-  
-  /* — Also Supported — compact ledger list — */
-  .tsf .also-band { border-top: 2px solid var(--ink); margin-top: var(--s-9); padding-top: var(--s-7); }
-  .tsf .also-band-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--s-6); flex-wrap: wrap; gap: var(--s-4); }
-  .tsf .also-band-head h3 { font-family: var(--f-serif) !important; font-size: clamp(22px, 2.2vw, 30px) !important; font-weight: 400 !important; letter-spacing: -0.005em !important; color: var(--ink); margin: 0; }
-  .tsf .also-band-head .also-note { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; color: var(--ink-3); max-width: 44ch; line-height: 1.5; text-align: right; }
-  .tsf .also-list { list-style: none; padding: 0; margin: 0; }
-  .tsf .also-item { display: grid; grid-template-columns: 1fr 160px 140px; gap: var(--s-5); align-items: baseline; padding: var(--s-4) 0; border-bottom: 1px solid var(--rule-soft); }
-  .tsf .also-item:first-child { border-top: 1px solid var(--rule-soft); }
-  .tsf .also-item .ai-name { font-family: var(--f-serif) !important; font-size: 22px !important; font-weight: 500 !important; letter-spacing: -0.005em !important; color: var(--ink); }
-  .tsf .also-item .ai-name a { color: inherit; text-decoration: none !important; transition: color .15s; }
-  .tsf .also-item .ai-name a:hover { color: var(--crimson); }
-  .tsf .also-item .ai-loc { font-family: var(--f-sans) !important; font-size: 12px !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; color: var(--ink-3); }
-  .tsf .also-item .ai-cat { font-family: var(--f-sans) !important; font-size: 11px !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; color: var(--ink-3); text-align: right; }
-  @media (max-width: 760px) {
-    .tsf .also-item { grid-template-columns: 1fr; gap: 4px; }
-    .tsf .also-item .ai-cat { text-align: left; }
-    .tsf .also-band-head .also-note { text-align: left; }
-  }
-
-</style>
+  </style>
 
   <!-- ===================== NAV ===================== -->
   <header class="nav">
@@ -564,8 +571,8 @@
       <nav class="nav-links">
         <a href="/">Home</a>
         <a href="/about">About</a>
-        <a href="/giving" class="active">Giving</a>
-        <a href="/stories">Stories</a>
+        <a href="/giving">Giving</a>
+        <a href="/stories" class="active">Stories</a>
       </nav>
       <a href="/" aria-label="The Spinner Foundation" class="wordmark"></a>
       <a class="lockup" href="/" aria-label="The Spinner Foundation home">
@@ -593,8 +600,8 @@
     <nav class="tsf-menu-nav">
       <a href="/"><span class="n">i</span> Home</a>
       <a href="/about"><span class="n">ii</span> About</a>
-      <a href="/giving" class="cur"><span class="n">iii</span> Giving</a>
-      <a href="/stories"><span class="n">iv</span> Stories</a>
+      <a href="/giving"><span class="n">iii</span> Giving</a>
+      <a href="/stories" class="cur"><span class="n">iv</span> Stories</a>
     </nav>
     <div class="tsf-menu-foot">
       <a class="tsf-menu-donate" href="mailto:thespinnerfoundation@gmail.com">Donate</a>
@@ -610,291 +617,329 @@
 
   <main>
 
-  <!-- ===================== PAGE HERO (typographic) ===================== -->
-  <section class="causes-hero">
+  <!-- ============================================================
+       PAGE HERO
+  ============================================================ -->
+  <section class="stories-hero">
     <div class="wrap">
-      <span class="eyebrow">Giving</span>
+      <span class="eyebrow">Stories</span>
       <h1 class="h1" style="margin-top: 24px">
-        Where the&nbsp;<em style="font-style:italic;color:var(--crimson)">giving</em> goes.
+        What each gift&nbsp;<em style="font-style:italic;color:var(--crimson)">became</em>.
       </h1>
       <p class="lede">
-        A growing list of the organizations we support across three pillars &mdash; animals, children &amp;
-        families, and medical causes. Every gift here is placed by hand and in conversation with the
-        people on the ground &mdash; real partners, doing the quiet, day-to-day work of care.
+        The animals, the partners, the moments. Stories build year by year here &mdash;
+        as the work happens, and as we have time to tell it honestly.
       </p>
+
+      <nav class="story-toc" aria-label="Stories index">
+        <a href="#cricket">
+          <div class="toc-num">01</div>
+          <div class="toc-name">Sponsoring Cricket</div>
+          <div class="toc-org">Catskill Animal Sanctuary</div>
+        </a>
+        <a href="#rowdy">
+          <div class="toc-num">02</div>
+          <div class="toc-name">Meet Rowdy</div>
+          <div class="toc-org">Catskill Animal Sanctuary</div>
+        </a>
+        <a href="#paws-of-war">
+          <div class="toc-num">03</div>
+          <div class="toc-name">To Paws of War</div>
+          <div class="toc-org">Paws of War &middot; Veterans &amp; Rescue</div>
+        </a>
+        <a href="#hubbard">
+          <div class="toc-num">04</div>
+          <div class="toc-name">Newtown's Sanctuary</div>
+          <div class="toc-org">Catherine Violet Hubbard</div>
+        </a>
+        <a href="#best-friends">
+          <div class="toc-num">05</div>
+          <div class="toc-name">A Night at the Glass House</div>
+          <div class="toc-org">Best Friends Animal Society</div>
+        </a>
+        <a href="#daws">
+          <div class="toc-num">06</div>
+          <div class="toc-name">A Local Shelter, Year After Year</div>
+          <div class="toc-org">DAWS &middot; Bethel, CT</div>
+        </a>
+        <a href="#families-network">
+          <div class="toc-num">07</div>
+          <div class="toc-name">Gingerbread Joy</div>
+          <div class="toc-org">Families Network of Western CT</div>
+        </a>
+      </nav>
     </div>
   </section>
 
-  <!-- ===================== FILTER + DIRECTORY ===================== -->
-  <section class="section" style="padding: 24px 0 144px">
+
+  <!-- ============================================================
+       STORIES INDEX  — long-form rows
+  ============================================================ -->
+  <section class="stories-list">
     <div class="wrap">
 
-      <div class="filter-row">
-        <div class="filter-chips">
-          <button class="chip active" type="button">All causes</button>
-          <button class="chip" type="button">Animals</button>
-          <button class="chip" type="button">Children &amp; Families</button>
-          <button class="chip" type="button">Medical</button>
-          <button class="chip" type="button">CT-based</button>
-        </div>
-        <div class="total-pill"><span class="v">13</span> active partners</div>
-      </div>
-
-      <!-- =========== SPOTLIGHT: CATSKILL ANIMAL SANCTUARY =========== -->
-      <div class="spotlight" id="catskill">
-        <div class="spotlight-img" style="background-image: var(--img-spotlight); background-position: center 30%;"></div>
-        <div class="spotlight-body">
-          <span class="eyebrow"><span class="num">Featured</span> Animal Sanctuary</span>
-          <h3><a href="https://casanctuary.org" target="_blank" rel="noopener">Catskill Animal Sanctuary</a></h3>
-          <p class="blurb">
-            A 150-acre refuge in New York&rsquo;s Hudson Valley, rescuing over 5,000 farm animals from cruelty,
-            neglect, and abandonment for 25 years. We are proud members and have had the privilege of sponsoring
-            several horses in their care &mdash; most recently <em>Rowdy</em>, rescued from an animal hoarding
-            situation in Saratoga alongside thirteen other horses. When Rowdy arrived he was several hundred pounds
-            underweight, suffering from rain rot and severely neglected hooves. With daily care and vitamin&nbsp;E
-            supplementation, he is now comfortable, continues to do well, and is adored by his caregivers.
+      <article class="story" id="cricket" style="padding: 9px 0px 96px">
+        <div class="story-img" style="background-image: url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f2ffec68211b7ffc351c/1780871935968/cricket.jpg'); background-position: center; aspect-ratio: 5 / 3;"></div>
+        <div class="story-body">
+          <div class="org"><span class="story-index-num">01.</span>Catskill Animal Sanctuary <span class="dot">&middot;</span> Saugerties, NY</div>
+          <h2>Sponsoring&nbsp;<em>Cricket.</em></h2>
+          <p class="lede">
+            The second horse we sponsor at Catskill &mdash; a quiet mare receiving steady,
+            individualized care as the sanctuary marks its 25th year.
           </p>
-          <div style="display:flex; gap: var(--s-6); margin-top: var(--s-3); flex-wrap: wrap">
-            <div>
-              <div class="caption" style="margin-bottom: 4px">Location</div>
-              <div style="font-family:var(--f-serif); font-size: 18px;">Saugerties, NY</div>
-            </div>
-            <div>
-              <div class="caption" style="margin-bottom: 4px">Sponsored since</div>
-              <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;">2021</div>
-            </div>
-            <div>
-              <div class="caption" style="margin-bottom: 4px">Animals rescued</div>
-              <div style="font-family:var(--f-serif); font-style: italic; font-size: 18px;">5,000+</div>
-            </div>
+          <div class="body">
+            <p>
+              Earlier this winter, Cricket said goodbye to her longtime best friend and
+              roommate, Callie. Her caregivers were especially attentive through the
+              change, and we&rsquo;re glad to report some good news: Cricket has moved into a
+              new pasture alongside a new friend, Coco. Their introduction was
+              &ldquo;wonderfully uneventful,&rdquo; and the two have already been spotted
+              sharing meals and exploring the field side by side.
+            </p>
+            <p>
+              Cricket is also being treated for a front-left hoof abscess. She&rsquo;s
+              wearing a special wrap and wedge heel while she heals over the next few
+              weeks, with her veterinarian very optimistic about her recovery.
+            </p>
           </div>
-          <a class="btn btn-ghost" href="/stories#rowdy" style="margin-top: var(--s-3)">Read Rowdy&rsquo;s story</a>
+          <div class="meta">
+            <div><strong>Recipient</strong>Catskill Animal Sanctuary</div>
+            <div><strong>Update</strong>March 2026</div>
+            <div><strong>Visit</strong>casanctuary.org</div>
+          </div>
         </div>
-      </div>
-
-      <!-- =========== SECTION I · ANIMALS =========== -->
-      <div class="section-head" style="padding: 48px 0 12px">
-        <span class="label"><em style="font-family:var(--f-serif);font-style:italic;font-size:18px;letter-spacing:0;color:var(--crimson);text-transform:none;font-weight:400">I</em>&ensp;Animals</span>
-        <h2 class="h3" style="margin-top: 12px; font-weight:400">Every animal deserves a soft place to land.</h2>
-      </div>
-
-      <article class="recipient-row">
-        <div class="idx">01</div>
-        <div>
-          <div class="name"><a href="https://pawsofwar.org" target="_blank" rel="noopener">Paws of War</a></div>
-          <div class="meta"><span>Bohemia, NY</span><span class="dot">&middot;</span><span>Animals</span><span class="dot">&middot;</span><span>National</span></div>
-        </div>
-        <div class="blurb">
-          Paws of War stands beside active-duty military, veterans, and the animals who serve as their
-          loyal companions. Their mission reaches conflict zones overseas &mdash; rescuing animals bonded
-          with soldiers and reuniting them stateside. We support their rescue operations, including
-          emergency efforts to bring animals home from active combat areas.
-        </div>
-        <div class="stats">
-          <div><span class="k">Focus</span><br/><span class="amount" style="font-size:18px">Veterans &amp; animals</span></div>
-          <div style="margin-top: 8px"><span class="k">Reach</span><br/><span class="amount" style="font-size:18px">National</span></div>
-        </div>
-        <a class="btn btn-ghost more" href="https://pawsofwar.org" target="_blank" rel="noopener">Visit org</a>
       </article>
 
-      <article class="recipient-row">
-        <div class="idx">02</div>
-        <div>
-          <div class="name"><a href="https://www.dawsct.org" target="_blank" rel="noopener">DAWS Animal Welfare Society</a></div>
-          <div class="meta"><span>Bethel, CT</span><span class="dot">&middot;</span><span>Animals</span><span class="dot">&middot;</span><span>CT-based</span></div>
-        </div>
-        <div class="blurb">
-          DAWS serves the greater Danbury region from their shelter at 147 Grassy Plain Street in Bethel,
-          providing care and adoption services for animals in need. Our family has maintained a long-standing
-          relationship with DAWS &mdash; their team describes our support as &ldquo;continued and unwavering,&rdquo;
-          and we are proud to stand behind the work they do every day.
-        </div>
-        <div class="stats">
-          <div><span class="k">Total gifts</span><br/><span class="amount"><em>$45K</em></span></div>
-          <div style="margin-top: 8px"><span class="k">Partner since</span><br/><span class="amount" style="font-size:18px">2024</span></div>
-        </div>
-        <a class="btn btn-ghost more" href="/stories#daws">Read story</a>
-      </article>
 
-      <article class="recipient-row">
-        <div class="idx">03</div>
-        <div>
-          <div class="name"><a href="https://cvhfoundation.org" target="_blank" rel="noopener">Catherine Violet Hubbard Sanctuary</a></div>
-          <div class="meta"><span>Newtown, CT</span><span class="dot">&middot;</span><span>Animal sanctuary</span><span class="dot">&middot;</span><span>CT-based</span></div>
-        </div>
-        <div class="blurb">
-          Named in memory of Catherine Violet Hubbard, this Newtown sanctuary enriches the lives of all
-          beings through compassion and acceptance. Programming includes <em>Monarchs, Meadows &amp; More</em>
-          (a free butterfly &amp; pollinator showcase), goat yoga, llama nature hikes, and an annual fun run.
-          Their mission &mdash; &ldquo;creating a kinder and gentler world for all&rdquo; &mdash; is one
-          we are proud to support with $30,000 in gifts toward their ongoing work.
-        </div>
-        <div class="stats">
-          <div><span class="k">Total gifts</span><br/><span class="amount"><em>$30K</em></span></div>
-          <div style="margin-top: 8px"><span class="k">Location</span><br/><span class="amount" style="font-size:18px">Newtown, CT</span></div>
-        </div>
-        <a class="btn btn-ghost more" href="/stories#hubbard">Read story</a>
-      </article>
-
-      <article class="recipient-row">
-        <div class="idx">04</div>
-        <div>
-          <div class="name"><a href="https://bestfriends.org" target="_blank" rel="noopener">Best Friends Animal Society</a></div>
-          <div class="meta"><span>Kanab, UT</span><span class="dot">&middot;</span><span>Animals</span><span class="dot">&middot;</span><span>National</span></div>
-        </div>
-        <div class="blurb">
-          The country&rsquo;s leading no-kill organization, working to ensure every shelter animal that
-          can be treated or adopted finds a home. Their policy: any animal adopted from them will always
-          be welcome back if circumstances change &mdash; they will always have a soft place to land.
-          We contribute generously to their mission, and family members attended their benefit gala
-          at the Glass House in September 2024.
-        </div>
-        <div class="stats">
-          <div><span class="k">Location</span><br/><span class="amount" style="font-size:18px">Kanab, UT</span></div>
-          <div style="margin-top: 8px"><span class="k">Mission</span><br/><span class="amount" style="font-size:18px">No-kill USA</span></div>
-        </div>
-        <a class="btn btn-ghost more" href="/stories#best-friends">Read story</a>
-      </article>
-
-      <!-- =========== SECTION II · CHILDREN & FAMILIES =========== -->
-      <div class="section-head" style="padding: 48px 0 12px">
-        <span class="label"><em style="font-family:var(--f-serif);font-style:italic;font-size:18px;letter-spacing:0;color:var(--crimson);text-transform:none;font-weight:400">II</em>&ensp;Children &amp; Families</span>
-        <h2 class="h3" style="margin-top: 12px; font-weight:400">Every child deserves a safe and healthy start.</h2>
-      </div>
-
-      <article class="recipient-row">
-        <div class="idx">01</div>
-        <div>
-          <div class="name"><a href="https://familiesnetworkct.org" target="_blank" rel="noopener">Families Network of Western CT</a></div>
-          <div class="meta"><span>Connecticut</span><span class="dot">&middot;</span><span>Children &amp; Families</span><span class="dot">&middot;</span><span>CT-based</span></div>
-        </div>
-        <div class="blurb">
-          Families Network ensures families get the support they need to give their children a safe and
-          healthy start. We were granted the joyous privilege of judging their Gingerbread Decorating
-          Contest &mdash; an event designed to reduce holiday stress, isolation, and tension at home.
-          Kits were distributed alongside winter fun ideas and safety handouts; designed to reduce
-          social isolation and lower the risk of childhood maltreatment during high-pressure seasons.
-          Every participating family received a grocery gift card &mdash; everyone was a winner.
-        </div>
-        <div class="stats">
-          <div><span class="k">Total gifts</span><br/><span class="amount"><em>$10K</em></span></div>
-          <div style="margin-top: 8px"><span class="k">Partner since</span><br/><span class="amount" style="font-size:18px">2025</span></div>
-        </div>
-        <a class="btn btn-ghost more" href="/stories#families-network">Read story</a>
-      </article>
-
-      <article class="recipient-row">
-        <div class="idx">02</div>
-        <div>
-          <div class="name"><a href="https://desertministries.org" target="_blank" rel="noopener">Desert Ministries</a></div>
-          <div class="meta"><span>Hurricane, UT</span><span class="dot">&middot;</span><span>Children &amp; Families</span><span class="dot">&middot;</span><span>No paid staff</span></div>
-        </div>
-        <div class="blurb">
-          A 501(c)(3) community outreach nonprofit in the Hurricane Valley of southern Utah. No paid employees &mdash;
-          every penny raised goes directly into programs. We support two: the <em>Zion Giving Garden</em>,
-          providing locally grown produce to families in need, and the <em>Zion Adventure Club</em>,
-          which addresses elevated substance use and suicide rates among local youth through enriching
-          outdoor recreation. No overhead. Just care, on the ground.
-        </div>
-        <div class="stats">
-          <div><span class="k">Total gifts</span><br/><span class="amount"><em>$10K</em></span></div>
-          <div style="margin-top: 8px"><span class="k">Partner since</span><br/><span class="amount" style="font-size:18px">2021</span></div>
-        </div>
-        <a class="btn btn-ghost more" href="https://desertministries.org" target="_blank" rel="noopener">Visit org</a>
-      </article>
-
-      <!-- =========== SECTION III · MEDICAL =========== -->
-      <div class="section-head" style="padding: 48px 0 12px">
-        <span class="label"><em style="font-family:var(--f-serif);font-style:italic;font-size:18px;letter-spacing:0;color:var(--crimson);text-transform:none;font-weight:400">III</em>&ensp;Medical</span>
-        <h2 class="h3" style="margin-top: 12px; font-weight:400">Care, access, and the people who make it possible.</h2>
-      </div>
-
-      <article class="recipient-row">
-        <div class="idx">01</div>
-        <div>
-          <div class="name"><a href="https://www.nuvancehealth.org/find-a-location/danbury-hospital" target="_blank" rel="noopener">Danbury Hospital</a></div>
-          <div class="meta"><span>Danbury, CT</span><span class="dot">&middot;</span><span>Medical</span><span class="dot">&middot;</span><span>Opened 2021</span></div>
-        </div>
-        <div class="blurb">
-          A 456-bed acute care hospital delivering award-winning care for over 130 years, now part of
-          Northwell Health. Our family has received impeccable care here over the years &mdash; getting
-          involved was a no-brainer. We started with cardiac care and fellow funding, then extended to
-          Cleveland Clinic training, the emergency preparedness fund, the Yoriko McClure Surgical Suite,
-          and bilingual peer navigation services.
-        </div>
-        <div class="stats">
-          <div><span class="k">Total donated</span><br/><span class="amount"><em>$700K+</em></span></div>
-          <div style="margin-top: 8px"><span class="k">Since</span><br/><span class="amount" style="font-size:18px">2019</span></div>
-        </div>
-        <a class="btn btn-ghost more" href="/stories#danbury-hospital">Read story</a>
-      </article>
-
-      <!-- =========== ALSO SUPPORTED =========== -->
-      <div class="also-band">
-        <div class="also-band-head">
-          <h3>Also supported</h3>
-          <p class="also-note">Organizations we support &mdash; full write-ups coming as we gather their stories.</p>
-        </div>
-        <ul class="also-list">
-          <li class="also-item">
-            <span class="ai-name"><a href="https://barcbrooklyn.org" target="_blank" rel="noopener">BARC Brooklyn</a></span>
-            <span class="ai-loc">Brooklyn, NY</span>
-            <span class="ai-cat">Animals</span>
-          </li>
-          <li class="also-item">
-            <span class="ai-name"><a href="https://brooklyncatcafe.com" target="_blank" rel="noopener">Brooklyn Cat Caf&eacute;</a></span>
-            <span class="ai-loc">Brooklyn, NY</span>
-            <span class="ai-cat">Animals</span>
-          </li>
-          <li class="also-item">
-            <span class="ai-name"><a href="https://udayton.edu" target="_blank" rel="noopener">University of Dayton</a></span>
-            <span class="ai-loc">Dayton, OH</span>
-            <span class="ai-cat">Children &amp; Families</span>
-          </li>
-          <li class="also-item">
-            <span class="ai-name"><a href="https://www.nuvancehealth.org" target="_blank" rel="noopener">NuVance Health</a></span>
-            <span class="ai-loc">Danbury, CT</span>
-            <span class="ai-cat">Medical</span>
-          </li>
-          <li class="also-item">
-            <span class="ai-name"><a href="https://northwell.edu" target="_blank" rel="noopener">Northwell Health</a></span>
-            <span class="ai-loc">New Hyde Park, NY</span>
-            <span class="ai-cat">Medical</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===================== OPEN INVITATION (full-bleed CTA) ===================== -->
-  <section class="nominate-cta">
-    <div class="wrap">
-      <div class="nominate-cta-inner">
-        <div>
-          <span class="eyebrow-cream">An Open Invitation</span>
-          <h3>Know an organization we&nbsp;<em>should know?</em></h3>
-          <p>
-            The foundation is always open to new partners across all three pillars &mdash;
-            animals, children &amp; families, and medical causes. If you know of an
-            organization doing the work, we&rsquo;d love to hear about them.
+      <article class="story" id="rowdy">
+        <div class="story-img" style="background-image: url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f676d49402018d9809a4/1780872822307/rowdy-2.jpg'); background-position: center 35%; background-size: cover;"></div>
+        <div class="story-body">
+          <div class="org"><span class="story-index-num">02.</span>Catskill Animal Sanctuary <span class="dot">&middot;</span> Saugerties, NY</div>
+          <h2>Meet <em>Rowdy.</em></h2>
+          <p class="lede">
+            A gentle soul, rescued from an animal hoarding situation in Saratoga, New York,
+            alongside thirteen other horses.
           </p>
+          <div class="body">
+            <p>
+              When Rowdy arrived at Catskill Animal Sanctuary, he was several hundred pounds
+              underweight, suffering from rain rot, and had severely neglected hooves.
+              Due to his past, Rowdy carries some lingering trust issues &mdash; but he is patient
+              and kind, and getting better every day.
+            </p>
+            <p>
+              We sponsor Rowdy. The sanctuary itself is a 150-acre Hudson Valley refuge that
+              has rescued over 5,000 animals in twenty-five years, and we couldn&rsquo;t be prouder
+              to support what they do.
+            </p>
+            <p>
+              We&rsquo;ve had the privilege of sponsoring a few of Catskill&rsquo;s blind horses, too. The
+              sanctuary trains them &mdash; twelve right now &mdash; to navigate by sound and voice command, and
+              watching a newly blind horse find its footing again is breathtaking. Their motto holds for every
+              animal that arrives: <em style="font-style:italic;color:var(--crimson)">you are safe, you are
+              loved, and you matter.</em>
+            </p>
+          </div>
+          <div class="meta">
+            <div><strong>Recipient</strong>Catskill Animal Sanctuary</div>
+            <div><strong>Sponsored</strong>2026</div>
+            <div><strong>Visit</strong>casanctuary.org</div>
+          </div>
         </div>
-        <a class="btn btn-cream" href="mailto:thespinnerfoundation@gmail.com?subject=Nominate%20a%20Cause">Nominate a cause &rarr;</a>
-      </div>
+      </article>
+
+
+      <article class="story" id="paws-of-war">
+        <div class="story-img" style="background-image: url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f5f754fe294edef0dc13/1780872696097/paws-of-war.jpg'); background-position: center; background-size: cover;"></div>
+        <div class="story-body">
+          <div class="org"><span class="story-index-num">03.</span>Paws of War <span class="dot">&middot;</span> Nesconset, NY</div>
+          <h2>To&nbsp;<em>Paws of War.</em></h2>
+          <p class="lede">
+            A single gift, hand-delivered in September 2024 to the people pairing rescued
+            animals with American veterans and first responders.
+          </p>
+          <div class="body">
+            <p>
+              Paws of War rescues animals from neglect, abandonment, and active conflict
+              zones, and trains them to support service members returning home. It is some
+              of the most concentrated good we know of &mdash; healing on both ends of the leash.
+            </p>
+            <p>
+              We delivered the check in person, at the Nesconset facility, alongside
+              the team that does the work day-in and day-out.
+            </p>
+          </div>
+          <div class="meta">
+            <div><strong>Gift</strong><span class="v">$10,000</span></div>
+            <div><strong>Date</strong>September 2024</div>
+            <div><strong>Visit</strong>pawsofwar.org</div>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="story" id="hubbard">
+        <div class="story-img" style="background-image: url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f31c8f66a64eb620ca14/1780871965317/event-21.jpg'); background-position: center top; aspect-ratio: 5 / 4;"></div>
+        <div class="story-body">
+          <div class="org"><span class="story-index-num">04.</span>Catherine Violet Hubbard Sanctuary <span class="dot">&middot;</span> Newtown, CT</div>
+          <h2>Newtown's quiet&nbsp;<em>sanctuary</em>.</h2>
+          <p class="lede">
+            A 34-acre animal sanctuary in Newtown, Connecticut &mdash; carrying forward the
+            memory of Catherine Violet Hubbard through compassion, education, and care.
+          </p>
+          <div class="body">
+            <p>
+              We were drawn to the worthwhile programming at the Catherine Violet Hubbard
+              Sanctuary in our home state. It is a place built deliberately for healing,
+              and we are honored to support their ongoing work.
+            </p>
+          </div>
+          <div class="meta">
+            <div><strong>Gift</strong><span class="v">$30,000</span></div>
+            <div><strong>Date</strong>August 2024</div>
+            <div><strong>Visit</strong>cvhfoundation.org</div>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="story" id="best-friends">
+        <div class="story-img" style="background-image: url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f31691521777c586595e/1780871959400/event-19.jpg'); background-position: center;"></div>
+        <div class="story-body">
+          <div class="org"><span class="story-index-num">05.</span>Best Friends Animal Society <span class="dot">&middot;</span> National</div>
+          <h2>A night at the&nbsp;<em>Glass House</em>.</h2>
+          <p class="lede">
+            The national leader in ending the killing of dogs and cats in America's
+            shelters &mdash; and the closest thing the movement has to a center of gravity.
+          </p>
+          <div class="body">
+            <p>
+              In 2024, members of the family attended Best Friends&rsquo; annual benefit gala at
+              the Glass House. The mission of Best Friends &mdash; ending shelter killing by 2025 &mdash;
+              is one of the only audacious, time-bound goals in animal welfare. We&rsquo;re glad
+              to be part of the room that&rsquo;s funding it.
+            </p>
+            <p>
+              Later that year, the family made the pilgrimage to the Best Friends sanctuary
+              in Kanab, Utah. The land itself is part of the story &mdash; we keep going back. And we love
+              their promise: any animal adopted from Best Friends, dog or pig, is always welcome back if its
+              person can no longer care for it. A soft place to land, for good.
+            </p>
+          </div>
+          <div class="meta">
+            <div><strong>Engagement</strong>Gala benefactor</div>
+            <div><strong>Sanctuary visit</strong>Kanab, UT</div>
+            <div><strong>Visit</strong>bestfriends.org</div>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="story" id="daws">
+        <div class="story-img" style="background-image: url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f310b653877d9ce5184b/1780871953023/event-15.jpg'); background-position: center;"></div>
+        <div class="story-body">
+          <div class="org"><span class="story-index-num">06.</span>DAWS Animal Welfare Society <span class="dot">&middot;</span> Bethel, CT</div>
+          <h2>A local shelter,&nbsp;<em>year after year</em>.</h2>
+          <p class="lede">
+            A no-kill shelter serving Western Connecticut with adoption, foster, and
+            community education programs &mdash; our longest-running partner.
+          </p>
+          <div class="body">
+            <p>
+              DAWS has been a constant for the foundation since the beginning. We read
+              their newsletter cover-to-cover, attend the benefits when we can, and quietly
+              keep the relationship warm. They are the model of what a small, well-run
+              shelter looks like.
+            </p>
+          </div>
+          <div class="meta">
+            <div><strong>Relationship</strong>Annual partner</div>
+            <div><strong>Newsletter</strong>Active recipient</div>
+            <div><strong>Visit</strong>daws.org</div>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="story" id="families-network">
+        <div class="story-img" style="background-image: url('https://static1.squarespace.com/static/69766c2d689e885f1749cd56/t/6a25f30a3227df3b2b0a2023/1780871947112/event-11.jpg'); background-position: center;"></div>
+        <div class="story-body">
+          <div class="org"><span class="story-index-num">07.</span>Families Network of Western CT <span class="dot">&middot;</span> Danbury, CT</div>
+          <h2>Gingerbread&nbsp;<em>joy.</em></h2>
+          <p class="lede">
+            Programs and resources that foster healthy, loving, supportive family
+            environments. They invite us in for the work and for the joy.
+          </p>
+          <div class="body">
+            <p>
+              Their mission is to ensure that families receive the support they need to give
+              their children a safe and healthy start. The programs reduce social isolation
+              and mitigate childhood risk &mdash; quiet, structural work.
+            </p>
+            <p>
+              We were granted the joyous privilege of judging their Gingerbread Decorating
+              Contest, themed &ldquo;Winter Family Fun: Avoiding Cabin Fever.&rdquo; The kits went out
+              with winter activity ideas and safety handouts. We came back with a story we
+              still tell.
+            </p>
+          </div>
+          <div class="meta">
+            <div><strong>Engagement</strong>Event partner</div>
+            <div><strong>Recent</strong>Gingerbread Contest, Dec &rsquo;24</div>
+            <div><strong>Visit</strong>familiesnetwork.org</div>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- Medical — Danbury Hospital (image pending: needs a Danbury / Northwell photo) -->
+      <article class="story" id="danbury-hospital">
+        <div class="story-img" style="background: repeating-linear-gradient(45deg, var(--paper) 0 18px, var(--paper-2) 18px 36px);"></div>
+        <div class="story-body">
+          <div class="org"><span class="story-index-num">08.</span>Danbury Hospital <span class="dot">&middot;</span> part of Northwell Health <span class="dot">&middot;</span> Danbury, CT</div>
+          <h2>Care close to&nbsp;<em>home</em>.</h2>
+          <p class="lede">
+            A 456-bed acute care hospital in Danbury, Connecticut &mdash; now part of Northwell Health,
+            and the place our family has trusted with its own care for years.
+          </p>
+          <div class="body">
+            <p>
+              For more than 130 years, Danbury Hospital has delivered mission-driven care to its community.
+              As part of Northwell Health &mdash; a system serving three million people a year across New York
+              and Connecticut, with 14,500 providers and 28 hospitals &mdash; its patients reach an even wider
+              network of care.
+            </p>
+            <p>
+              We&rsquo;ve given over $700,000 to Danbury Hospital since 2019. We started with the cardiac
+              care department and fellowship funding, and have since supported Cleveland Clinic training,
+              the emergency preparedness fund, the Yoriko McClure Surgical Suite, and a bilingual peer-navigator
+              program. Our family has been cared for here over the years &mdash; getting involved was a no-brainer.
+            </p>
+          </div>
+          <div class="meta">
+            <div><strong>Gift</strong><span class="v">$700,000+</span></div>
+            <div><strong>Since</strong>2019</div>
+            <div><strong>Visit</strong>danburyhospital.org</div>
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
 
-  <!-- ===================== DONATE BAND ===================== -->
+
+  <!-- ============================================================
+       DONATE BAND (shared)
+  ============================================================ -->
   <section class="donate" id="donate">
     <div class="wrap">
       <div class="donate-inner">
         <div>
-          <span class="eyebrow"><span class="num">04</span> Get Involved</span>
+          <span class="eyebrow"><span class="num">07</span> Get Involved</span>
           <h2 class="h2">A foundation that&nbsp;<em>gives</em>,<br/>not gathers.</h2>
           <p class="lede" style="margin-top: 24px">
-            If you&rsquo;d like to contribute, your gift goes directly to one of these partners.
-            We don&rsquo;t take a cut. We don&rsquo;t keep an endowment.
+            If you'd like to contribute, your gift goes directly to one of our partner
+            organizations. We don't take a cut. We don't keep an endowment.
           </p>
         </div>
         <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start">

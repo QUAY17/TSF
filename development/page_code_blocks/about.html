@@ -102,6 +102,10 @@
   .tsf a   { color: inherit; text-decoration: none !important; }
   .tsf hr  { border: 0; border-top: 1px solid var(--rule); margin: var(--s-6) 0; }
 
+  /* — Squarespace theme guard — stop the template forcing UPPERCASE on body copy.
+     Intentional uppercase uses higher-specificity .class rules with !important, so those still win. */
+  .tsf p, .tsf blockquote, .tsf dd, .tsf li, .tsf cite, .tsf figcaption { text-transform: none !important; }
+
   /* — Type system — */
   .tsf .eyebrow {
     font-family: var(--f-sans) !important; font-size: 12px !important; font-weight: 500 !important;
@@ -387,7 +391,7 @@
   .tsf .about-hero .lede { max-width: 56ch; margin-top: var(--s-5); }
   .tsf .about-hero h1 { max-width: 18ch; }
   .tsf .about-hero-img {
-    margin-top: var(--s-8); width: 100%; aspect-ratio: 21 / 9;
+    margin-top: 0; width: 100%; aspect-ratio: 21 / 9;
     background-size: cover; background-position: center 38%; border: 1px solid var(--rule);
   }
   .tsf .about-hero-cap { margin-top: var(--s-3); text-align: right; color: var(--ink-3); }
@@ -494,14 +498,14 @@
         <a href="/stories">Stories</a>
       </nav>
       <a href="/" aria-label="The Spinner Foundation" class="wordmark"></a>
-      <div class="lockup">
+      <a class="lockup" href="/" aria-label="The Spinner Foundation home">
         <span class="lk-stack">
           <span class="lk-the">The</span>
           <span class="lk-spinner">Spin<em>n</em>er</span>
           <span class="lk-foundation">Foundation</span>
         </span>
         <span class="lk-v" aria-hidden="true"></span>
-      </div>
+      </a>
       <span class="nav-rule" aria-hidden="true"></span>
       <div class="nav-right">
         <a class="btn btn-primary" href="mailto:thespinnerfoundation@gmail.com">Donate</a>
@@ -550,7 +554,7 @@
         been guided by three pillars &mdash; compassion, protection, and sanctuary.
       </p>
 
-      <figure style="margin: 0">
+      <figure style="margin: 0; padding-top: var(--s-7)">
         <div class="about-hero-img" style="background-image: var(--img-banner); background-position: center 38%;"></div>
         <figcaption class="caption about-hero-cap">
           Presenting a $10,000 gift to Paws of War, September 2024.
