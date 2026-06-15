@@ -127,6 +127,8 @@
     line-height: 1.02 !important; letter-spacing: -0.018em !important; text-transform: none !important;
   }
   .tsf .display em { font-style: italic; font-weight: 500; color: var(--crimson); }
+  /* Never split a word mid-character in display type (SS Malone theme can force overflow-wrap: break-word). */
+  .tsf .display, .tsf .h1, .tsf .h2, .tsf .h3, .tsf .h4, .tsf h1, .tsf h2, .tsf h3, .tsf h4, .tsf .lede, .tsf .lede-big, .tsf .tally-h { overflow-wrap: normal !important; word-break: normal !important; hyphens: none !important; }
   .tsf .h1 { font-size: clamp(40px, 5.4vw, 72px) !important; line-height: 1.05 !important; font-weight: 400 !important; }
   .tsf .h2 { font-size: clamp(32px, 3.8vw, 52px) !important; line-height: 1.08 !important; font-weight: 400 !important; }
   .tsf .h3 { font-size: clamp(22px, 2.0vw, 28px) !important; line-height: 1.2  !important; font-weight: 500 !important; }
@@ -315,6 +317,11 @@
   @media (max-width: 980px) { .tsf .family-quote .wrap { grid-template-columns: 1fr; } }
   @media (max-width: 760px) {
     .tsf { --gutter: 24px; --section-y: 64px; }
+    /* Mobile: nudge the small editorial labels up a notch for legibility (consistent across all pages). */
+    .tsf .eyebrow { font-size: 14px !important; }
+    .tsf .caption { font-size: 14px !important; }
+    .tsf .feature-stats dt, .tsf .kpi .l, .tsf .tally-stat .tl, .tsf .pillar-card .meta, .tsf .family-quote .attribution, .tsf .pullquote cite { font-size: 13px !important; }
+    .tsf .photo-frame .label .meta { font-size: 12px !important; }
     /* Mobile masthead — crimson V menu button in the top-left corner, wordmark centered.
        The menu's X opens in that same corner, so trigger → open is one continuous spot. */
     .tsf .nav { position: static; }
@@ -326,13 +333,16 @@
     .tsf .nav-toggle .lines i:nth-child(2) { top: 6px; width: 18px; }
     .tsf .nav-toggle .lines i:nth-child(3) { top: 12px; }
     .tsf .nav .wordmark { height: 44px; }
-    .tsf .lk-v { opacity: 0.55; }   /* keep the mobile masthead V soft grey beside the hamburger */
-    .tsf .nav-rule, .tsf .nav-links, .tsf .nav-right { display: none; }
+    .tsf .nav-rule, .tsf .nav-right { display: none; }
     .tsf .pillars-index, .tsf .feature, .tsf .mission-grid, .tsf .foot-inner { grid-template-columns: 1fr !important; }
     .tsf .kpi-strip { grid-template-columns: 1fr 1fr; }
     .tsf .kpi:nth-child(2) { border-right: 0; }
+    /* Feature stats (home Rowdy card): the 28px serif value overflows its half-column on
+       phones — a long org name wraps to 3 ragged lines beside a one-line "2026". Trim the
+       value size so both balance to ~2 lines max. Desktop (>760px) keeps 28px. */
+    .tsf .feature-stats dd { font-size: 22px !important; }
     .tsf[data-hero="split"] .hero { grid-template-columns: 1fr; }
-    .tsf[data-hero="split"] .hero-img { min-height: 0; aspect-ratio: 3 / 4; }
+    .tsf[data-hero="split"] .hero-img { width: 100%; min-height: 0; height: 0; padding-bottom: 133.33%; }   /* whole hero image, no crop: padding-bottom = cas-2 native ratio (4032/3024 = 133.33% of width). Universal ratio-box; no aspect-ratio (collapses on iOS Safari) */
     .tsf[data-hero="split"] .hero-inner { padding-top: var(--s-8) !important; }
     .tsf .foot-inner { text-align: center; gap: var(--s-7); }
     .tsf .foot-inner > div { display: flex; flex-direction: column; align-items: center; }
@@ -358,8 +368,8 @@
     .tsf .tsf-menu-social svg { width: 20px; height: 20px; fill: currentColor; display: block; }
     /* Brand block at the top of the open menu: large grey ruled-V + tagline stacked. */
     .tsf .tsf-menu-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 2px 0 30px; }
-    .tsf .tsf-menu-v { width: 100px; height: 122px; background: var(--logo-v) center / contain no-repeat; opacity: 0.72; }
-    .tsf .tsf-menu-tag { margin: 0; font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 16px !important; letter-spacing: 0.14em !important; text-transform: uppercase; color: var(--ink-2); text-align: center; }
+    .tsf .tsf-menu-v { width: 100px; height: 122px; background: var(--logo-v) center / contain no-repeat; opacity: 1; }
+    .tsf .tsf-menu-tag { margin: 0; font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 22px !important; line-height: 1.5 !important; letter-spacing: 0.16em !important; text-transform: uppercase; color: var(--ink-2); text-align: center; }
   }
   /* ============================================================
      WORDMARK LOCKUP (live type) + ruled-V suffix — DESKTOP + MOBILE.
@@ -374,9 +384,22 @@
   .tsf .lk-spinner { font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 30px !important; letter-spacing: 0.10em !important; text-indent: 0.10em; text-transform: uppercase; color: var(--ink); margin: 3px 0; }
   .tsf .lk-spinner em { font-style: normal; color: var(--crimson); }
   .tsf .lk-foundation { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 13px !important; letter-spacing: 0.20em !important; text-transform: uppercase; color: var(--ink); }
-  /* Ruled-V suffix: brand PNG art tucked next to SPINNER. Darker on desktop (main logo);
-     softened to grey on mobile where it sits beside the ink hamburger (override below). */
-  .tsf .lk-v { width: 44px; height: 60px; background: var(--logo-v) center / contain no-repeat; opacity: 0.85; }
+  /* Ruled-V suffix (black V, red rules): brand PNG tucked next to SPINNER on desktop.
+     Hidden on the mobile masthead (override below) — the V appears in the drop-down instead. */
+  .tsf .lk-v { width: 44px; height: 60px; background: var(--logo-v) center / contain no-repeat; opacity: 1; }
+  /* Brand V relocated to the far left of the nav, before the links (desktop masthead). */
+  .tsf .nav-left { display: flex; align-items: center; gap: var(--s-5); }
+  .tsf .nav-brand-v { display: inline-flex; align-items: center; }
+  .tsf .nav-brand-v .lk-v { width: 34px; height: 47px; }
+  /* FOUNDATION flanking rules (row 3): short crimson dashes each side of the word.
+     Hidden by default; shown on the mobile masthead per the brand wordmark. */
+  .tsf .lk-fr { display: none; width: 18px; height: 1px; background: var(--crimson); flex: none; }
+  /* Mobile masthead overrides — placed AFTER the base rules above so they win the cascade
+     (media queries add no specificity, so a later non-media rule would otherwise override). */
+  @media (max-width: 760px) {
+    .tsf .nav-left { display: none; }   /* hide the far-left V + the nav links */
+    .tsf .lk-fr { display: block; }     /* show the FOUNDATION flanking rules (row 3) */
+  }
 
   /* ============================================================
      ABOUT PAGE — page-specific (appended; shared rules above untouched).
@@ -484,6 +507,7 @@
   @media (max-width: 760px) {
     .tsf .donate-inner { grid-template-columns: 1fr; }
     .tsf .about-hero { padding-top: var(--s-8); }
+    .tsf .person-role { font-size: 13px !important; }
   }
   </style>
 
@@ -491,20 +515,22 @@
   <header class="nav">
     <div class="nav-inner">
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-controls="tsf-menu"><span class="lines"><i></i><i></i><i></i></span></button>
-      <nav class="nav-links">
+      <div class="nav-left">
+        <a class="nav-brand-v" href="/" aria-label="The Spinner Foundation home"><span class="lk-v" aria-hidden="true"></span></a>
+        <nav class="nav-links">
         <a href="/">Home</a>
         <a href="/about" class="active">About</a>
         <a href="/giving">Giving</a>
         <a href="/stories">Stories</a>
       </nav>
+      </div>
       <a href="/" aria-label="The Spinner Foundation" class="wordmark"></a>
       <a class="lockup" href="/" aria-label="The Spinner Foundation home">
         <span class="lk-stack">
           <span class="lk-the">The</span>
           <span class="lk-spinner">Spin<em>n</em>er</span>
-          <span class="lk-foundation">Foundation</span>
+          <span class="lk-foundation"><i class="lk-fr" aria-hidden="true"></i>Foundation<i class="lk-fr" aria-hidden="true"></i></span>
         </span>
-        <span class="lk-v" aria-hidden="true"></span>
       </a>
       <span class="nav-rule" aria-hidden="true"></span>
       <div class="nav-right">
@@ -550,7 +576,7 @@
       </h1>
       <p class="lede">
         The Spinner Foundation is a family-run charitable foundation supporting animal
-        sanctuaries, children&rsquo;s services, and medical causes. Since 2021, our giving has
+        sanctuaries, children&rsquo;s services, and medical causes. Since 2019, our giving has
         been guided by three pillars &mdash; compassion, protection, and sanctuary.
       </p>
 
@@ -632,7 +658,7 @@
       <div class="mission-long">
         <header class="mission-long-head">
           <span class="eyebrow"><span class="num">02</span> Our Mission</span>
-          <h2 class="h2">Compassion, innovation,&nbsp;<em style="font-style:italic;color:var(--crimson)">collaboration</em>.</h2>
+          <h2 class="h2">Compassion, innovation, <em style="font-style:italic;color:var(--crimson)">collaboration</em>.</h2>
         </header>
 
         <p class="lede">
@@ -739,7 +765,7 @@
           <a href="/" class="wordmark wordmark-dark" aria-label="The Spinner Foundation"></a>
           <p class="body" style="color: rgba(255,250,242,.7); font-size: 14px !important; margin-top: 24px; max-width: 36ch">
             A family-run charitable foundation supporting animal sanctuaries, children&rsquo;s services,
-            and medical causes since 2021.
+            and medical causes since 2019.
           </p>
           <div class="foot-social">
             <a href="https://www.tiktok.com/@thespinnerfoundation" target="_blank" rel="noopener" aria-label="TikTok" data-social="tiktok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1-2.82h-3.1v12.36a2.6 2.6 0 0 1-2.6 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.4-2.48V9.6a5.7 5.7 0 0 0-.8-.06A5.71 5.71 0 0 0 4.2 15.26 5.71 5.71 0 0 0 9.9 21a5.71 5.71 0 0 0 5.7-5.74V8.99a7.33 7.33 0 0 0 4.3 1.38V7.27a4.28 4.28 0 0 1-3.3-1.45z"/></svg></a>
@@ -796,6 +822,22 @@
     if(closeBtn) closeBtn.addEventListener('click', close);
     menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+    // Giving directory: category pills filter the directory to that category (no-op on pages without chips).
+    var chips = root.querySelectorAll('.filter-chips .chip');
+    var items = root.querySelectorAll('.spotlight[data-cat], .section-head[data-cat], .recipient-row[data-cat]');
+    var filterRow = root.querySelector('.filter-row');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var cat = chip.getAttribute('data-cat');
+        chips.forEach(function(c){ c.classList.remove('active'); });
+        chip.classList.add('active');
+        items.forEach(function(it){
+          var cats = (it.getAttribute('data-cat') || '').split(' ');
+          it.style.display = (cat === 'all' || cats.indexOf(cat) !== -1) ? '' : 'none';
+        });
+        if(filterRow){ filterRow.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
   })();
   </script>
 

@@ -711,6 +711,11 @@
 }
 @media (max-width: 760px) {
   .tsf { --gutter: 24px; --section-y: 64px; }
+  /* Mobile: nudge the small editorial labels up a notch for legibility (consistent across all pages). */
+  .tsf .eyebrow { font-size: 14px !important; }
+  .tsf .caption { font-size: 14px !important; }
+  .tsf .feature-stats dt, .tsf .kpi .l, .tsf .tally-stat .tl, .tsf .pillar-card .meta, .tsf .family-quote .attribution, .tsf .pullquote cite { font-size: 13px !important; }
+  .tsf .photo-frame .label .meta { font-size: 12px !important; }
   /* Mobile masthead — rule-mark menu button in the top-left corner, wordmark centered.
      The menu's X opens in that same corner, so trigger → open is one continuous spot. */
   .tsf .nav { position: static; }
@@ -729,6 +734,10 @@
   .tsf .foot-inner { grid-template-columns: 1fr !important; }
   .tsf .kpi-strip { grid-template-columns: 1fr 1fr; }
   .tsf .kpi:nth-child(2) { border-right: 0; }
+  /* Feature stats (home Rowdy card): the 28px serif value overflows its half-column on
+     phones — a long org name wraps to 3 ragged lines beside a one-line "2026". Trim the
+     value size so both balance to ~2 lines max. Desktop (>760px) keeps 28px. */
+  .tsf .feature-stats dd { font-size: 22px !important; }
   .tsf[data-hero="split"] .hero { grid-template-columns: 1fr; }
   /* portrait hero photo (3:4) shows whole on mobile — no crop needed in this view */
   .tsf[data-hero="split"] .hero-img { min-height: 0; aspect-ratio: 3 / 4; }
