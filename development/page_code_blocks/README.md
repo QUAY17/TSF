@@ -101,11 +101,3 @@ reverts to the normal, unhighlighted style.
   doesn't reach edge-to-edge, confirm the section width is **Full** and padding is **0**.
 - **Dangling `#donate`:** the mockup has no on-page donate band, so the Donate button and footer
   "Make a Donation" point at `mailto:` for now — revisit when the donate flow is decided.
-
----
-
-## Superseded
-
-`development/desktop_code_blocks/` holds the earlier **per-section** blocks. Once `home.html` is
-confirmed in Squarespace, those can be archived. Note `hero-code-block.html` there is an obsolete
-duplicate of `01-hero.html` (same `.tsf-hero` class, hardcoded year) — safe to delete.
