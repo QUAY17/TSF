@@ -379,6 +379,7 @@
      ============================================================ */
   .tsf .nav .wordmark { display: none; }
   .tsf .lockup { display: inline-flex; align-items: center; gap: 4px; justify-self: center; }
+  .tsf .lk-word { height: 60px; width: auto; display: block; }   /* brand wordmark image (Logo_8: split crimson N + FOUNDATION rules) — replaces the live-type lockup */
   .tsf .lk-stack { display: flex; flex-direction: column; align-items: center; line-height: 1; }
   .tsf .lk-the { font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 11px !important; letter-spacing: 0.34em !important; text-indent: 0.34em; text-transform: uppercase; color: var(--ink); }
   .tsf .lk-spinner { font-family: var(--f-serif) !important; font-weight: 500 !important; font-size: 30px !important; letter-spacing: 0.10em !important; text-indent: 0.10em; text-transform: uppercase; color: var(--ink); margin: 3px 0; }
@@ -398,7 +399,7 @@
      (media queries add no specificity, so a later non-media rule would otherwise override). */
   @media (max-width: 760px) {
     .tsf .nav-left { display: none; }   /* hide the far-left V + the nav links */
-    .tsf .lk-fr { display: block; }     /* show the FOUNDATION flanking rules (row 3) */
+    .tsf .lk-word { height: 50px; }     /* wordmark image size on the mobile masthead */
   }
 
   /* ============================================================
@@ -526,11 +527,7 @@
       </div>
       <a href="/" aria-label="The Spinner Foundation" class="wordmark"></a>
       <a class="lockup" href="/" aria-label="The Spinner Foundation home">
-        <span class="lk-stack">
-          <span class="lk-the">The</span>
-          <span class="lk-spinner">Spin<em>n</em>er</span>
-          <span class="lk-foundation"><i class="lk-fr" aria-hidden="true"></i>Foundation<i class="lk-fr" aria-hidden="true"></i></span>
-        </span>
+        <img class="lk-word" src="../../design/designer_styleguides/assets/wordmark-light.png" alt="The Spinner Foundation">
       </a>
       <span class="nav-rule" aria-hidden="true"></span>
       <div class="nav-right">
